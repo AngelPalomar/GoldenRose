@@ -51,11 +51,12 @@
         <nav class="nav-menu d-none d-lg-block">
           <ul>
             <li class="active"><a href="#header">Inicio</a></li>
-            <li><a href="#about">Acerca de</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#team">Team</a></li>
-            <li class="drop-down"><a href="">Drop Down</a>
+            <li><a href="#about">Nosotros</a></li>
+            <li><a href="#services">Categorías</a></li>
+            <li><a href="#portfolio">Productos</a></li>
+            <li><a href="#team">Sucursales</a></li>
+            <!--
+            <li class="drop-down"><a href="">Drop</a>
               <ul>
                 <li><a href="#">Drop Down 1</a></li>
                 <li class="drop-down"><a href="#">Drop Down 2</a>
@@ -72,9 +73,10 @@
                 <li><a href="#">Drop Down 5</a></li>
               </ul>
             </li>
-            <li><a href="#contact">Contact</a></li>
+            -->
+            <li><a href="#contact">Contacto</a></li>
 
-            <li class="get-started"><a href="#about">Get Started</a></li>
+            <li class="get-started"><a href="login.html">Iniciar sesión</a></li>
           </ul>
         </nav><!-- .nav-menu -->
       </div><!-- End Header Container -->
@@ -84,48 +86,13 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
-      <h1>Your New Online Presence with Bethany</h1>
-      <h2>We are team of talanted designers making websites with Bootstrap</h2>
-      <a href="#about" class="btn-get-started scrollto">Get Started</a>
+      <h1>Los mejores productos para tu jardín</h1>
+      <h2>Plantas, árboles, flores y herramientas de jardinería al alcance de tu mano</h2>
+      <a href="register.html" class="btn-get-started scrollto">Regístrate ahora</a>
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
-
-    <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients">
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="100">
-            <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="200">
-            <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="300">
-            <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="400">
-            <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="500">
-            <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="600">
-            <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Clients Section -->
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
@@ -698,11 +665,8 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Bethany</h3>
+            <h3>Golden Rose</h3>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
               <strong>Phone:</strong> +1 5589 55488 55<br>
               <strong>Email:</strong> info@example.com<br>
             </p>

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inner Page - Bethany Bootstrap Template</title>
+  <title>Registrarse</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -14,7 +14,9 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,6 +30,10 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/golden_rose.css">
+
+  <!--Font Awesome-->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
   <!-- =======================================================
   * Template Name: Bethany - v2.1.0
@@ -44,38 +50,16 @@
     <div class="container">
       <div class="header-container d-flex align-items-center">
         <div class="logo mr-auto">
-          <h1 class="text-light"><a href="index.html"><span>Bethany</span></a></h1>
+          <h1 class="text-light"><a href="index.php"><span>Golden Rose</span></a></h1>
           <!-- Uncomment below if you prefer to use an image logo -->
           <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
 
         <nav class="nav-menu d-none d-lg-block">
           <ul>
-            <li class="active"><a href="#header">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#team">Team</a></li>
-            <li class="drop-down"><a href="">Drop Down</a>
-              <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li class="drop-down"><a href="#">Drop Down 2</a>
-                  <ul>
-                    <li><a href="#">Deep Drop Down 1</a></li>
-                    <li><a href="#">Deep Drop Down 2</a></li>
-                    <li><a href="#">Deep Drop Down 3</a></li>
-                    <li><a href="#">Deep Drop Down 4</a></li>
-                    <li><a href="#">Deep Drop Down 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-                <li><a href="#">Drop Down 5</a></li>
-              </ul>
-            </li>
-            <li><a href="#contact">Contact</a></li>
-
-            <li class="get-started"><a href="#about">Get Started</a></li>
+            <li><a href="index.php">Inicio</a></li>
+            <li><a href="login.html">Iniciar sesión</a></li>
+            <li class="active"><a href="#header">Registrarse</a></li>
           </ul>
         </nav><!-- .nav-menu -->
       </div><!-- End Header Container -->
@@ -87,23 +71,139 @@
     <!-- ======= Breadcrumbs ======= -->
     <section class="breadcrumbs">
       <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Inner Page</li>
-          </ol>
+        <div class="text-center">
+          <h2>Bienvenido a Golden Rose</h2>
         </div>
-
       </div>
-    </section><!-- End Breadcrumbs -->
+    </section>
 
     <section class="inner-page">
-      <div class="container">
-        <p>
-          Example inner page template
-        </p>
+      <div class="container pl-5 pr-5">
+
+        <div class="text-center">
+          <h2>Registrarse</h2>
+          <p>
+            <span class="golden-text-primary">Ingresar la información correspondiente</span>
+          </p>
+        </div>
+
+        <form action="" method="post">
+          <div class="mb-4">
+            <h4>Datos personales</h4>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="form-group">
+                  <input type="text" name="nombre1" id="nombre1" placeholder="*Primer nombre" class="form-control"
+                    required>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-group">
+                  <input type="text" name="nombre2" id="nombre2" placeholder="Segundo nombre" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="form-group">
+                  <input type="text" name="apellido1" id="apellido1" placeholder="*Primer apellido" class="form-control"
+                    required>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-group">
+                  <input type="text" name="apellido2" id="apellido2" placeholder="Segundo apellido"
+                    class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xl-4">
+                <div class="form-group">
+                  <input type="email" name="email" id="email" placeholder="*Dirección de correo electrónico"
+                    class="form-control" required>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="form-group">
+                  <input type="password" name="password" id="password" placeholder="*Contraseña" class="form-control"
+                    required>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="form-group">
+                  <input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="*Confirmar contraseña"
+                    class="form-control" required>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="mb-4">
+            <h4>Domicilio</h4>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xl-8">
+                <div class="form-group">
+                  <input type="text" name="calle" id="calle" placeholder="*Calle" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-xl-2">
+                <div class="form-group">
+                  <input type="text" name="numeroExterior" id="numeroExterior" placeholder="*No. exterior"
+                    class="form-control" required>
+                </div>
+              </div>
+              <div class="col-xl-2">
+                <div class="form-group">
+                  <input type="text" name="numeroInterior" id="numeroInterior" placeholder="*No. interior"
+                    class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xl-3">
+                <div class="form-group">
+                  <input type="text" name="colonia" id="colonia" placeholder="*Colonia" class="form-control">
+                </div>
+              </div>
+              <div class="col-xl-3">
+                <div class="form-group">
+                  <input type="text" name="codigoPostal" id="codigoPostal" placeholder="*CP" class="form-control">
+                </div>
+              </div>
+              <div class="col-xl-3">
+                <select name="estado" id="estado" class="form-control">
+                  <option hidden selected value="">*Estado</option>
+                </select>
+              </div>
+              <div class="col-xl-3">
+                <select name="municipio" id="municipio" class="form-control">
+                  <option hidden selected value="">*Municipio</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group text-center mt-5">
+              <button type="reset" class="btn btn-lg golden-button-secondary">
+                <i class="fas fa-undo-alt"></i>
+                Restablecer
+              </button>
+              <button type="submit" class="btn btn-lg golden-button-success">
+                <i class="fas fa-check"></i>
+                Registrarse ahora
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </section>
 
