@@ -54,7 +54,7 @@ CREATE TABLE inventario(
 
 CREATE TABLE usuario(
     id INT NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(50) NOT NULL,
     tipoUsuario ENUM('cliente','empleado','admin') NOT NULL DEFAULT 'cliente',
     nombre1 VARCHAR(20) NOT NULL,
@@ -121,6 +121,10 @@ CREATE TABLE direccion(
 );
 
 ALTER TABLE sucursal ADD CONSTRAINT Index_sucursal_FK1_direccion FOREIGN KEY(idDireccion) REFERENCES direccion(id); 
+
+--Inserts
+INSERT INTO usuario VALUES(1, 'admin1@golden.com', md5('12345678'), 'admin', 'Cruz', 'Angel', 'Palomar', 'Gaytan', NOW(), NOW(), 'activo', null);
+INSERT INTO usuario VALUES(2, 'admin2@golden.com', md5('12345678'), 'admin', 'Erick', 'Jesus', 'Yañez', 'Bran', NOW(), NOW(), 'inactivo', null);
 
 INSERT INTO estado VALUES
 (1, "Aguascalientes"),
@@ -190,7 +194,7 @@ INSERT INTO sucursal VALUES
 (2, "suc2", 2),
 (3, "suc3", 3);
 
-/*Vista que muestre historial de compras de los clientes [Erick]*/
+--Vista que muestre historial de compras de los clientes
 
 CREATE VIEW usu_comp AS
 SELECT email, CONCAT(nombre1, " ", nombre2, " ", apellidopaterno, " ", apellidoMaterno) AS Nombre, venta.id AS CantidadCompras,
@@ -202,7 +206,7 @@ GROUP BY idusuario;
 
 SELECT * FROM usu_comp;
 
-/*Vista que muestre ganancias ariba de 50 pesos de productos [Cruz]*/
+--Vista que muestre ganancias ariba de 50 pesos de productos [Cruz]
 
 CREATE VIEW ganancias_arriba AS
 SELECT * 
