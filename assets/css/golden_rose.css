@@ -28,12 +28,12 @@ a:hover{
 }
 
 .golden-button-primary {
-    background-color: var(--goldenR-primary);
+    background-color: var(--goldenR-primary) !important;
     color: white;
 }
 
 .golden-button-primary:hover {
-    background-color: var(--goldenR-complementary);
+    background-color: var(--goldenR-complementary) !important;
     color: white;
 }
 
@@ -55,4 +55,8 @@ a:hover{
 .golden-button-success:hover {
     background-color: var(--goldenR-success);
     color: white;
+}
+
+.admin-sidebar{
+    background-color: var(--goldenR-primary) !important;
 }

@@ -43,7 +43,7 @@
     <div class="container">
       <div class="header-container d-flex align-items-center">
         <div class="logo mr-auto">
-          <h1 class="text-light"><a href="index.html"><span>Golden Rose</span></a></h1>
+          <h1 class="text-light"><a href="index.php"><span>Golden Rose</span></a></h1>
           <!-- Uncomment below if you prefer to use an image logo -->
           <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
@@ -55,28 +55,9 @@
             <li><a href="#services">Categorías</a></li>
             <li><a href="#portfolio">Productos</a></li>
             <li><a href="#team">Sucursales</a></li>
-            <!--
-            <li class="drop-down"><a href="">Drop</a>
-              <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li class="drop-down"><a href="#">Drop Down 2</a>
-                  <ul>
-                    <li><a href="#">Deep Drop Down 1</a></li>
-                    <li><a href="#">Deep Drop Down 2</a></li>
-                    <li><a href="#">Deep Drop Down 3</a></li>
-                    <li><a href="#">Deep Drop Down 4</a></li>
-                    <li><a href="#">Deep Drop Down 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-                <li><a href="#">Drop Down 5</a></li>
-              </ul>
-            </li>
-            -->
             <li><a href="#contact">Contacto</a></li>
 
-            <li class="get-started"><a href="login.html">Iniciar sesión</a></li>
+            <li class="get-started"><a href="login.php">Iniciar sesión</a></li>
           </ul>
         </nav><!-- .nav-menu -->
       </div><!-- End Header Container -->
@@ -88,7 +69,7 @@
     <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
       <h1>Los mejores productos para tu jardín</h1>
       <h2>Plantas, árboles, flores y herramientas de jardinería al alcance de tu mano</h2>
-      <a href="register.html" class="btn-get-started scrollto">Regístrate ahora</a>
+      <a href="register.php" class="btn-get-started scrollto">Crea una cuenta ahora</a>
     </div>
   </section><!-- End Hero -->
 

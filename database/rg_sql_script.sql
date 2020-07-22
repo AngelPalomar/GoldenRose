@@ -55,7 +55,7 @@ CREATE TABLE inventario(
 CREATE TABLE usuario(
     id INT NOT NULL,
     email VARCHAR(50) NOT NULL,
-    password VARCHAR(20) NOT NULL,
+    password VARCHAR(50) NOT NULL,
     tipoUsuario ENUM('cliente','empleado','admin') NOT NULL DEFAULT 'cliente',
     nombre1 VARCHAR(20) NOT NULL,
     nombre2 VARCHAR(20),
@@ -106,7 +106,7 @@ CREATE TABLE municipio(
     CONSTRAINT Index_municipio_FK1_estado FOREIGN KEY (idEstado) REFERENCES estado(id)
 );
 
-CREATE TABLE direccion( 
+CREATE TABLE direccion(
     id INT NOT NULL,
     calle VARCHAR(25) NOT NULL,
     numeroExterior VARCHAR(10) NOT NULL,
@@ -181,93 +181,14 @@ INSERT INTO municipio VALUES
 ("MX001","Iztapalapa",15);
 
 INSERT INTO direccion VALUES
-(5, "call5", 1, null, "col2", "POSTAL2", "QT002", null),
-(6, "call6", 1, null, "col2", "POSTAL2", "QT002", null),
-(7, "call7", 1, null, "col3", "POSTAL3", "QT003", null),
-(8, "call8", 1, null, "col3", "POSTAL3", "QT003", null),
-(9, "call9", 1, null, "col3", "POSTAL3", "QT003", null),
-(10, "call10", 1, null, "col4", "POSTAL4", "QT004", null),
-(11, "call11", 1, null, "col4", "POSTAL4", "QT004", null),
-(12, "call12", 1, null, "col4", "POSTAL4", "QT004", null),
-(13, "call13", 1, null, "col4", "POSTAL4", "QT004", null),
-(14, "call14", 1, null, "col5", "POSTAL5", "QT005", null),
-(15, "call15", 1, null, "col5", "POSTAL5", "QT005", null),
-(16, "call16", 1, null, "col5", "POSTAL5", "QT005", null),
-(17, "call17", 1, null, "col5", "POSTAL5", "QT005", null),
-(18, "call18", 1, null, "col6", "POSTAL5", "QT005", null),
-(19, "call18", 1, null, "col6", "POSTAL5", "QT005", null),
-(20, "call19", 1, null, "col6", "POSTAL5", "QT005", null);
+(1, "call5", 1, null, "col2", "POSTAL2", "QT002", null),
+(2, "call6", 1, null, "col2", "POSTAL2", "QT002", null),
+(3, "call7", 1, null, "col3", "POSTAL3", "QT003", null);
 
 INSERT INTO sucursal VALUES
-(1, "suc1", 8),
-(2, "suc2", 9),
-(3, "suc3", 20);
-
-INSERT INTO categoria VALUES
-(1, "cat1"),
-(2, "cat2"),
-(3, "cat3");
-
-INSERT INTO marca VALUES
-(1, "marca1"),
-(2, "marca2"),
-(3, "marca3");
-
-INSERT INTO producto VALUES
-(1, "prod1", 0, 5, "nodesc", "nodescamp", "mod1", "img", 1, 1),
-(2, "prod2", 0, 10, "nodesc", "nodescamp", "mod1", "img", 1, 2),
-(3, "prod3", 0, 15, "nodesc", "nodescamp", "mod1", "img", 1, 3),
-(4, "prod4", 0, 20, "nodesc", "nodescamp", "mod1", "img", 2, 1),
-(5, "prod5", 0, 25, "nodesc", "nodescamp", "mod1", "img", 2, 2),
-(6, "prod6", 0, 30, "nodesc", "nodescamp", "mod1", "img", 2, 3),
-(7, "prod7", 0, 35, "nodesc", "nodescamp", "mod1", "img", 3, 1),
-(8, "prod8", 0, 40, "nodesc", "nodescamp", "mod1", "img", 3, 2),
-(9, "prod9", 0, 45, "nodesc", "nodescamp", "mod1", "img", 3, 3),
-(10, "prod10", 0, 50, "nodesc", "nodescamp", "mod1", "img", 2, 3),
-(11, "prod11", 0, 5, "nodesc", "nodescamp", "mod1", "img", 2, 2),
-(12, "prod12", 0, 5, "nodesc", "nodescamp", "mod1", "img", 2, 1),
-(13, "prod13", 0, 5, "nodesc", "nodescamp", "mod1", "img", 1, 3),
-(14, "prod14", 0, 5, "nodesc", "nodescamp", "mod1", "img", 1, 2),
-(15, "prod15", 0, 5, "nodesc", "nodescamp", "mod1", "img", 1, 3),
-(16, "prod16", 0, 5, "nodesc", "nodescamp", "mod1", "img", 1, 1);
-
-INSERT INTO inventario VALUES
-(1, 1, 1, 10),
-(2, 1, 2, 10),
-(3, 1, 3, 10),
-(4, 2, 1, 10),
-(5, 2, 2, 10),
-(6, 2, 3, 5),
-(7, 3, 1, 5),
-(8, 3, 2, 5), 
-(9, 3, 3, 5),
-(10, 4, 1, 9),
-(11, 4, 2, 9),
-(12, 4, 3, 9),
-(13, 5, 1, 9),
-(14, 5, 2, 3),
-(15, 5, 3, 3),
-(16, 6, 1, 3),
-(17,6, 2, 5),
-(18,6, 3, 5),
-(19,7, 1, 5),
-(20,7, 2, 0),
-(21,7, 3, 9),
-(22,8, 1, 5),
-(23,8, 2, 9),
-(24,9, 1, 0),
-(25,9, 2, 8),
-(26,9, 3, 9),
-(27,10, 2, 10),
-(28,10, 3, 1),
-(29,11, 1, 3),
-(30,12, 1, 2),
-(31,13, 2, 4),
-(32,14, 2, 3),
-(33,15, 3, 5),
-(34,16, 1, 2),
-(35,16, 2, 0),
-(36,16, 3, 1);
+(1, "suc1", 1),
+(2, "suc2", 2),
+(3, "suc3", 3);
 
 /*Vista que muestre historial de compras de los clientes [Erick]*/
 
@@ -373,7 +294,7 @@ BEGIN
         apellidoMaterno, fechaRegisro, fechaUltimoAcceso) VALUES (
             NewIdUsuario,
             Email,
-            RandomPassword,
+            MD5(RandomPassword),
             Nombre1,
             Nombre2,
             ApellidoPaterno,
@@ -404,26 +325,6 @@ BEGIN
         INSERT INTO usuario (id) VALUES (NULL);
     END IF;
 END;
-
-DROP PROCEDURE alta_cliente
-
-CALL alta_cliente("angel@email.com.mx","Cruz","Angel","Palomar","Gaytan",
-"Mentira","","225","La Falacia","76148","Queretaro");
-
-CALL alta_cliente("fernando@email.com.mx","Fernando","","Gómez","Maldonado",
-"Engaño","2001","3","La Falsedad","76145","Queretaro");
-
-CALL alta_cliente("alan@email.com.mx","Jorge","Alan","Salas","Montoya",
-"Puente de la Farsa","","2892","Cuento del bosque","75128","Corregidora");
-
-CALL alta_cliente("erick@gmail.com","Erick","Jesus","Yañez","Bran",
-"Embusterías","","2892","Selenosis","76148","Queretaro");
-
-CALL alta_cliente("andrea@gmail.com","Paula","Andre","Rivera","Estrada",
-"Falsa","","2892","Difamación","76148","El Marques");
-
-SELECT * FROM usuario;
-SELECT * FROM direccion;
 
 /*Procedimiento almacenado que consulte productos (omitir id, idCategorias) por categoría mostrando la
 nombre de la marca [Erick]*/
@@ -486,7 +387,6 @@ BEGIN
     END IF;
 END;
 
-SELECT * FROM detalle_venta;
 /*Disparador que calcule el precio de un producto a partir de un marjen de contribución fijo del 23% y un costo 
 variable (100% - marjen) [Cruz]*/
 
@@ -503,6 +403,3 @@ BEGIN
     SET new.precio = new.costo / CostoVariable;
 
 END;
-
-INSERT INTO producto VALUES (17, "prod17", 0, 20, "", "", "", "img",1, 1)
-SELECT * FROM producto
