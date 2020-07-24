@@ -18,10 +18,6 @@
     --goldenR-light: #F8EFF6;
 }
 
-.icon{
-    color: var(--goldenR-primary);
-}
-
 a{
     color: var(--goldenR-primary);
 }
@@ -31,14 +27,31 @@ a:hover{
     text-decoration: none;
 }
 
-.golden-button-primary {
+span.focus {
+    color: var(--goldenR-primary);
+    font-weight: 700;
+    font-size: large;
+}
+
+.golden-bg-primary {
     background-color: var(--goldenR-primary);
+    color: white;
+    
+}
+
+.golden-bg-secondary {
+    background-color: var(--goldenR-primary-bold);
     color: white;
 }
 
+.golden-button-primary {
+    background-color: var(--goldenR-primary) !important;
+    color: white !important;
+}
+
 .golden-button-primary:hover {
-    background-color: var(--goldenR-complementary);
-    color: white;
+    background-color: var(--goldenR-complementary) !important;
+    color: white !important;
 }
 
 .golden-button-secondary {

@@ -185,14 +185,16 @@ INSERT INTO municipio VALUES
 ("MX001","Iztapalapa",15);
 
 INSERT INTO direccion VALUES
-(1, "call5", 1, null, "col2", "POSTAL2", "QT002", null),
-(2, "call6", 1, null, "col2", "POSTAL2", "QT002", null),
-(3, "call7", 1, null, "col3", "POSTAL3", "QT003", null);
+(1, "Fray F. Galindo", 22, "", "Centro", "76008", "QT014", null),
+(2, "K.m 8", "s/n", "s/n", "Balvanera", "79600", "QT006", null),
+(3, "Anillo Vial III", 3, "", "Los Heroes", "76267", "QT011", null);
 
 INSERT INTO sucursal VALUES
-(1, "suc1", 1),
-(2, "suc2", 2),
-(3, "suc3", 3);
+(1, "GoldenRose Qro. Cent", 1),
+(2, "GoldenRose Qro. Corr", 2),
+(3, "GoldenRose Qro. Marq", 3);
+
+-- ############  PRODEDIMIENTOS, TRIGGERS, VISTAS Y CONSULTAS ############ --
 
 --Vista que muestre historial de compras de los clientes
 
