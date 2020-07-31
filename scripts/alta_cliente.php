@@ -6,6 +6,7 @@ if (isset($_POST)) {
     $apellido1 = $_POST['apellido1'];
     $apellido2 = $_POST['apellido2'];
     $email = $_POST['email'];
+    $contrasena = $_POST['pass'];
     $calle = $_POST['colonia'];
     $colonia = $_POST['colonia'];
     $numeroExterior = $_POST['numeroExterior'];
@@ -15,13 +16,13 @@ if (isset($_POST)) {
 
     require('db_connection.php');
     /**Procedimiento almacenado de alta de clientes */
-    $cmd = "CALL alta_cliente('$email','$nombre1','$nombre2','$apellido1','$apellido2','$calle',
+    $cmd = "CALL alta_cliente('$email', '$contrasena' ,'$nombre1','$nombre2','$apellido1','$apellido2','$calle',
     '$numeroExterior','$numeroInterior','$colonia','$codigoPostal','$municipio')";
 
     if ($mysqli->query($cmd)) {
         /**Cerrar conexión */
         $mysqli->close();
-        header('Location:../store.php?mensaje=1');
+        header('Location:../home.php?mensaje=1');
     } else {
         $error = $mysqli->error;
         $cmd = 'DELETE FROM usuario WHERE email = ""';

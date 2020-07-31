@@ -12,7 +12,7 @@ if (!isset($_SESSION['id'])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inner Page - Bethany Bootstrap Template</title>
+  <title>Bienvenido a Golden Rose - Jardinería y más</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -31,6 +31,8 @@ if (!isset($_SESSION['id'])) {
   <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
   <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">

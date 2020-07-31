@@ -263,7 +263,7 @@ WHERE (PRECIO - COSTO) <= 15
 /*Procedimiento almacenado que cree clientes con una contraseña aleatoria con su dirección,
 evitando la duplicidad de correos electrónicos [Cruz]*/
 
-CREATE PROCEDURE alta_cliente(IN Email VARCHAR(50), IN Nombre1 VARCHAR(20),
+CREATE PROCEDURE alta_cliente(IN Email VARCHAR(50), IN Contrasena VARCHAR(50), IN Nombre1 VARCHAR(20),
     IN Nombre2 VARCHAR(20), IN ApellidoPaterno VARCHAR(20), IN ApellidoMaterno VARCHAR(20),
     IN Calle VARCHAR(25), IN NumeroExterior VARCHAR(10), IN NumeroInterior VARCHAR(10),
     IN Colonia VARCHAR(40), IN CodigoPostal VARCHAR(10), IN Municipio VARCHAR(20))
@@ -274,13 +274,6 @@ BEGIN
     DECLARE EmailExistentes INT(10);
     DECLARE IdMunicipio VARCHAR(6);
     DECLARE RandomPassword VARCHAR(16);
-
-    SET RandomPassword = (
-        SELECT CONCAT(
-            LPAD(CONV(FLOOR(RAND() * POW(36,8)), 10, 36), 8, 0),
-            LPAD(CONV(FLOOR(RAND() * POW(36,8)), 10, 36), 8, 0)
-        ) AS randomPassword
-    );
 
     SET EmailExistentes = (SELECT COUNT(id) FROM usuario WHERE usuario.email LIKE Email);
 
@@ -300,7 +293,7 @@ BEGIN
         apellidoMaterno, fechaRegisro, fechaUltimoAcceso) VALUES (
             NewIdUsuario,
             Email,
-            MD5(RandomPassword),
+            MD5(Contrasena),
             Nombre1,
             Nombre2,
             ApellidoPaterno,

@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
   header('Location:../login.php');
 }
 
@@ -28,7 +28,7 @@ require('../scripts/db_connection.php');
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/golden_admin.css" rel="stylesheet">
+  <link href="../assets/css/golden_rose.css" rel="stylesheet">
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
@@ -53,7 +53,7 @@ require('../scripts/db_connection.php');
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800 text-center">Usuarios</h1>
+          <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-user"></i> Usuarios</h1>
 
           <div class="row pb-3">
             <div class="col-sm-3">
@@ -65,27 +65,11 @@ require('../scripts/db_connection.php');
               </a>
             </div>
             <div class="col-sm-3">
-              <a href="eliminar_usuario.php" class="btn golden-button-primary btn-lg btn-block">
-                  <span class="icon text-white-50">
-                  <i class="fas fa-user-minus"></i>
-                  </span>
-                <span class="text">Eliminar Usuario</span>
-              </a>
-            </div>
-            <div class="col-sm-3">
               <a href="consultar_usuario.php" class="btn golden-button-primary btn-lg btn-block">
                   <span class="icon text-white-50">
                     <i class="fas fa-search"></i>
                   </span>
-                <span class="text">Consultar usuario</span>
-              </a>
-            </div>
-            <div class="col-sm-3">
-              <a href="modificar_usuario.php" class="btn golden-button-primary btn-lg btn-block">
-                  <span class="icon text-white-50">
-                    <i class="fas fa-pen"></i>
-                  </span>
-                <span class="text">Modificar Usuario</span>
+                <span class="text">Buscar usuario</span>
               </a>
             </div>
           </div>
@@ -101,6 +85,8 @@ require('../scripts/db_connection.php');
                 <th>TIPO USUARIO</th>
                 <th>ESTADO ACTUAL</th>
                 <th>FECHA DE REGISTRO</th>
+                <th>DIRECCION</th>
+                <th>ACCIONES</th>
               </thead>
               <tbody>
                 <?php 
@@ -120,8 +106,13 @@ require('../scripts/db_connection.php');
                     WHEN estado LIKE "inactivo" THEN "Inactivo"
                   END
                 ) AS "ESTADO ACTUAL",
-                usuario.fechaRegisro AS "FECHA DE REGISTRO"
-                FROM usuario ORDER BY usuario.fechaRegisro DESC';
+                usuario.fechaRegisro AS "FECHA DE REGISTRO",
+                CONCAT(calle, " No. ", numeroExterior, " ", numeroInterior, " ", colonia, " ", codigoPostal, " ", municipio.nombre, ", ", estado.nombre) AS DIRECCION
+                FROM usuario 
+                INNER JOIN direccion ON (usuario.id=direccion.idUsuario)
+                INNER JOIN municipio ON (direccion.idMunicipio=municipio.id)
+                INNER JOIN estado ON (municipio.idEstado=estado.id)
+                ORDER BY usuario.id DESC';
 
                 $query = $mysqli->query($cmd);
                 
@@ -134,6 +125,21 @@ require('../scripts/db_connection.php');
                     <td><?=$row['TIPO USUARIO']?></td>
                     <td><?=$row['ESTADO ACTUAL']?></td>
                     <td><?=$row['FECHA DE REGISTRO']?></td>
+                    <td><?=$row['DIRECCION']?></td>
+                    <td>
+                      <div class="d-flex flex-row">
+                        <div class="col-sm-6"> 
+                          <a href="modificar_usuario.php?id=<?=$row['ID']?>" class="btn btn-success"> 
+                            <i class="fas fa-pen"></i>
+                          </a>
+                        </div>
+                        <div class="col-sm-6">
+                          <a href="eliminar_usuario.php?id=<?=$row['ID']?>" class="btn btn-danger"> 
+                            <i class="fas fa-times"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </td>
                   </tr>
                   <?php endwhile; ?>
                 <?php endif; ?>

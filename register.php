@@ -142,9 +142,15 @@ require('scripts/db_connection.php');
             </div>
 
             <div class="row">
-              <div class="col-xl-12">
+              <div class="col-xl-8">
                 <div class="form-group">
                   <input type="email" name="email" id="email" placeholder="*Dirección de correo electrónico"
+                    class="form-control" required>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="form-group">
+                  <input type="password" name="pass" id="pass" placeholder="*Contraseña"
                     class="form-control" required>
                 </div>
               </div>

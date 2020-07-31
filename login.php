@@ -1,3 +1,22 @@
+<?php
+
+session_start();
+if (isset($_SESSION['id'])) {
+    switch ($_SESSION['tipoUsuario']) {
+        case 'admin':
+            header('Location:admin/index.php');
+            break;
+        case 'empleado':
+            header('Location:admin/index.php');
+            break;
+        case 'cliente':
+            header('Location:home.php');
+            break;
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

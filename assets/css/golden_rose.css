@@ -1,6 +1,6 @@
-:root{
+:root {
     --goldenR-primary: #883677;
-    --goldenR-complementary: #ca61c3;
+    --goldenR-complementary: #702e63;
     --goldenR-primary-bold: #441151;
 
     --goldenR-secondary: #646367;
@@ -12,6 +12,7 @@
     --goldenR-warning: #cf9b3a;
 
     --goldenR-danger: #87363F;
+    --goldenR-danger-complementary: #aa434f;
 
     --goldenR-info: #363687;
 
@@ -27,34 +28,60 @@ a:hover{
     text-decoration: none;
 }
 
+span.focus {
+    color: var(--goldenR-primary);
+    font-weight: 700;
+    font-size: large;
+}
+
+.golden-bg-primary {
+    background-color: var(--goldenR-primary) !important;
+    color: white !important;
+}
+
+.golden-bg-secondary {
+    background-color: var(--goldenR-primary-bold) !important;
+    color: white !important;
+}
+
 .golden-button-primary {
     background-color: var(--goldenR-primary) !important;
-    color: white;
+    color: white !important;
 }
 
 .golden-button-primary:hover {
     background-color: var(--goldenR-complementary) !important;
-    color: white;
+    color: white !important;
 }
 
 .golden-button-secondary {
-    background-color: var(--goldenR-secondary-bold);
-    color: white;
+    background-color: var(--goldenR-secondary) !important;
+    color: white !important;
 }
 
 .golden-button-secondary:hover {
-    background-color: var(--goldenR-secondary);
-    color: white;
+    background-color: var(--goldenR-secondary-bold) !important;
+    color: white !important;
 }
 
 .golden-button-success {
-    background-color: var(--goldenR-success-bold);
-    color: white;
+    background-color: var(--goldenR-success-bold) !important;
+    color: white !important;
 }
 
 .golden-button-success:hover {
-    background-color: var(--goldenR-success);
-    color: white;
+    background-color: var(--goldenR-success) !important;
+    color: white !important;
+}
+
+.golden-button-danger {
+    background-color: var(--goldenR-danger) !important;
+    color: white !important;
+}
+
+.golden-button-danger:hover {
+    background-color: var(--goldenR-danger-complementary) !important;
+    color: white !important;
 }
 
 .admin-sidebar{

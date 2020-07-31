@@ -21,10 +21,16 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="index.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <i class="fas fa-home"></i>
           <span>Inicio</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="../home.php">
+          <i class="fas fa-leaf"></i>
+          <span>Ir a la tienda</span></a>
       </li>
 
       <!-- Divider -->
@@ -97,15 +103,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body">Seleccione "Salir" para cerrar la sesión actual</div>
           <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="../login.php">Logout</a>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <a class="btn golden-button-primary" href="../scripts/logout.php">Cerrar sesión</a>
           </div>
         </div>
       </div>
