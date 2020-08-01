@@ -21,7 +21,7 @@ require('../scripts/db_connection.php');
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Usuarios - Golden Rose</title>
+  <title>Productos - Golden Rose</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -53,66 +53,49 @@ require('../scripts/db_connection.php');
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-user"></i> Usuarios</h1>
+          <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-box"></i> Productos</h1>
 
           <div class="row pb-3">
             <div class="col-sm-3">
-              <a href="agregar_usuario.php" class="btn golden-button-primary btn-lg btn-block">
+              <a href="agregar_producto.php" class="btn golden-button-primary btn-lg btn-block">
                   <span class="icon text-white-50">
-                    <i class="fas fa-user-plus"></i>
+                    <i class="fas fa-plus"></i>
                   </span>
-                <span class="text">Agregar Usuario</span>
+                <span class="text">Agregar Producto</span>
               </a>
             </div>
             <div class="col-sm-3">
-              <a href="consultar_usuario.php" class="btn golden-button-primary btn-lg btn-block">
+              <a href="consultar_producto.php" class="btn golden-button-primary btn-lg btn-block">
                   <span class="icon text-white-50">
                     <i class="fas fa-search"></i>
                   </span>
-                <span class="text">Buscar Usuario</span>
+                <span class="text">Buscar Producto</span>
               </a>
             </div>
           </div>
-          
-          <span>Usuarios registrados en el sistema</span>
+
+          <span>Productos existentes en el sistema</span>
 
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead class="golden-bg-secondary">
                 <th>ID</th>
-                <th>EMAIL</th>
-                <th>NOMBRE</th>
-                <th>TIPO USUARIO</th>
-                <th>ESTADO ACTUAL</th>
-                <th>FECHA DE REGISTRO</th>
-                <th>DIRECCION</th>
+                <th>NOMBRE DEL PRODUCTO</th>
+                <th>COSTO</th>
+                <th>PRECIO</th>
+                <th>IMAGEN</th>
+                <th>CATEGORIA</th>
+                <th>MARCA</th>
                 <th>ACCIONES</th>
               </thead>
               <tbody>
                 <?php 
-                $cmd = 'SELECT usuario.id AS ID,
-                usuario.email AS EMAIL,
-                CONCAT(usuario.nombre1, " ", usuario.nombre2, " ", usuario.apellidoPaterno, " ", usuario.apellidoMaterno) AS NOMBRE,
-                (
-                  CASE
-                    WHEN tipoUsuario LIKE "admin" THEN "Administrador"
-                    WHEN tipoUsuario LIKE "empleado" THEN "Empleado"
-                    WHEN tipoUsuario LIKE "cliente" THEN "Cliente"
-                  END
-                ) AS "TIPO USUARIO",
-                (
-                  CASE
-                    WHEN estado LIKE "activo" THEN "Activo"
-                    WHEN estado LIKE "inactivo" THEN "Inactivo"
-                  END
-                ) AS "ESTADO ACTUAL",
-                usuario.fechaRegisro AS "FECHA DE REGISTRO",
-                CONCAT(calle, " No. ", numeroExterior, " ", numeroInterior, " ", colonia, " ", codigoPostal, " ", municipio.nombre, ", ", estado.nombre) AS DIRECCION
-                FROM usuario 
-                INNER JOIN direccion ON (usuario.id=direccion.idUsuario)
-                INNER JOIN municipio ON (direccion.idMunicipio=municipio.id)
-                INNER JOIN estado ON (municipio.idEstado=estado.id)
-                ORDER BY usuario.id DESC';
+                $cmd = "SELECT producto.id AS ID, producto.nombre AS NOMBRE_PRODUCTO, 
+                producto.costo AS COSTO, producto.precio AS PRECIO, producto.pathImagen AS IMAGEN, 
+                categoria.nombre AS CATEGORIA, marca.nombre AS MARCA 
+                FROM producto
+                INNER JOIN categoria ON (categoria.id = producto.idCategoria) 
+                INNER JOIN marca ON (marca.id = producto.idMarca)";
 
                 $query = $mysqli->query($cmd);
                 
@@ -120,12 +103,14 @@ require('../scripts/db_connection.php');
                   while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
                   <tr>
                     <td><?=$row['ID']?></td>
-                    <td><?=$row['EMAIL']?></td>
-                    <td><?=$row['NOMBRE']?></td>
-                    <td><?=$row['TIPO USUARIO']?></td>
-                    <td><?=$row['ESTADO ACTUAL']?></td>
-                    <td><?=$row['FECHA DE REGISTRO']?></td>
-                    <td><?=$row['DIRECCION']?></td>
+                    <td><?=$row['NOMBRE_PRODUCTO']?></td>
+                    <td><?=$row['COSTO']?></td>
+                    <td><?=$row['PRECIO']?></td>
+                    <td>
+                      <img src="../imagenes_productos/<?=$row['IMAGEN']?>" alt="producto" width="20px">
+                    </td>
+                    <td><?=$row['CATEGORIA']?></td>
+                    <td><?=$row['MARCA']?></td>
                     <td>
                       <div class="d-flex flex-row">
                         <div class="col-sm-6"> 

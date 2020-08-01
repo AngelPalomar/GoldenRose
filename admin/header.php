@@ -25,7 +25,7 @@
         <span class="mr-2 d-none d-lg-inline text-gray-600 small">
             <?php echo "Bienvenido, <strong>{$_SESSION['nombre1']} {$_SESSION['apellidoPaterno']}</strong>"?>
         </span>
-        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+        <i class="fas fa-user-circle fa-lg"></i>
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

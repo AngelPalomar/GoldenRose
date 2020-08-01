@@ -78,7 +78,7 @@ require('scripts/db_connection.php');
     <section class="breadcrumbs">
       <div class="container">
         <div class="text-center">
-          <h2>Bienvenido a Golden Rose</h2>
+          <h2>Bienvenido a <i class="fas fa-leaf"></i> Golden Rose</h2>
         </div>
       </div>
     </section>
@@ -87,15 +87,15 @@ require('scripts/db_connection.php');
       <div class="container pl-5 pr-5">
 
         <div class="text-center">
-          <h2>Crear una cuenta</h2>
+          <h2><i class="fas fa-user-edit"></i> Crear una cuenta</h2>
           <p>
             <span class="golden-text-primary">Ingresar la información correspondiente</span>
           </p>
         </div>
 
         <!--Mensaje de error-->
-        <?php if(isset( $_GET['mensaje'])) : ?>
-          <?php switch ( $_GET['mensaje'] ) : case 2: ?>
+        <?php if(isset( $_GET['mensajeAltaCliente'])) : ?>
+          <?php switch ( $_GET['mensajeAltaCliente'] ) : case 2: ?>
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Ocurrió un error.</strong> <br/>
                 <span>You should check in on some of those fields below.</span> 
@@ -113,29 +113,30 @@ require('scripts/db_connection.php');
 
           <div class="form-group">
             <div class="row">
-              <div class="col-xl-6">
+              <div class="col-xl-3">
                 <div class="form-group">
-                  <input type="text" name="nombre1" id="nombre1" placeholder="*Primer nombre" class="form-control"
+                  <label for="nombre1">*Primer nombre</label>
+                  <input type="text" name="nombre1" id="nombre1" class="form-control" placeholder="Juan"
                     required>
                 </div>
               </div>
-              <div class="col-xl-6">
+              <div class="col-xl-3">
                 <div class="form-group">
-                  <input type="text" name="nombre2" id="nombre2" placeholder="Segundo nombre" class="form-control">
+                  <label for="nombre2">Segundo nombre</label>
+                  <input type="text" name="nombre2" id="nombre2" class="form-control">
                 </div>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="col-xl-6">
+              <div class="col-xl-3">
                 <div class="form-group">
-                  <input type="text" name="apellido1" id="apellido1" placeholder="*Primer apellido" class="form-control"
+                  <label for="apellido2">*Primer apellido</label>
+                  <input type="text" name="apellido1" id="apellido1" class="form-control" placeholder="Pérez"
                     required>
                 </div>
               </div>
-              <div class="col-xl-6">
+              <div class="col-xl-3">
                 <div class="form-group">
-                  <input type="text" name="apellido2" id="apellido2" placeholder="Segundo apellido"
+                  <label for="apellido2">Segundo apellido</label>
+                  <input type="text" name="apellido2" id="apellido2"
                     class="form-control">
                 </div>
               </div>
@@ -144,13 +145,15 @@ require('scripts/db_connection.php');
             <div class="row">
               <div class="col-xl-8">
                 <div class="form-group">
-                  <input type="email" name="email" id="email" placeholder="*Dirección de correo electrónico"
+                  <label for="email">*Dirección de correo electrónico</label>
+                  <input type="email" name="email" id="email" placeholder="ejemplo@email.com"
                     class="form-control" required>
                 </div>
               </div>
               <div class="col-xl-4">
                 <div class="form-group">
-                  <input type="password" name="pass" id="pass" placeholder="*Contraseña"
+                  <label for="pass">*Contraseña</label>
+                  <input type="password" name="pass" id="pass"
                     class="form-control" required>
                 </div>
               </div>
@@ -165,37 +168,63 @@ require('scripts/db_connection.php');
             <div class="row">
               <div class="col-xl-8">
                 <div class="form-group">
-                  <input type="text" name="calle" id="calle" placeholder="*Calle" class="form-control" required>
+                  <label for="calle">*Calle</label>
+                  <input type="text" name="calle" id="calle" class="form-control" required>
                 </div>
               </div>
               <div class="col-xl-2">
                 <div class="form-group">
-                  <input type="text" name="numeroExterior" id="numeroExterior" placeholder="*No. exterior"
+                  <label for="numeroExterior">*No. exterior</label>
+                  <input type="text" name="numeroExterior" id="numeroExterior" placeholder="#"
                     class="form-control" required>
                 </div>
               </div>
               <div class="col-xl-2">
                 <div class="form-group">
-                  <input type="text" name="numeroInterior" id="numeroInterior" placeholder="No. interior"
+                  <label for="numeroInterior">No. interior</label>
+                  <input type="text" name="numeroInterior" id="numeroInterior"
                     class="form-control">
                 </div>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-xl-6">
+              <div class="col-xl-3">
                 <div class="form-group">
-                  <input type="text" name="colonia" id="colonia" placeholder="*Colonia" class="form-control">
+                  <label for="colonia">*Colonia</label>
+                  <input type="text" name="colonia" id="colonia" class="form-control">
                 </div>
               </div>
               <div class="col-xl-3">
                 <div class="form-group">
-                  <input type="text" name="codigoPostal" id="codigoPostal" placeholder="*CP" class="form-control">
+                  <label for="codigoPostal">*Código postal</label>
+                  <input type="text" name="codigoPostal" id="codigoPostal" class="form-control">
                 </div>
               </div>
-              <div class="col-xl-3">
+              <div class="col-sm-3">
                 <div class="form-group">
-                  <input type="text" name="municipio" id="municipio" placeholder="*Municipio" class="form-control" value=<?php $municipio?>>
+                  <label for="edo">*Estado</label>
+                  <select name="edo" id="edo" class="form-control" required>
+                  <option hidden selected value="">Seleccione un estado</option>
+                    <?php 
+                    $cmd = "SELECT * FROM estado";
+                    $query = $mysqli->query($cmd);
+                    
+                    if ($query->num_rows > 0):
+                      while($row = $query->fetch_array(MYSQLI_ASSOC)) :
+                  ?>
+                    <option value="<?=$row['id']?>"><?=$row['nombre']?></option>
+                    <?php 
+                    endwhile;
+                    endif; 
+                  ?>
+                  </select>
+                </div>
+              </div>  
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for='mun'>*Municipio</label>
+                  <select class="form-control" id="mun" name="mun" required> </select>
                 </div>
               </div>
             </div>
@@ -217,80 +246,8 @@ require('scripts/db_connection.php');
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer">
-
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Bethany</h3>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Join Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container d-md-flex py-4">
-
-      <div class="mr-md-auto text-center text-md-left">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Bethany</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/ -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-      </div>
-      <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
+  <?php require('footer.php') ?>
+  <!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
@@ -312,3 +269,30 @@ require('scripts/db_connection.php');
 </body>
 
 </html>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous">
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    recargarLista();
+
+    $('#edo').change(function () {
+      recargarLista();
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  function recargarLista() {
+    $.ajax({
+      type: "POST",
+      url: "scripts/municipios.php",
+      data: "estado=" + $('#edo').val(),
+      success: function (response) {
+        $('#mun').html(response);
+      }
+    });
+  } 
+</script>

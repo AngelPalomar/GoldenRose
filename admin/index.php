@@ -20,7 +20,7 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Blank</title>
+  <title>Panel de administración - Golden Rose</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

@@ -16,7 +16,8 @@ if ($tipoUsuario === "empleado") {
     <div class='row form-group'>
         <div class='col-sm-3'>
         <label for='suc'>Nombre de sucursal</label>
-        <select name='suc' id='suc' class='form-control' required>";
+        <select name='suc' id='suc' class='form-control' required>
+        <option hidden selected value=''>Seleccione una sucursal</option>";
 
     while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
         echo '<option value='.$row['id'].'>'.$row['nombre'].'</option>';

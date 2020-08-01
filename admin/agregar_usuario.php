@@ -21,7 +21,7 @@ require('../scripts/db_connection.php');
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Blank</title>
+  <title>Agregar usuario - Golden Rose</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -159,6 +159,7 @@ require('../scripts/db_connection.php');
                 <div class="form-group">
                   <label for="edo">*Estado</label>
                   <select name="edo" id="edo" class="form-control" required>
+                  <option hidden selected value="">Seleccione un estado</option>
                     <?php 
                     $cmd = "SELECT * FROM estado";
                     $query = $mysqli->query($cmd);
@@ -189,7 +190,7 @@ require('../scripts/db_connection.php');
                 <i class="fas fa-user-plus"></i>
                 Añadir usuario  
               </button>
-              <button type="button" class="btn btn-danger btn-lg" onclick="regresar();">
+              <button type="button" class="btn golden-button-danger btn-lg" onclick="regresar();">
                 <i class="fas fa-times"></i>
                 Cancelar
               </button>

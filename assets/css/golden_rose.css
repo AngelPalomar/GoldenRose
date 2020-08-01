@@ -4,10 +4,10 @@
     --goldenR-primary-bold: #441151;
 
     --goldenR-secondary: #646367;
-    --goldenR-secondary-bold: #49484b;
+    --goldenR-secondary-bold: #59585c;
     
-    --goldenR-success: #368746;
-    --goldenR-success-bold: #2d6939;
+    --goldenR-success: #2f9143;
+    --goldenR-success-bold: #307a3f;
 
     --goldenR-warning: #cf9b3a;
 
@@ -15,6 +15,7 @@
     --goldenR-danger-complementary: #aa434f;
 
     --goldenR-info: #363687;
+    --goldenR-info-complementary: #2c2c6d;
 
     --goldenR-light: #F8EFF6;
 }
@@ -65,22 +66,32 @@ span.focus {
 }
 
 .golden-button-success {
-    background-color: var(--goldenR-success-bold) !important;
-    color: white !important;
-}
-
-.golden-button-success:hover {
     background-color: var(--goldenR-success) !important;
     color: white !important;
 }
 
+.golden-button-success:hover {
+    background-color: var(--goldenR-success-bold) !important;
+    color: white !important;
+}
+
 .golden-button-danger {
-    background-color: var(--goldenR-danger) !important;
+    background-color: var(--goldenR-danger-complementary) !important;
     color: white !important;
 }
 
 .golden-button-danger:hover {
-    background-color: var(--goldenR-danger-complementary) !important;
+    background-color: var(--goldenR-danger) !important;
+    color: white !important;
+}
+
+.golden-button-info {
+    background-color: var(--goldenR-info) !important;
+    color: white !important;
+}
+
+.golden-button-info:hover {
+    background-color: var(--goldenR-info-complementary) !important;
     color: white !important;
 }
 

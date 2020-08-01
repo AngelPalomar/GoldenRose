@@ -1,35 +1,65 @@
 <?php
 
+require('db_connection.php');
+
 if (isset($_POST)) {
     $nombre1 = $_POST['nombre1'];
     $nombre2 = $_POST['nombre2'];
     $apellido1 = $_POST['apellido1'];
     $apellido2 = $_POST['apellido2'];
     $email = $_POST['email'];
-    $contrasena = $_POST['pass'];
+    $contrasena = md5($_POST['pass']);   
+    $fechaR = date('Y-m-d H:i:s');
+    $fechaU = date('Y-m-d H:i:s');
+
     $calle = $_POST['colonia'];
     $colonia = $_POST['colonia'];
     $numeroExterior = $_POST['numeroExterior'];
     $numeroInterior = $_POST['numeroInterior'];
     $codigoPostal = $_POST['codigoPostal'];
-    $municipio = $_POST['municipio'];
+    $municipio = $_POST['mun'];
+    
+    /**INSERTAR USUARIO */
+    $idUsuario = "SELECT max(id) AS ID FROM usuario";
+    $query = $mysqli->query($idUsuario);
 
-    require('db_connection.php');
-    /**Procedimiento almacenado de alta de clientes */
-    $cmd = "CALL alta_cliente('$email', '$contrasena' ,'$nombre1','$nombre2','$apellido1','$apellido2','$calle',
-    '$numeroExterior','$numeroInterior','$colonia','$codigoPostal','$municipio')";
+    if ($query->num_rows > 0) {
+        while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
+            /**Máximo id de la tabla dirección */
+            $idUsuario = $row['ID'] + 1;
 
-    if ($mysqli->query($cmd)) {
-        /**Cerrar conexión */
-        $mysqli->close();
-        header('Location:../home.php?mensaje=1');
-    } else {
-        $error = $mysqli->error;
-        $cmd = 'DELETE FROM usuario WHERE email = ""';
-        $mysqli->query($cmd);
-        $mysqli->close();
-        header('Location:alta_cliente.php?mensaje=2&valor='.$error);
+            /**Agregar usuario */
+            $insertUsuario = "INSERT INTO usuario VALUES('$idUsuario', '$email', '$contrasena', 'cliente', '$nombre1', '$nombre2', '$apellido1', '$apellido2', '$fechaR', '$fechaU', 'activo', null)";
+
+            if ($mysqli->query($insertUsuario)) {
+                
+                /**Agregar dirección */
+                $idDireccion = "SELECT max(id) AS ID FROM direccion";
+                $query = $mysqli->query($idDireccion);
+
+                if ($query->num_rows > 0) {
+                    while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
+                        /**Máximo id de la tabla dirección */
+                        $idDireccion = $row['ID'] + 1;
+                        $insertDireccion = "INSERT INTO direccion VALUES('$idDireccion', '$calle', '$numeroExterior', '$numeroInterior', '$colonia', '$codigoPostal', '$municipio', '$idUsuario')";
+                        $mysqli->query($insertDireccion);
+
+                        /**Cerrar conexión */
+                        $mysqli->close();
+
+                        header('Location:../login.php?mensajeRegister=1');
+                    }
+                }
+
+            } else {
+                /**No se pudo guardar */
+                $error = $mysqli->error;
+                $mysqli->close();
+                header('Location:../register.php?mensajeRegister=2&valor='.$error);
+            }
+        }
     }
+    
 }
 
 ?>

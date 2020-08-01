@@ -94,7 +94,7 @@ if (isset($_SESSION['id'])) {
     <section class="breadcrumbs">
       <div class="container pl-5 pr-5">
         <div class="text-center">
-          <h2>Bienvenido a Golden Rose</h2>
+          <h2>Bienvenido a <i class="fas fa-leaf"></i> Golden Rose</h2>
         </div>
       </div>
     </section>
@@ -106,7 +106,7 @@ if (isset($_SESSION['id'])) {
     <div class="container">
 
       <div class="text-center">
-        <h2>Iniciar sesión</h2>
+        <h2><i class="fas fa-sign-in-alt"></i> Iniciar sesión</h2>
         <p>
           Todos los datos son requeridos
         </p>
@@ -157,24 +157,29 @@ if (isset($_SESSION['id'])) {
         <?php endswitch; ?>
       <?php endif; ?>
 
-      <form action="scripts/login.php" method="POST">
-        <div class="form-group row">
-          <label for="email" class="col-sm-2 col-form-label">Correo electrónico</label>
-          <div class="col-sm-10">
-            <input type="email" name="email" id="email" class="form-control"
-              placeholder="Tu dirección de correo electrónico" required autofocus />
-          </div>
+      <form action="scripts/login.php" method="POST" class="mt-5">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+              <div class="form-group row">
+                <label for="email" class="col-sm-3 col-form-label">Correo electrónico</label>
+                <div class="col-sm-9">
+                  <input type="email" name="email" id="email" class="form-control"
+                    placeholder="Tu dirección de correo electrónico" required autofocus />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="password" class="col-sm-3 col-form-label">Contraseña</label>
+                <div class="col-sm-9">
+                  <input type="password" name="password" id="password" class="form-control" placeholder="Tu contraseña"
+                    required autofocus />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2"></div>
         </div>
-        <div class="form-group row">
-          <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
-          <div class="col-sm-10">
-            <input type="password" name="password" id="password" class="form-control" placeholder="Tu contraseña"
-              required autofocus />
-          </div>
-        </div>
-
         <div class="text-center">
-          <a href="register.html">¿No tienes una cuenta? ¡Regístrate ahora!</a>
+          <a href="register.php">¿No tienes una cuenta? ¡Regístrate ahora!</a>
         </div>
 
         <div class="form-group text-center mt-5">

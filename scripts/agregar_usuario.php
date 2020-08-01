@@ -60,7 +60,7 @@ if (isset($_POST)) {
 
                         /**Cerrar conexión */
                         $mysqli->close();
-                        header('Location:../admin/usuarios.php?mensaje=1');
+                        header('Location:../admin/usuarios.php?mensajeAgregar=1');
                     }
                 }
 
@@ -68,14 +68,14 @@ if (isset($_POST)) {
                 /**No se pudo guardar */
                 $error = $mysqli->error;
                 $mysqli->close();
-                header('Location:../admin/agregar_usuario.php?mensaje=2&valor='.$error);
+                header('Location:../admin/agregar_usuario.php?mensajeAgregar=2&valor='.$error);
             }
         }
     }
 
 } else {
     /**Algo salió mal */
-    header('Location:../admin/agregar_usuario.php?error=1');
+    header('Location:../admin/agregar_usuario.php?mensajeAgregar=3');
 }
 
 

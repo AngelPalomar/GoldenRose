@@ -25,6 +25,8 @@
   <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 
+  <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
@@ -50,12 +52,12 @@
 
         <nav class="nav-menu d-none d-lg-block">
           <ul>
-            <li class="active"><a href="#header">Inicio</a></li>
-            <li><a href="#about">Nosotros</a></li>
-            <li><a href="#services">Categorías</a></li>
-            <li><a href="#portfolio">Productos</a></li>
-            <li><a href="#team">Sucursales</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li class="active"><a href="#header"><i class="fas fa-home"></i> Inicio</a></li>
+            <li><a href="#about"><i class="fas fa-users"></i> Nosotros</a></li>
+            <li><a href="#portfolio"><i class="fas fa-seedling"></i> Productos</a></li>
+            <li><a href="#team"><i class="fas fa-store"></i> Sucursales</a></li>
+            <li><a href="#contact"><i class="fas fa-id-badge"></i> Contacto</a></li>
+            <li><a href="#"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
 
             <li class="get-started"><a href="login.php">Iniciar sesión</a></li>
           </ul>
