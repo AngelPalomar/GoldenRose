@@ -8,6 +8,32 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
 
 require('../scripts/db_connection.php');
 
+if (isset($_GET['id'])) {
+  $idProducto = $_GET['id'];
+  $cmd = "SELECT producto.id AS ID, producto.nombre AS NOMBRE_PRODUCTO, 
+  producto.costo AS COSTO, producto.precio AS PRECIO, producto.descripcion AS DESCRIPCION, 
+  producto.descripcionAmpliada AS DESC_AMP, producto.pathImagen AS IMAGEN, producto.modelo AS MODELO,
+  categoria.nombre AS CATEGORIA, marca.nombre AS MARCA, producto.estado AS ESTADO
+  FROM producto
+  INNER JOIN categoria ON (categoria.id = producto.idCategoria) 
+  INNER JOIN marca ON (marca.id = producto.idMarca)
+  WHERE producto.id = '$idProducto'";
+
+  $query = $mysqli->query($cmd);
+
+  if ($query->num_rows === 1) {
+    $datosProducto = $query->fetch_array(MYSQLI_ASSOC);
+  } else {
+    /**No encontró producto */
+    header('Location:productos.php?MensajeModificarProducto=2');
+  }
+  
+
+} else {
+  /**No hay id por GET */
+  header('Location:productos.php?MensajeModificarProducto=2');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -55,33 +81,49 @@ require('../scripts/db_connection.php');
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-box"></i> Agregar Producto</h1>
+          <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-box"></i> Modificar Producto</h1>
 
           <div>
-            <form action="../scripts/agregar_producto.php" enctype="multipart/form-data" method="post">
+            <form action="../scripts/modificar_producto.php" enctype="multipart/form-data" method="post">
               <div class="form-group">
                 <h4 class="h4 mb-4 text-gray-800">Datos del producto</h4>
                 <div class="row">
-                  <div class="col-sm-4 form-group">
-                    <label for="nombre">*Nombre del producto</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control" maxlength="25" required>
+                  <div class="col-sm-1 form-group">
+                    <label for="nombre">*ID</label>
+                    <input type="text" name="id" id="id" class="form-control" maxlength="25" required
+                      value="<?=$datosProducto['ID']?>" readonly>
                   </div>
                   <div class="col-sm-4 form-group">
+                    <label for="nombre">*Nombre del producto</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control" maxlength="25" required
+                      value="<?=$datosProducto['NOMBRE_PRODUCTO']?>">
+                  </div>
+                  <div class="col-sm-2 form-group">
                     <label for="precio">*Costo original</label>
-                    <div class="input-group mb-4">
+                    <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                       </div>
                       <input type="number" step="0.01" name="costo" id="costo" class="form-control" maxlength="11"
-                        placeholder="00.00" required>
+                        placeholder="00.00" value="<?=$datosProducto['COSTO']?>" required>
                     </div>
                   </div>
-                  <div class="col-sm-4">
+                  <div class="col-sm-2 form-group">
+                    <label for="precio">*Precio al publico</label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input type="number" step="0.01" name="precio" id="precio" class="form-control" maxlength="11"
+                        placeholder="00.00" value="<?=$datosProducto['PRECIO']?>" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
                     <label for="marca">*Estado actual</label>
                     <select name="estado" id="estado" class="form-control" required>
                       <option hidden selected value="">Seleccione el estado del producto</option>
-                      <option value="disponible">Disponible</option>
-                      <option value="no_disponible">No disponible</option>
+                      <option value="disponible" <?=$datosProducto['ESTADO'] == 'disponible' ? 'selected="selected"' : NULL?>>Disponible</option>
+                      <option value="no_disponible" <?=$datosProducto['ESTADO'] == 'no_disponible' ? 'selected="selected"' : NULL?>>No disponible</option>
                     </select>
                   </div>
                 </div>
@@ -91,25 +133,21 @@ require('../scripts/db_connection.php');
                   <div class="col-sm-6 form-group">
                     <label for="desc">*Descripción del producto</label>
                     <textarea name="desc" id="desc" cols="132" rows="5" maxlength="256" class="form-control"
-                      required></textarea>
+                      required><?=$datosProducto['DESCRIPCION']?></textarea>
                   </div>
                   <div class="col-sm-6 form-group">
                     <label for="desc">*Descripción ampliada (características) del producto</label>
                     <textarea name="descAmp" id="descAmp" cols="132" rows="5" maxlength="512" class="form-control"
-                      required></textarea>
+                      required><?=$datosProducto['DESC_AMP']?></textarea>
                   </div>
                 </div>
 
                 <div class="row form-group mb-5">
-                  <div class="col-sm-2">
+                  <div class="col-sm-4">
                     <label for="modelo">*Modelo del producto</label>
-                    <input type="text" name="modelo" id="modelo" class="form-control" required>
+                    <input type="text" name="modelo" id="modelo" class="form-control" value="<?=$datosProducto['MODELO']?>" required>
                   </div>
                   <div class="col-sm-4">
-                    <label for="imagen">*Imagen del producto</label>
-                    <input type="file" name="imagen" id="imagen" class="form-control" required>
-                  </div>
-                  <div class="col-sm-3">
                     <label for="categoria">*Categoría</label>
                     <select name="categoria" id="categoria" class="form-control" required>
                       <option hidden selected value="">Seleccione una categoría</option>
@@ -120,14 +158,14 @@ require('../scripts/db_connection.php');
                       if ($query->num_rows > 0):
                         while($row = $query->fetch_array(MYSQLI_ASSOC)) :
                     ?>
-                      <option value="<?=$row['id']?>"><?=$row['nombre']?></option>
+                      <option value="<?=$row['id']?>" <?=$datosProducto['CATEGORIA'] == $row['nombre'] ? 'selected="selected"' : NULL?> ><?=$row['nombre']?></option>
                       <?php 
                       endwhile;
                       endif; 
                     ?>
                     </select>
                   </div>
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <label for="marca">*Marca</label>
                     <select name="marca" id="marca" class="form-control" required>
                       <option hidden selected value="">Seleccione una marca</option>
@@ -138,7 +176,7 @@ require('../scripts/db_connection.php');
                       if ($query->num_rows > 0):
                         while($row = $query->fetch_array(MYSQLI_ASSOC)) :
                     ?>
-                      <option value="<?=$row['id']?>"><?=$row['nombre']?></option>
+                      <option value="<?=$row['id']?>" <?=$datosProducto['MARCA'] == $row['nombre'] ? 'selected="selected"' : NULL?>><?=$row['nombre']?></option>
                       <?php 
                       endwhile;
                       endif; 

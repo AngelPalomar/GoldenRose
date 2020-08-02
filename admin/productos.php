@@ -86,13 +86,20 @@ require('../scripts/db_connection.php');
                 <th>IMAGEN</th>
                 <th>CATEGORIA</th>
                 <th>MARCA</th>
+                <th>ESTADO ACTUAL</th>
                 <th>ACCIONES</th>
               </thead>
               <tbody>
                 <?php 
                 $cmd = "SELECT producto.id AS ID, producto.nombre AS NOMBRE_PRODUCTO, 
                 producto.costo AS COSTO, producto.precio AS PRECIO, producto.pathImagen AS IMAGEN, 
-                categoria.nombre AS CATEGORIA, marca.nombre AS MARCA 
+                categoria.nombre AS CATEGORIA, marca.nombre AS MARCA,
+                (
+                  CASE
+                    WHEN estado LIKE 'disponible' THEN 'Disponible'
+                    WHEN estado LIKE 'no_disponible' THEN 'No disponible'
+                  END
+                ) AS ESTATUS
                 FROM producto
                 INNER JOIN categoria ON (categoria.id = producto.idCategoria) 
                 INNER JOIN marca ON (marca.id = producto.idMarca)";
@@ -107,19 +114,20 @@ require('../scripts/db_connection.php');
                     <td><?=$row['COSTO']?></td>
                     <td><?=$row['PRECIO']?></td>
                     <td>
-                      <img src="../imagenes_productos/<?=$row['IMAGEN']?>" alt="producto" width="20px">
+                      <img src="../imagenes_productos/<?=$row['IMAGEN']?>" alt="producto" width="40px">
                     </td>
                     <td><?=$row['CATEGORIA']?></td>
                     <td><?=$row['MARCA']?></td>
+                    <td><?=$row['ESTATUS']?></td>
                     <td>
                       <div class="d-flex flex-row">
                         <div class="col-sm-6"> 
-                          <a href="modificar_usuario.php?id=<?=$row['ID']?>" class="btn golden-button-success"> 
+                          <a href="modificar_producto.php?id=<?=$row['ID']?>" class="btn golden-button-success"> 
                             <i class="fas fa-pen"></i>
                           </a>
                         </div>
                         <div class="col-sm-6">
-                          <a href="eliminar_usuario.php?id=<?=$row['ID']?>" class="btn golden-button-danger"> 
+                          <a href="eliminar_producto.php?id=<?=$row['ID']?>" class="btn golden-button-danger"> 
                             <i class="fas fa-times"></i>
                           </a>
                         </div>

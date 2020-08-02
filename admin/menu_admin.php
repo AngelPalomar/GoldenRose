@@ -42,12 +42,22 @@
       </div>
 
       <!-- Nav Item - Charts -->
+      <?php if ($_SESSION['tipoUsuario'] === 'admin'): ?>
       <li class="nav-item">
         <a class="nav-link" href="usuarios.php">
           <i class="fas fa-user"></i>
           <span>Usuarios</span>
         </a>
       </li>
+      <?php endif; ?>
+
+      <?php if ($_SESSION['tipoUsuario'] === 'admin'): ?>
+      <li class="nav-item">
+        <a class="nav-link" href="productos.php">
+          <i class="fas fa-box"></i>
+          <span>Productos</span></a>
+      </li>
+      <?php endif; ?>
       
       <li class="nav-item">
         <a class="nav-link" href="usuarios.php">
@@ -57,23 +67,21 @@
       </li>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="productos.php">
-          <i class="fas fa-box"></i>
-          <span>Productos</span></a>
-      </li>
-
+      <?php if ($_SESSION['tipoUsuario'] === 'admin'): ?>
       <li class="nav-item">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-copyright"></i>
           <span>Marcas</span></a>
       </li>
+      <?php endif; ?>
 
+      <?php if ($_SESSION['tipoUsuario'] === 'admin'): ?>
       <li class="nav-item">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-tag"></i>
           <span>Categorías</span></a>
       </li>
+      <?php endif; ?>
 
       <li class="nav-item">
         <a class="nav-link" href="tables.html">
@@ -81,11 +89,13 @@
           <span>Ventas</span></a>
       </li>
 
+      <?php if ($_SESSION['tipoUsuario'] === 'admin'): ?>
       <li class="nav-item">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-store"></i>
           <span>Sucursales</span></a>
       </li>
+      <?php endif; ?>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

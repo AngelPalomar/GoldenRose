@@ -201,7 +201,7 @@ if (!isset($_GET['id'])) {
                     if ($query->num_rows > 0):
                       while($row = $query->fetch_array(MYSQLI_ASSOC)) :
                   ?>
-                    <option value="<?=$row['id']?>"><?=$row['nombre']?></option>
+                    <option value="<?=$row['id']?>" <?=$usuario_datos['nombreEstado'] == $row['nombre'] ? 'selected="selected"' : NULL?>><?=$row['nombre']?></option>
                     <?php 
                     endwhile;
                     endif; 

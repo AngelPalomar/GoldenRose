@@ -30,6 +30,7 @@ CREATE TABLE producto(
     pathImagen VARCHAR(216) NOT NULL,
     idCategoria INT NOT NULL,
     idMarca INT NOT NULL,
+    estado ENUM('disponible', 'no_disponible') NOT NULL DEFAULT 'disponible';
     CONSTRAINT Index_PK_producto PRIMARY KEY (id),
     CONSTRAINT Index_producto_FK1_categoria FOREIGN KEY (idCategoria) REFERENCES categoria(id),
     CONSTRAINT Index_producto_FK2_marca FOREIGN KEY (idMarca) REFERENCES marca(id)
