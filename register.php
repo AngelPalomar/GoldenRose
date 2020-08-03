@@ -94,11 +94,11 @@ require('scripts/db_connection.php');
         </div>
 
         <!--Mensaje de error-->
-        <?php if(isset( $_GET['mensajeAltaCliente'])) : ?>
-          <?php switch ( $_GET['mensajeAltaCliente'] ) : case 2: ?>
+        <?php if(isset( $_GET['mensajeRegister'])) : ?>
+          <?php switch ( $_GET['mensajeRegister'] ) : case 2: ?>
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Ocurrió un error.</strong> <br/>
-                <span>You should check in on some of those fields below.</span> 
+                <strong>Este usuario ya existe</strong> <br/>
+                <span>Por favor, verifica que el correo electrónico no haya sido registrado con aterioridad.</span> 
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>

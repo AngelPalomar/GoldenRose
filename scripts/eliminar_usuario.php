@@ -11,10 +11,10 @@ if (!isset($_POST['id'])) {
     $cmd = "UPDATE usuario SET estado = 'inactivo' WHERE usuario.id LIKE '$idUsuario'";
   
     if ($query = $mysqli->query($cmd)) {
-      header('Location:../admin/usuarios.php?mensajeEliminar=2');
+      header('Location:../admin/usuarios.php?mensajeEliminar=1');
     } else {
       /**No se pudo */
-      header('Location:usuarios.php?mensajeEliminar=3');
+      header('Location:usuarios.php?mensajeEliminar=2');
     }
 }
 

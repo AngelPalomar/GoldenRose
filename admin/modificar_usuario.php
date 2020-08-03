@@ -83,6 +83,36 @@ if (!isset($_GET['id'])) {
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-user-plus"></i> Agregar usuario</h1>
           <span class="focus">Llenar los campos correspondientes</span>
+          
+          <?php if(isset( $_GET['mensajeModificar'])) : ?>
+            <?php switch ( $_GET['mensajeModificar'] ) : case 2: ?>
+                <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                  <strong><i class="fas fa-times-circle"></i> El usuario no pudo ser modificado.</strong> <br/>
+                  <span>Verifique que los datos del domicilio sean correctos.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break;?>
+            <?php case 3: ?>
+                <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                  <strong><i class="fas fa-times-circle"></i> El usuario no pudo ser modificado.</strong> <br/>
+                  <span>Verifique que los datos del usuario sean correctos.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>     
+            <?php break;?>   
+            <?php case 4: ?>
+                <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                  <strong><i class="fas fa-times-circle"></i> El usuario no pudo ser modificado.</strong> <br/>
+                  <span>La nueva contraseña no puede ser igual a la anterior.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>   
+            <?php break; endswitch; ?>
+          <?php endif; ?>
 
           <form action="../scripts/modificar_usuario.php" method="post" class="pt-4">
             <div class="form-group">

@@ -74,6 +74,51 @@ require('../scripts/db_connection.php');
             </div>
           </div>
 
+          <?php if(isset( $_GET['mensajeAgregarProducto'])) : ?>
+            <?php switch ( $_GET['mensajeAgregarProducto'] ) : case 1: ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong><i class="fas fa-check-circle"></i> Producto agregado con éxito.</strong> <br/>
+                  <span>Verifique los resultados.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break; endswitch; ?>
+          <?php endif; ?>
+
+          <?php if(isset( $_GET['mensajeModificarProducto'])) : ?>
+            <?php switch ( $_GET['mensajeModificarProducto'] ) : case 1: ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong><i class="fas fa-check-circle"></i> Producto modificado con éxito.</strong> <br/>
+                  <span>Verifique los resultados.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break; endswitch; ?>
+          <?php endif; ?>
+
+          <?php if(isset( $_GET['mensajeEliminarProducto'])) : ?>
+            <?php switch ( $_GET['mensajeEliminarProducto'] ) : case 1: ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong><i class="fas fa-check-circle"></i> Estatus del producto cambiado con éxito.</strong> <br/>
+                  <span>Verifique que el estado del usuario sea "inactivo".</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break; ?>
+            <?php case 2: ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong><i class="fas fa-times-circle"></i> El estatus del producto no pudo ser cambiado.</strong> <br/>
+                  <span>Contacte al administrador.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break; endswitch; ?>
+          <?php endif; ?>
+
           <span>Productos existentes en el sistema</span>
 
           <div class="table-responsive">

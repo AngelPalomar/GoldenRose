@@ -30,7 +30,7 @@ CREATE TABLE producto(
     pathImagen VARCHAR(216) NOT NULL,
     idCategoria INT NOT NULL,
     idMarca INT NOT NULL,
-    estado ENUM('disponible', 'no_disponible') NOT NULL DEFAULT 'disponible';
+    estado ENUM('disponible', 'no_disponible') NOT NULL DEFAULT 'disponible'
     CONSTRAINT Index_PK_producto PRIMARY KEY (id),
     CONSTRAINT Index_producto_FK1_categoria FOREIGN KEY (idCategoria) REFERENCES categoria(id),
     CONSTRAINT Index_producto_FK2_marca FOREIGN KEY (idMarca) REFERENCES marca(id)
@@ -122,78 +122,6 @@ CREATE TABLE direccion(
 );
 
 ALTER TABLE sucursal ADD CONSTRAINT Index_sucursal_FK1_direccion FOREIGN KEY(idDireccion) REFERENCES direccion(id); 
-
---Inserts
-INSERT INTO usuario VALUES(1, 'admin1@golden.com', md5('12345678'), 'admin', 'Cruz', 'Angel', 'Palomar', 'Gaytan', NOW(), NOW(), 'activo', null);
-INSERT INTO usuario VALUES(2, 'admin2@golden.com', md5('12345678'), 'admin', 'Erick', 'Jesus', 'Yañez', 'Bran', NOW(), NOW(), 'inactivo', null);
-
-INSERT INTO estado VALUES
-(1, "Aguascalientes"),
-(2, "Baja California"),
-(3, "Baja California Sur"),
-(4, "Campeche"),
-(5, "Chiapas"),
-(6, "Chihuahua"),
-(7, "Ciudad de México"),
-(8, "Coahuila"),
-(9, "Colima"),
-(10, "Durango"),
-(11, "Guanajuato"),
-(12, "Guerrero"),
-(13, "Hidalgo"),
-(14, "Jalisco"),
-(15, "Estado de México"),
-(16, "Michoacán"),
-(17, "Morelos"),
-(18, "Nayarit"),
-(19, "Nuevo León"),
-(20, "Oaxaca"),
-(21, "Puebla"),
-(22, "Querétaro"),
-(23, "Quintana Roo"),
-(24, "San Luis Potosí"),
-(25, "Sinaloa"),
-(26, "Sonora"),
-(27, "Tabasco"),
-(28, "Tamaulipas"),
-(29, "Tlaxcala"),
-(30, "Veracruz"),
-(31, "Yucatán"),
-(32, "Zacatecas");
-
-INSERT INTO municipio VALUES
-("QT001","Amealco de Bonfil",22),
-("QT002","Pinal de Amoles",22),
-("QT003","Arroyo Seco",22),
-("QT004","Cadereyta de Montes",22),
-("QT005","Colon",22),
-("QT006","Corregidora",22),
-("QT007","Ezequiel Montes",22),
-("QT008","Huimilpan",22),
-("QT009","Jalpan de Serra",22),
-("QT010","Landa de Matamoros",22),
-("QT011","El Marques",22),
-("QT012","Pedro Escobedo",22),
-("QT013","Peñamiller",22),
-("QT014","Querétaro",22),
-("QT015","San Joaquin",22),
-("QT016","San Juan del Rio",22),
-("QT017","Tequisquiapan",22),
-("QT018","Toliman",22),
-("AG001","Aguascalientes",1),
-("GTO01","Leon",11),
-("YU001","Merida",31),
-("MX001","Iztapalapa",15);
-
-INSERT INTO direccion VALUES
-(1, "Fray F. Galindo", 22, "", "Centro", "76008", "QT014", null),
-(2, "K.m 8", "s/n", "s/n", "Balvanera", "79600", "QT006", null),
-(3, "Anillo Vial III", 3, "", "Los Heroes", "76267", "QT011", null);
-
-INSERT INTO sucursal VALUES
-(1, "GoldenRose Qro. Cent", 1),
-(2, "GoldenRose Qro. Corr", 2),
-(3, "GoldenRose Qro. Marq", 3);
 
 -- ############  PRODEDIMIENTOS, TRIGGERS, VISTAS Y CONSULTAS ############ --
 

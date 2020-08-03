@@ -25,7 +25,9 @@ require('../scripts/db_connection.php');
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="../assets/css/golden_rose.css" rel="stylesheet">
@@ -58,22 +60,67 @@ require('../scripts/db_connection.php');
           <div class="row pb-3">
             <div class="col-sm-3">
               <a href="agregar_usuario.php" class="btn golden-button-primary btn-lg btn-block">
-                  <span class="icon text-white-50">
-                    <i class="fas fa-user-plus"></i>
-                  </span>
+                <span class="icon text-white-50">
+                  <i class="fas fa-user-plus"></i>
+                </span>
                 <span class="text">Agregar Usuario</span>
               </a>
             </div>
             <div class="col-sm-3">
               <a href="consultar_usuario.php" class="btn golden-button-primary btn-lg btn-block">
-                  <span class="icon text-white-50">
-                    <i class="fas fa-search"></i>
-                  </span>
+                <span class="icon text-white-50">
+                  <i class="fas fa-search"></i>
+                </span>
                 <span class="text">Buscar Usuario</span>
               </a>
             </div>
           </div>
-          
+
+          <?php if(isset( $_GET['mensajeAgregar'])) : ?>
+            <?php switch ( $_GET['mensajeAgregar'] ) : case 1: ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong><i class="fas fa-check-circle"></i> Usuario agregado con éxito.</strong> <br/>
+                  <span>Verifique los resultados.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break; endswitch; ?>
+          <?php endif; ?>
+
+          <?php if(isset( $_GET['mensajeModificar'])) : ?>
+            <?php switch ( $_GET['mensajeModificar'] ) : case 1: ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong><i class="fas fa-check-circle"></i> Usuario modificado con éxito.</strong> <br/>
+                  <span>Verifique los resultados.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break; endswitch; ?>
+          <?php endif; ?>
+
+          <?php if(isset( $_GET['mensajeEliminar'])) : ?>
+            <?php switch ( $_GET['mensajeEliminar'] ) : case 1: ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong><i class="fas fa-check-circle"></i> Estatus del usuario cambiado con éxito.</strong> <br/>
+                  <span>Verifique que el estado del usuario sea "inactivo".</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break; ?>
+            <?php case 2: ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong><i class="fas fa-times-circle"></i> El estatus del usuario no pudo ser cambiado.</strong> <br/>
+                  <span>Contacte al administrador.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break; endswitch; ?>
+          <?php endif; ?>
+
           <span>Usuarios registrados en el sistema</span>
 
           <div class="table-responsive">
@@ -109,39 +156,39 @@ require('../scripts/db_connection.php');
                 usuario.fechaRegisro AS "FECHA DE REGISTRO",
                 CONCAT(calle, " No. ", numeroExterior, " ", numeroInterior, " ", colonia, " ", codigoPostal, " ", municipio.nombre, ", ", estado.nombre) AS DIRECCION
                 FROM usuario 
-                INNER JOIN direccion ON (usuario.id=direccion.idUsuario)
-                INNER JOIN municipio ON (direccion.idMunicipio=municipio.id)
-                INNER JOIN estado ON (municipio.idEstado=estado.id)
+                LEFT JOIN direccion ON (usuario.id=direccion.idUsuario)
+                LEFT JOIN municipio ON (direccion.idMunicipio=municipio.id)
+                LEFT JOIN estado ON (municipio.idEstado=estado.id)
                 ORDER BY usuario.id DESC';
 
                 $query = $mysqli->query($cmd);
                 
                 if ($query->num_rows > 0):
                   while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
-                  <tr>
-                    <td><?=$row['ID']?></td>
-                    <td><?=$row['EMAIL']?></td>
-                    <td><?=$row['NOMBRE']?></td>
-                    <td><?=$row['TIPO USUARIO']?></td>
-                    <td><?=$row['ESTADO ACTUAL']?></td>
-                    <td><?=$row['FECHA DE REGISTRO']?></td>
-                    <td><?=$row['DIRECCION']?></td>
-                    <td>
-                      <div class="d-flex flex-row">
-                        <div class="col-sm-6"> 
-                          <a href="modificar_usuario.php?id=<?=$row['ID']?>" class="btn golden-button-success"> 
-                            <i class="fas fa-pen"></i>
-                          </a>
-                        </div>
-                        <div class="col-sm-6">
-                          <a href="eliminar_usuario.php?id=<?=$row['ID']?>" class="btn golden-button-danger"> 
-                            <i class="fas fa-times"></i>
-                          </a>
-                        </div>
+                <tr>
+                  <td><?=$row['ID']?></td>
+                  <td><?=$row['EMAIL']?></td>
+                  <td><?=$row['NOMBRE']?></td>
+                  <td><?=$row['TIPO USUARIO']?></td>
+                  <td><?=$row['ESTADO ACTUAL']?></td>
+                  <td><?=$row['FECHA DE REGISTRO']?></td>
+                  <td><?=$row['DIRECCION']?></td>
+                  <td>
+                    <div class="d-flex flex-row">
+                      <div class="col-sm-6">
+                        <a href="modificar_usuario.php?id=<?=$row['ID']?>" class="btn golden-button-success">
+                          <i class="fas fa-pen"></i>
+                        </a>
                       </div>
-                    </td>
-                  </tr>
-                  <?php endwhile; ?>
+                      <div class="col-sm-6">
+                        <a href="eliminar_usuario.php?id=<?=$row['ID']?>" class="btn golden-button-danger">
+                          <i class="fas fa-times"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <?php endwhile; ?>
                 <?php endif; ?>
               </tbody>
             </table>

@@ -74,7 +74,7 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
           </div>
 
           <div id="resultados"></div>
-          
+
         </div>
         <!-- /.container-fluid -->
 
@@ -121,13 +121,13 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
     buscarUsuario();
   });
 
-  $('#buscar').click(function () { 
+  $('#buscar').click(function () {
     buscarUsuario();
   });
 </script>
 
 <script type="text/javascript">
-  function buscarUsuario() { 
+  function buscarUsuario() {
     $.ajax({
       type: "POST",
       url: "../scripts/consultar_usuario.php",

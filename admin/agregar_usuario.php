@@ -58,6 +58,27 @@ require('../scripts/db_connection.php');
           <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-user-plus"></i> Agregar usuario</h1>
           <span class="focus">Llenar los campos correspondientes</span>
 
+          <?php if(isset( $_GET['mensajeAgregar'])) : ?>
+            <?php switch ( $_GET['mensajeAgregar'] ) : case 2: ?>
+                <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                  <strong><i class="fas fa-times-circle"></i> Hubo un problema al subir este usuario</strong> <br/>
+                  <span>Verifique la información.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <?php break; ?>
+                <?php case 3: ?>
+                <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                  <strong><i class="fas fa-times-circle"></i> Ocurrió un error</strong> <br/>
+                  <span>Vuelva a intentarlo.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break; endswitch; ?>
+          <?php endif; ?>
+
           <form action="../scripts/agregar_usuario.php" method="post" class="pt-4">
             <h4 class="h4 mb-4 text-gray-800">Datos personales</h4>
             <div class="row">
@@ -159,7 +180,7 @@ require('../scripts/db_connection.php');
                 <div class="form-group">
                   <label for="edo">*Estado</label>
                   <select name="edo" id="edo" class="form-control" required>
-                  <option hidden selected value="">Seleccione un estado</option>
+                    <option hidden selected value="">Seleccione un estado</option>
                     <?php 
                     $cmd = "SELECT * FROM estado";
                     $query = $mysqli->query($cmd);
@@ -174,7 +195,7 @@ require('../scripts/db_connection.php');
                   ?>
                   </select>
                 </div>
-              </div>  
+              </div>
               <div class="col-sm-3">
                 <div class="form-group">
                   <label for='mun'>*Municipio</label>
@@ -188,7 +209,7 @@ require('../scripts/db_connection.php');
             <div class="form-group text-center pt-3">
               <button type="submit" class="btn btn-lg golden-button-primary">
                 <i class="fas fa-user-plus"></i>
-                Añadir usuario  
+                Añadir usuario
               </button>
               <button type="button" class="btn golden-button-danger btn-lg" onclick="regresar();">
                 <i class="fas fa-times"></i>

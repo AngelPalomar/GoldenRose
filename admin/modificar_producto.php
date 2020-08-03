@@ -83,6 +83,27 @@ if (isset($_GET['id'])) {
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-box"></i> Modificar Producto</h1>
 
+          <?php if(isset( $_GET['mensajeModificarProducto'])) : ?>
+            <?php switch ( $_GET['mensajeModificarProducto'] ) : case 2: ?>
+                <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                  <strong><i class="fas fa-times-circle"></i> El producto no pudo ser modificado.</strong> <br/>
+                  <span>Verifique los datos.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php break;?>
+            <?php case 3: ?>
+                <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                  <strong><i class="fas fa-times-circle"></i> El producto no pudo ser modificado.</strong> <br/>
+                  <span>Ocurrió un error, contacte al administrador.</span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div> 
+            <?php break; endswitch; ?>
+          <?php endif; ?>
+
           <div>
             <form action="../scripts/modificar_producto.php" enctype="multipart/form-data" method="post">
               <div class="form-group">

@@ -157,6 +157,18 @@ if (isset($_SESSION['id'])) {
         <?php endswitch; ?>
       <?php endif; ?>
 
+      <?php if(isset( $_GET['mensajeRegister'])) : ?>
+          <?php switch ( $_GET['mensajeRegister'] ) : case 1: ?>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong><i class="fas fa-check-circle"></i> Cuenta creada con éxito.</strong> <br/>
+                <span>Inicia sesión para empezar a comprar.</span> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+          <?php break; endswitch; ?>
+        <?php endif; ?>
+
       <form action="scripts/login.php" method="POST" class="mt-5">
         <div class="row">
             <div class="col-sm-2"></div>

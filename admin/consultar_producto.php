@@ -58,11 +58,10 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
           <div class="row mb-4">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
-              <label for="id">Ingrese el ID del producto a buscar.</label>  
+              <label for="id">Ingrese el ID del producto a buscar.</label>
               <div class="row text-center">
                 <div class="col-sm-10">
-                  <input type="text" name="id" id="id" class="form-control"
-                    placeholder="ID">
+                  <input type="text" name="id" id="id" class="form-control" placeholder="ID">
                 </div>
                 <div class="col-sm-2">
                   <button id="buscar" class="btn golden-button-info">
@@ -122,13 +121,13 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
     buscarProducto();
   });
 
-  $('#buscar').click(function () { 
+  $('#buscar').click(function () {
     buscarProducto();
   });
 </script>
 
 <script type="text/javascript">
-  function buscarProducto() { 
+  function buscarProducto() {
     $.ajax({
       type: "POST",
       url: "../scripts/consultar_producto.php",

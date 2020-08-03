@@ -56,11 +56,7 @@ if (!isset($_SESSION['id'])) {
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Inner Page</li>
-          </ol>
+          <h2>Bienvenido a Golden Rose</h2>
         </div>
 
       </div>
