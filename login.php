@@ -10,7 +10,7 @@ if (isset($_SESSION['id'])) {
             header('Location:admin/index.php');
             break;
         case 'cliente':
-            header('Location:home.php');
+            header('Location:index.php');
             break;
     }
 }

@@ -20,7 +20,7 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="../home.php">
+    <a class="nav-link" href="../index.php">
       <i class="fas fa-leaf"></i>
       <span>Ir a la tienda</span></a>
   </li>

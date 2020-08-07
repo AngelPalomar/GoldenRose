@@ -20,6 +20,10 @@
     --goldenR-light: #F8EFF6;
 }
 
+.g-text-primary {
+    color: var(--goldenR-primary);
+}
+
 a{
     color: var(--goldenR-primary);
 }
@@ -33,6 +37,23 @@ span.focus {
     color: var(--goldenR-primary);
     font-weight: 700;
     font-size: large;
+}
+
+span.g-title {
+    color: var(--goldenR-primary);
+    font-weight: lighter;
+    font-size: large;
+}
+
+span.g-price {
+    color: black;
+    font-weight: inherit;
+    font-size: small;
+}
+
+.img-product {
+    width: 200px;
+    height: 200px;
 }
 
 .golden-bg-primary {
