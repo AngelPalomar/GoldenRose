@@ -146,8 +146,9 @@ require('../scripts/db_connection.php');
                   END
                 ) AS ESTATUS
                 FROM producto
-                INNER JOIN categoria ON (categoria.id = producto.idCategoria) 
-                INNER JOIN marca ON (marca.id = producto.idMarca)";
+                LEFT JOIN categoria ON (categoria.id = producto.idCategoria) 
+                LEFT JOIN marca ON (marca.id = producto.idMarca)
+                ORDER BY producto.id DESC";
 
                 $query = $mysqli->query($cmd);
                 

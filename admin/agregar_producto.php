@@ -85,7 +85,7 @@ require('../scripts/db_connection.php');
                 <div class="row">
                   <div class="col-sm-4 form-group">
                     <label for="nombre">*Nombre del producto</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control" maxlength="25" required>
+                    <input type="text" name="nombre" id="nombre" class="form-control" maxlength='25' required='required'>
                   </div>
                   <div class="col-sm-4 form-group">
                     <label for="precio">*Costo original</label>
