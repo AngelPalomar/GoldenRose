@@ -1,4 +1,4 @@
-<<?php
+<?php
 
 require('db_connection.php');
 
@@ -30,12 +30,12 @@ if (isset($_POST)) {
 
       /**Cerrar conexión */
       $mysqli->close();
-      header('Location:../admin/sucursal.php?mensaje=1');
+      header('Location:../admin/sucursal.php?mensajeEliminar=1');
 
     } else {
       $error = $mysqli->error;
       $mysqli->close();
-      header('Location:../admin/modificar_sucursal.php?id='.$id.'&mensajeModificar=2'.$error);
+      header('Location:../admin/sucursal.php?id='.$id.'&mensajeEliminar=2'.$error);
     }
 
 
@@ -44,7 +44,7 @@ if (isset($_POST)) {
     /**No se pudo guardar */
     $error = $mysqli->error;
     $mysqli->close();
-    header('Location:../admin/modificar_sucursal.php?id='.$id.'&mensajeModificar=3'.$error);
+    header('Location:../admin/sucursal.php?id='.$id.'&mensajeEliminar=3'.$error);
   }
 
 }
@@ -52,7 +52,7 @@ if (isset($_POST)) {
 
 } else {
   /**Algo salió mal */
-  header('Location:../admin/modificar_sucursal.php?error=1');
+  header('Location:../admin/sucursal.php?mensajeEliminar=4');
 }
 
 
