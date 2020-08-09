@@ -56,81 +56,104 @@ require('../scripts/db_connection.php');
 
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-copyright"></i> Agregar marca</h1>
-          <span class="focus">Llenar los campos correspondientes</span>
 
-          <form action="../scripts/agregar_marca.php" method="post" class="pt-4">
-            <h4 class="h4 mb-4 text-gray-800">Datos de la marca</h4>
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="form-group">
-                  <label for="marca">*Nombre de la marca</label>
-                  <input type="text" name="marca" id="marca" class="form-control" required>
+          <?php if(isset( $_GET['mensajeAgregar'])) : ?>
+            <?php switch ( $_GET['mensajeAgregar'] ) : case 2: ?>
+              <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                <strong><i class="fas fa-times-circle"></i> La marca no pudo ser agregada.</strong> <br/>
+                <span>Verifique los datos.</span> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <?php break;?>
+              <?php case 3: ?>
+              <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                <strong><i class="fas fa-times-circle"></i> El marca no pudo ser agregada.</strong> <br/>
+                <span>Ocurrió un error, contacte al administrador.</span> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div> 
+              <?php break; endswitch; ?>
+            <?php endif; ?>
+
+
+            <span class="focus">Llenar los campos correspondientes</span>
+
+            <form action="../scripts/agregar_marca.php" method="post" class="pt-4">
+              <h4 class="h4 mb-4 text-gray-800">Datos de la marca</h4>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="marca">*Nombre de la marca</label>
+                    <input type="text" name="marca" id="marca" class="form-control" maxlength="20" required>
+                  </div>
                 </div>
+
+
+
               </div>
 
 
+              <div class="form-group text-center pt-3">
+                <button type="submit" class="btn btn-lg golden-button-primary">
+                  <i class="fas fa-check"></i>
+                  Añadir marca  
+                </button>
+                <button type="button" class="btn golden-button-danger btn-lg" onclick="regresar();">
+                  <i class="fas fa-times"></i>
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>       
+          <!-- /.container-fluid -->
 
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Your Website 2020</span>
             </div>
-
-
-            <div class="form-group text-center pt-3">
-              <button type="submit" class="btn btn-lg golden-button-primary">
-                <i class="fas fa-check"></i>
-                Añadir marca  
-              </button>
-              <button type="button" class="btn btn-danger btn-lg" onclick="regresar();">
-                <i class="fas fa-times"></i>
-                Cancelar
-              </button>
-            </div>
-          </form>
-        </div>       
-        <!-- /.container-fluid -->
+          </div>
+        </footer>
+        <!-- End of Footer -->
 
       </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
+      <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-  </div>
-  <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"></script>
-  <script>
-    function regresar() {
-      if (confirm("¿Realmente quiere salir de esta sección?\nNo se guardarán los cambios.")) {
-        window.location.href = 'marca.php';
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+    <script>
+      function regresar() {
+        if (confirm("¿Realmente quiere salir de esta sección?\nNo se guardarán los cambios.")) {
+          window.location.href = 'marca.php';
+        }
       }
-    }
-  </script>
+    </script>
 
-</body>
+  </body>
 
-</html>
+  </html>
 
