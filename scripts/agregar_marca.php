@@ -22,7 +22,7 @@ if (isset($_POST)) {
             
 
             /**Agregar usuario */
-            $insertMarca = "INSERT INTO marca VALUES('$idMarca', '$marca')";
+            $insertMarca = "INSERT INTO marca VALUES('$idMarca', '$marca', 'activo')";
 
             /*Si la consulta se realizo, redireccionamos a la lista de 
             usuarios*/
@@ -31,15 +31,18 @@ if (isset($_POST)) {
 
                 /**Cerrar conexión */
                 $mysqli->close();
-                header('Location:../admin/marca.php?mensaje=1');
-            }
+                header('Location:../admin/marca.php?mensajeAgregar=1');
+                
+            }else{header('Location:../admin/agregar_marca.php?mensajeAgregar=2');
 
         }
+
     }
+}
 
 } else {
     /**Algo salió mal */
-    header('Location:../admin/agregar_marca.php?error=1');
+    header('Location:../admin/agregar_marca.php?mensajeAgregar=2');
 }
 
 
