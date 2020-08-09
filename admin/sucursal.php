@@ -73,100 +73,148 @@ require('../scripts/db_connection.php');
               </a>
             </div>
           </div>
-          
-          <span>Sucursales registrados en el sistema</span>
 
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead class="golden-bg-secondary">
-                <th>ID</th>
-                <th>SUCURSAL</th>
-                <th>DIRECCION</th>
-                <th>ESTADO</th>
-                <th>MUNICIPIO</th>
-              </thead>
-              <tbody>
-                <?php 
-                $cmd = 'SELECT sucursal.id AS ID,
-                sucursal.nombre AS SUCURSAL,
-                CONCAT(calle, " No. ", numeroExterior, " ", numeroInterior, " ", colonia, " ", codigoPostal, " ", municipio.nombre, ", ", estado.nombre) AS DIRECCION,
-                estado.nombre AS ESTADO,
-                municipio.nombre AS MUNICIPIO
-                FROM direccion 
-                INNER JOIN sucursal ON (direccion.id=sucursal.idDireccion)
-                INNER JOIN municipio ON (direccion.idMunicipio=municipio.id)
-                INNER JOIN estado ON (municipio.idEstado=estado.id)
-                ORDER BY sucursal.id DESC
-                ';
 
-                $query = $mysqli->query($cmd);
-                
-                if ($query->num_rows > 0):
-                  while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
-                    <tr>
-                      <td><?=$row['ID']?></td>
-                      <td><?=$row['SUCURSAL']?></td>
-                      <td><?=$row['DIRECCION']?></td>
-                      <td><?=$row['ESTADO']?></td>
-                      <td><?=$row['MUNICIPIO']?></td>
-                      <td>
-                        <div class="d-flex flex-row">
-                          <div class="col-sm-6"> 
-                            <a href="modificar_sucursal.php?id=<?=$row['ID']?>" class="btn btn-success"> 
-                              <i class="fas fa-pen"></i>
-                            </a>
-                          </div>
-                          <div class="col-sm-6">
-                            <a href="eliminar_sucursal.php?id=<?=$row['ID']?>" class="btn btn-danger"> 
-                              <i class="fas fa-times"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  <?php endwhile; ?>
+          <?php if(isset( $_GET['mensajeAgregar'])) : ?>
+            <?php switch ( $_GET['mensajeAgregar'] ) : case 1: ?>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong><i class="fas fa-check-circle"></i> Sucursal agregada con éxito.</strong> <br/>
+                <span>Verifique los resultados.</span> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <?php break; endswitch; ?>
+            <?php endif; ?>
+
+            <?php if(isset( $_GET['mensajeModificar'])) : ?>
+              <?php switch ( $_GET['mensajeModificar'] ) : case 1: ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong><i class="fas fa-check-circle"></i> Sucursal modificada con éxito.</strong> <br/>
+                  <span>Verifique los resultados.</span> 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <?php break; endswitch; ?>
+              <?php endif; ?>
+
+              <?php if(isset( $_GET['mensajeEliminar'])) : ?>
+                <?php switch ( $_GET['mensajeEliminar'] ) : case 1: ?>
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong><i class="fas fa-check-circle"></i> Sucursal fue eliminada con éxito.</strong> <br/>
+                    <span>Verifique que la sucursal no esté en el sistema.</span> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <?php break; ?>
+                  <?php default: ?>
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><i class="fas fa-times-circle"></i> La sucursal no pudo ser eliminada.</strong> <br/>
+                    <span>Contacte al administrador.</span> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <?php break; endswitch; ?>
                 <?php endif; ?>
-              </tbody>
-            </table>
+
+
+                <span>Sucursales registrados en el sistema</span>
+
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="golden-bg-secondary">
+                      <th>ID</th>
+                      <th>SUCURSAL</th>
+                      <th>DIRECCION</th>
+                      <th>ESTADO</th>
+                      <th>MUNICIPIO</th>
+                      <TH>ACCIONES</TH>
+                    </thead>
+                    <tbody>
+                      <?php 
+                      $cmd = 'SELECT sucursal.id AS ID,
+                      sucursal.nombre AS SUCURSAL,
+                      CONCAT(calle, " No. ", numeroExterior, " ", numeroInterior, " ", colonia, " ", codigoPostal, " ", municipio.nombre, ", ", estado.nombre) AS DIRECCION,
+                      estado.nombre AS ESTADO,
+                      municipio.nombre AS MUNICIPIO
+                      FROM direccion 
+                      INNER JOIN sucursal ON (direccion.id=sucursal.idDireccion)
+                      INNER JOIN municipio ON (direccion.idMunicipio=municipio.id)
+                      INNER JOIN estado ON (municipio.idEstado=estado.id)
+                      ORDER BY sucursal.id DESC
+                      ';
+
+                      $query = $mysqli->query($cmd);
+
+                      if ($query->num_rows > 0):
+                        while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
+                          <tr>
+                            <td><?=$row['ID']?></td>
+                            <td><?=$row['SUCURSAL']?></td>
+                            <td><?=$row['DIRECCION']?></td>
+                            <td><?=$row['ESTADO']?></td>
+                            <td><?=$row['MUNICIPIO']?></td>
+                            <td>
+                              <div class="d-flex flex-row">
+                                <div class="col-sm-6"> 
+                                  <a href="modificar_sucursal.php?id=<?=$row['ID']?>" class="btn golden-button-success"> 
+                                    <i class="fas fa-pen"></i>
+                                  </a>
+                                </div>
+                                <div class="col-sm-6">
+                                  <a href="eliminar_sucursal.php?id=<?=$row['ID']?>" class="btn golden-button-danger btn-lg"> 
+                                    <i class="fas fa-times"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        <?php endwhile; ?>
+                      <?php endif; ?>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+              <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+              <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                  <span>Copyright &copy; Your Website 2020</span>
+                </div>
+              </div>
+            </footer>
+            <!-- End of Footer -->
+
           </div>
+          <!-- End of Content Wrapper -->
 
         </div>
-        <!-- /.container-fluid -->
+        <!-- End of Page Wrapper -->
 
-      </div>
-      <!-- End of Main Content -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+          <i class="fas fa-angle-up"></i>
+        </a>
 
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    </div>
-    <!-- End of Content Wrapper -->
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  </div>
-  <!-- End of Page Wrapper -->
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+      </body>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-
-</body>
-
-</html>
+      </html>
