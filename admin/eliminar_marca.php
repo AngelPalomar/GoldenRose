@@ -80,7 +80,7 @@ if (!isset($_GET['id'])) {
           <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-times"></i> Eliminar marca</h1>
 
           <div class="alert alert-warning" role="alert">
-            <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> ¿Deseas cambiar el estadp de la marca?</h4>
+            <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> ¿Deseas cambiar el estado de la marca?</h4>
             <p>
               La marca <span class="font-weight-bold"><?=$Marca_datos['NOMBRE_MARCA']?></span> será cambiada a  <span class="text-danger">inactiva</span> y no se mostrará en el sistema. 
             </p>
