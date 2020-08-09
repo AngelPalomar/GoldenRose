@@ -48,7 +48,7 @@ if (isset($_POST)) {
 
                 /**Cerrar conexión */
                 $mysqli->close();
-                header('Location:../admin/sucursal.php?mensaje=1');
+                header('Location:../admin/sucursal.php?mensajeModificar=1');
 
             } else {
                 $error = $mysqli->error;
@@ -70,7 +70,7 @@ if (isset($_POST)) {
 
 } else {
     /**Algo salió mal */
-    header('Location:../admin/modificar_sucursal.php?error=1');
+    header('Location:../admin/modificar_sucursal.php?mensajeModificar=4');
 }
 
 
