@@ -10,11 +10,11 @@ $nombreMarca = $_POST['nombre'];
 $updateMarca = "UPDATE marca SET nombre = '$nombreMarca' WHERE id = '$idMarca'";
 
 if ($query = $mysqli->query($updateMarca)) {
-	header('Location:../admin/marca.php?&mensajeModificarProducto=1');
+	header('Location:../admin/marca.php?&mensajeModificar=1');
 } else {
 	$error = $mysqli->error;
 	$mysqli->close();
-	header('Location:../admin/modificar_marca.php?id='.$idMarca.'&mensajeModificarProducto=2'.$error);
+	header('Location:../admin/modificar_marca.php?id='.$idMarca.'&mensajeModificar=2'.$error);
 }
 
 
