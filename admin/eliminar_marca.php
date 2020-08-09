@@ -23,8 +23,8 @@ if (!isset($_GET['id'])) {
   if ($query->num_rows === 1) {
     $Marca_datos = $query->fetch_array(MYSQLI_ASSOC);
   } else {
-    /**No hay usuarios */
-    header('Location:marca.php?mensajeEliminarProducto=2');
+    /**No hay marcas */
+    header('Location:marca.php?mensajeEliminar=2');
   }
 }
 
@@ -80,13 +80,12 @@ if (!isset($_GET['id'])) {
           <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-times"></i> Eliminar marca</h1>
 
           <div class="alert alert-warning" role="alert">
-            <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> ¿Deseas borrar la marca?</h4>
+            <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> ¿Deseas cambiar el estadp de la marca?</h4>
             <p>
-              La marca <span class="font-weight-bold"><?=$Marca_datos['NOMBRE_MARCA']?></span> será dado de baja del sistema.
+              La marca <span class="font-weight-bold"><?=$Marca_datos['NOMBRE_MARCA']?></span> será cambiada a  <span class="text-danger">inactiva</span> y no se mostrará en el sistema. 
             </p>
-            <P><span class="text-danger">Sólo se derá de baja si no hay registros de dicha marca.</span></P>
             <p class="mb-0">Presiona el botón "Aceptar" para dar de baja esta marca o presiona "Cancelar" para volver al
-            menú de usuarios.</p>
+            menú de marcas.</p>
           </div>
 
           <div class="form-group">
