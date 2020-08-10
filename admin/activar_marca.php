@@ -77,25 +77,25 @@ if (!isset($_GET['id'])) {
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-times"></i> Eliminar marca</h1>
+          <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-times"></i> Activar marca</h1>
 
           <div class="alert alert-warning" role="alert">
             <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> ¿Deseas cambiar el estado de la marca?</h4>
             <p>
-              La marca <span class="font-weight-bold"><?=$Marca_datos['NOMBRE_MARCA']?></span> será cambiada a  <span class="text-danger">inactiva</span> y no se mostrará en el sistema. 
+              La marca <span class="font-weight-bold"><?=$Marca_datos['NOMBRE_MARCA']?></span> será cambiada a  <span class="text-primary">activa</span> y se mostrará en el sistema nuevamente. 
             </p>
-            <p class="mb-0">Presiona el botón "Aceptar" para dar de baja esta marca o presiona "Cancelar" para volver al
-            menú de marcas.</p>
+            <p class="mb-0">Presiona el botón "Aceptar" para dar de activar esta marca o presiona "Cancelar" para volver al
+            menú de marcas inactivas.</p>
           </div>
 
           <div class="form-group">
             <div class="row text-center">
               <div class="col-sm-12">
-                <a href="../scripts/eliminar_marca.php?id=<?=$idMarca?>" class="btn btn-lg golden-button-success">
+                <a href="../scripts/activar_marca.php?id=<?=$idMarca?>" class="btn btn-lg golden-button-success">
                   <i class="fas fa-check"></i>
                   Aceptar
                 </a>
-                <a href="marca.php" class="btn btn-lg golden-button-danger">
+                <a href="marca_inactiva.php" class="btn btn-lg golden-button-danger">
                   <i class="fas fa-times"></i>
                   Cancelar
                 </a>

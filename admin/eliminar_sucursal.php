@@ -82,7 +82,7 @@ if (!isset($_GET['id'])) {
                 será borrada.  
               </p>
               <p>
-                <span class="text-danger">Para que pueda ser borrada la sucursal no deberá estar nada registrado a esta sucursal.</span>
+                <span class="text-danger">Una vez borrada la sucursal, los datos registrados con esta sucursal no tendrán registradas la sucursal.</span>
               </p>
               <div class="row d-flex justify-content-center">
                 <div class="col-sm-1">

@@ -40,11 +40,18 @@ if (isset($_POST)) {
                         /**Máximo id de la tabla dirección */
                         $idSucursal = $row['ID'] + 1;
                         $insertSucursal = "INSERT INTO sucursal VALUES('$idSucursal', '$nombre1', '$idDireccion')";
-                        $mysqli->query($insertSucursal);
 
-                        /**Cerrar conexión */
-                        $mysqli->close();
-                        header('Location:../admin/sucursal.php?mensaje=1');
+                        if ( $mysqli->query($insertSucursal);) {
+                            /*aqui va el insert sucursal si no no jala*/
+                            /**Cerrar conexión */
+                            $mysqli->close();
+                            header('Location:../admin/sucursal.php?mensajeAgregar=1');
+                            
+                        } else{ $error = $mysqli->error;
+                            $mysqli->close();
+                            header('Location:../admin/agregar_sucursal.php?mensajeAgregar=2&valor='.$error);
+                        }
+
                     }
                 }
 
@@ -52,7 +59,7 @@ if (isset($_POST)) {
                 /**No se pudo guardar */
                 $error = $mysqli->error;
                 $mysqli->close();
-                header('Location:../admin/agregar_sucursal.php?mensaje=2&valor='.$error);
+                header('Location:../admin/agregar_sucursal.php?mensajeAgregar=2&valor='.$error);
             }
 
         }
@@ -63,7 +70,7 @@ if (isset($_POST)) {
 
 } else {
     /**Algo salió mal */
-    header('Location:../admin/agregar_sucursal.php?error=1');
+    header('Location:../admin/agregar_sucursal.php?mensajeAgregar=3');
 }
 
 
