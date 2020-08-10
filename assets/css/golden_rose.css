@@ -24,6 +24,10 @@
     color: var(--goldenR-primary);
 }
 
+.g-text-success {
+    color: var(--goldenR-success);
+}
+
 a{
     color: var(--goldenR-primary);
 }
@@ -51,9 +55,28 @@ span.g-price {
     font-size: small;
 }
 
+span.g-summary {
+    color: black;
+    font-weight: lighter;
+}
+
+span.g-mount {
+    color: black;
+    font-weight: bold;
+}
+
 .img-product {
     width: 200px;
     height: 200px;
+}
+
+.img-cart-product {
+    width: 100px;
+    height: 100px;
+}
+
+.input-quantity-cart {
+    max-width: 100% !important;
 }
 
 .golden-bg-primary {

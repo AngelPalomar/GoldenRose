@@ -21,7 +21,7 @@ require('../scripts/db_connection.php');
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Productos - Golden Rose</title>
+  <title>Inventario - Golden Rose</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -53,31 +53,31 @@ require('../scripts/db_connection.php');
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-box"></i> Productos</h1>
+          <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-box"></i> Inventarios</h1>
 
           <div class="row pb-3">
             <div class="col-sm-3">
-              <a href="agregar_producto.php" class="btn golden-button-primary btn-lg btn-block">
+              <a href="agregar_inventario.php" class="btn golden-button-primary btn-lg btn-block">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
                   </span>
-                <span class="text">Agregar Producto</span>
+                <span class="text">Agregar inventario</span>
               </a>
             </div>
             <div class="col-sm-3">
-              <a href="consultar_producto.php" class="btn golden-button-primary btn-lg btn-block">
+              <a href="consultar_inventario.php" class="btn golden-button-primary btn-lg btn-block">
                   <span class="icon text-white-50">
                     <i class="fas fa-search"></i>
                   </span>
-                <span class="text">Buscar Producto</span>
+                <span class="text">Buscar inventario</span>
               </a>
             </div>
           </div>
 
-          <?php if(isset( $_GET['mensajeAgregarProducto'])) : ?>
-            <?php switch ( $_GET['mensajeAgregarProducto'] ) : case 1: ?>
+          <?php if(isset( $_GET['mensajeAgregarInventario'])) : ?>
+            <?php switch ( $_GET['mensajeAgregarInventario'] ) : case 1: ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong><i class="fas fa-check-circle"></i> Producto agregado con éxito.</strong> <br/>
+                  <strong><i class="fas fa-check-circle"></i> Inventario agregado con éxito.</strong> <br/>
                   <span>Verifique los resultados.</span> 
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -86,10 +86,10 @@ require('../scripts/db_connection.php');
             <?php break; endswitch; ?>
           <?php endif; ?>
 
-          <?php if(isset( $_GET['mensajeModificarProducto'])) : ?>
-            <?php switch ( $_GET['mensajeModificarProducto'] ) : case 1: ?>
+          <?php if(isset( $_GET['mensajeModificarInventario'])) : ?>
+            <?php switch ( $_GET['mensajeModificarInventario'] ) : case 1: ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong><i class="fas fa-check-circle"></i> Producto modificado con éxito.</strong> <br/>
+                  <strong><i class="fas fa-check-circle"></i> Inventario modificado con éxito.</strong> <br/>
                   <span>Verifique los resultados.</span> 
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -98,10 +98,10 @@ require('../scripts/db_connection.php');
             <?php break; endswitch; ?>
           <?php endif; ?>
 
-          <?php if(isset( $_GET['mensajeEliminarProducto'])) : ?>
-            <?php switch ( $_GET['mensajeEliminarProducto'] ) : case 1: ?>
+          <?php if(isset( $_GET['mensajeEliminarInventario'])) : ?>
+            <?php switch ( $_GET['mensajeEliminarInventario'] ) : case 1: ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong><i class="fas fa-check-circle"></i> Estatus del producto cambiado con éxito.</strong> <br/>
+                  <strong><i class="fas fa-check-circle"></i> Estatus del inventario cambiado con éxito.</strong> <br/>
                   <span>Verifique que el estado del usuario sea "inactivo".</span> 
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -110,7 +110,7 @@ require('../scripts/db_connection.php');
             <?php break; ?>
             <?php case 2: ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong><i class="fas fa-times-circle"></i> El estatus del producto no pudo ser cambiado.</strong> <br/>
+                  <strong><i class="fas fa-times-circle"></i> El estatus del inventario no pudo ser cambiado.</strong> <br/>
                   <span>Contacte al administrador.</span> 
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -119,66 +119,39 @@ require('../scripts/db_connection.php');
             <?php break; endswitch; ?>
           <?php endif; ?>
 
-          <span>Productos existentes en el sistema</span>
+          <span>Inventario</span>
 
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead class="golden-bg-secondary">
                 <th>ID</th>
-                <th>NOMBRE DEL PRODUCTO</th>
-                <th>COSTO</th>
-                <th>PRECIO</th>
-                <th>IMAGEN</th>
-                <th>CATEGORIA</th>
-                <th>MARCA</th>
-                <th>ESTADO ACTUAL</th>
-                <th>ACCIONES</th>
+                <th>PRODUCTO</th>
+                <th>SUCURSAL</th>
+                <th>CANTIDAD</th>
               </thead>
               <tbody>
                 <?php 
-                $cmd = "SELECT producto.id AS ID, producto.nombre AS NOMBRE_PRODUCTO, 
-                producto.costo AS COSTO, producto.precio AS PRECIO, producto.pathImagen AS IMAGEN, 
-                categoria.nombre AS CATEGORIA, marca.nombre AS MARCA,
-                (
-                  CASE
-                    WHEN producto.estado LIKE 'disponible' THEN 'Disponible'
-                    WHEN producto.estado LIKE 'no_disponible' THEN 'No disponible'
-                  END
-                ) AS ESTATUS
-                FROM producto
-                INNER JOIN categoria ON (categoria.id = producto.idCategoria) 
-                INNER JOIN marca ON (marca.id = producto.idMarca)
-                ORDER BY producto.id DESC";
-
                 $query = $mysqli->query($cmd);
                 
                 if ($query->num_rows > 0):
                   while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
                   <tr>
                     <td><?=$row['ID']?></td>
-                    <td><?=$row['NOMBRE_PRODUCTO']?></td>
-                    <td><?=$row['COSTO']?></td>
-                    <td><?=$row['PRECIO']?></td>
-                    <td>
-                      <img src="../imagenes_productos/<?=$row['IMAGEN']?>" alt="producto" width="40px">
-                    </td>
-                    <td><?=$row['CATEGORIA']?></td>
-                    <td><?=$row['MARCA']?></td>
-                    <td><?=$row['ESTATUS']?></td>
-                    <td>
+                    <td><?=$row['PRODUCTO']?></td>
+                    <td><?=$row['SUCURSAL']?></td>
+                    <td><?=$row['CANTIDAD']?></td>
                       <div class="d-flex flex-row">
                         <div class="col-sm-6"> 
-                          <a href="modificar_producto.php?id=<?=$row['ID']?>" class="btn golden-button-success"> 
+                          <a href="modificar_inventario.php?id=<?=$row['ID']?>" class="btn golden-button-success"> 
                             <i class="fas fa-pen"></i>
                           </a>
                         </div>
                         <div class="col-sm-6">
-                          <a href="eliminar_producto.php?id=<?=$row['ID']?>" class="btn golden-button-danger"> 
+                          <a href="eliminar_inventario.php?id=<?=$row['ID']?>" class="btn golden-button-danger"> 
                             <i class="fas fa-times"></i>
                           </a>
                         </div>
                       </div>
-                    </td>
                   </tr>
                   <?php endwhile; ?>
                 <?php endif; ?>

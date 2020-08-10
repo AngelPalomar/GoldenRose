@@ -108,7 +108,7 @@ if (isset($_GET['id'])) {
                                 <p>
                                     <?=$datosProducto['desc_amp']?>
                                 </p>
-                                <a href="#" class="mt-5 btn golden-button-info btn-block">
+                                <a href="carrito.php?accion=agregar&id=<?=$datosProducto['ID']?>&cantidad=1" class="mt-5 btn golden-button-info btn-block">
                                     <i class="fas fa-cart-plus"></i> Añadir al carrito
                                 </a>
                             </div>

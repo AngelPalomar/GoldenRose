@@ -52,7 +52,7 @@
   <?php endif; ?>
 
   <li class="nav-item">
-    <a class="nav-link" href="usuarios.php">
+    <a class="nav-link" href="inventario.php">
       <i class="fas fa-boxes"></i>
       <span>Inventarios</span>
     </a>
@@ -69,7 +69,7 @@
 
   <?php if ($_SESSION['tipoUsuario'] === 'admin'): ?>
   <li class="nav-item">
-    <a class="nav-link" href="tables.html">
+    <a class="nav-link" href="categoria.php">
       <i class="fas fa-tag"></i>
       <span>Categorías</span></a>
   </li>

@@ -46,11 +46,10 @@ session_start();
 </head>
 
 <body>
-
     <?php require('header.php') ?>
     <main id="main">
-
         <section id="hero" class="d-flex align-items-center">
+
             <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
                 <h1>Los mejores productos para tu jardín</h1>
                 <h2>Plantas, árboles, flores y herramientas de jardinería al alcance de tu mano</h2>
@@ -151,7 +150,8 @@ session_start();
                                         <span class="g-title"><?=$row['nombreProducto']?></span>
                                         <br />
                                         <span clasS="g-price">$ <?=$row['precio']?></span>
-                                        <a href="#" class="mt-3 btn golden-button-info btn-block">
+                                        <a href="carrito.php?accion=agregar&id=<?=$row['ID']?>&cantidad=1"
+                                            class="mt-3 btn golden-button-info btn-block">
                                             <i class="fas fa-cart-plus"></i> Añadir al carrito
                                         </a>
                                     </div>
@@ -199,7 +199,8 @@ session_start();
                                         <span class="g-title"><?=$row['nombreProducto']?></span>
                                         <br />
                                         <span clasS="g-price">$ <?=$row['precio']?></span>
-                                        <a href="#" class="mt-3 btn golden-button-info btn-block">
+                                        <a href="carrito.php?accion=agregar&id=<?=$row['ID']?>&cantidad=1"
+                                            class="mt-3 btn golden-button-info btn-block">
                                             <i class="fas fa-cart-plus"></i> Añadir al carrito
                                         </a>
                                     </div>
@@ -247,7 +248,8 @@ session_start();
                                         <span class="g-title"><?=$row['nombreProducto']?></span>
                                         <br />
                                         <span clasS="g-price">$ <?=$row['precio']?></span>
-                                        <a href="#" class="mt-3 btn golden-button-info btn-block">
+                                        <a href="carrito.php?accion=agregar&id=<?=$row['ID']?>&cantidad=1"
+                                            class="mt-3 btn golden-button-info btn-block">
                                             <i class="fas fa-cart-plus"></i> Añadir al carrito
                                         </a>
                                     </div>

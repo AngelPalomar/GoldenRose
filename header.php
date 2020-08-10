@@ -36,9 +36,16 @@ require('scripts/db_connection.php');
                         </ul>
                     </li>
                     <li>
-                        <a href="carrito.php">
+                        <a href="ver_carrito.php">
                             <i class="fas fa-shopping-cart"></i>
-                            Mi carrito
+                            Mi carrito 
+                            <?php
+                            if (!isset($_SESSION['carrito'])) {
+                                echo '(0)';
+                            } else {
+                                echo '('.sizeof($_SESSION['carrito']).')';
+                            }
+                            ?>                           
                         </a>
                     </li>
                     <?php
@@ -53,10 +60,10 @@ require('scripts/db_connection.php');
                     </li>
                     <?php else: ?>
                     <li class="drop-down active">
-                    <a href="">
-                        <i class="fas fa-arrow-alt-circle-right"></i>                       
-                        Ingresar
-                    </a>
+                        <a href="">
+                            <i class="fas fa-arrow-alt-circle-right"></i>
+                            Ingresar
+                        </a>
                         <ul>
                             <li><a href="register.php"><i class="fas fa-user-edit"></i> Registrarse</a></li>
                             <li><a href="login.php"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
