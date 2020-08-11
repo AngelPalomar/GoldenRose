@@ -42,6 +42,9 @@ if (isset($_POST)) {
 
             $mysqli->close();
             header('Location:../admin/productos.php?mensajeAgregarProducto=1');
+        } else {
+            /**Si no se pudo */
+            header('Location:../admin/productos.php?mensajeAgregarProducto=4');
         }
 
     } else {

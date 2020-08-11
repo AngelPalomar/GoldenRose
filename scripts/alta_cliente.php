@@ -8,58 +8,36 @@ if (isset($_POST)) {
     $apellido1 = $_POST['apellido1'];
     $apellido2 = $_POST['apellido2'];
     $email = $_POST['email'];
-    $contrasena = md5($_POST['pass']);   
+    $contrasena = $_POST['pass'];   
     $fechaR = date('Y-m-d H:i:s');
     $fechaU = date('Y-m-d H:i:s');
 
-    $calle = $_POST['colonia'];
+    $calle = $_POST['calle'];
     $colonia = $_POST['colonia'];
     $numeroExterior = $_POST['numeroExterior'];
     $numeroInterior = $_POST['numeroInterior'];
     $codigoPostal = $_POST['codigoPostal'];
     $municipio = $_POST['mun'];
     
-    /**INSERTAR USUARIO */
-    $idUsuario = "SELECT max(id) AS ID FROM usuario";
-    $query = $mysqli->query($idUsuario);
+    /**Procedimiento almacenado */
+    $alta = "CALL alta_cliente('$email', '$contrasena', '$nombre1', '$nombre2', '$apellido1', '$apellido2', 
+'$calle', '$numeroExterior', '$numeroInterior', '$colonia', '$codigoPostal', '$municipio')";
 
-    if ($query->num_rows > 0) {
+    if ($query = $mysqli->query($alta)) {
         while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
-            /**Máximo id de la tabla dirección */
-            $idUsuario = $row['ID'] + 1;
-
-            /**Agregar usuario */
-            $insertUsuario = "INSERT INTO usuario VALUES('$idUsuario', '$email', '$contrasena', 'cliente', '$nombre1', '$nombre2', '$apellido1', '$apellido2', '$fechaR', '$fechaU', 'activo', null)";
-
-            if ($mysqli->query($insertUsuario)) {
-                
-                /**Agregar dirección */
-                $idDireccion = "SELECT max(id) AS ID FROM direccion";
-                $query = $mysqli->query($idDireccion);
-
-                if ($query->num_rows > 0) {
-                    while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
-                        /**Máximo id de la tabla dirección */
-                        $idDireccion = $row['ID'] + 1;
-                        $insertDireccion = "INSERT INTO direccion VALUES('$idDireccion', '$calle', '$numeroExterior', '$numeroInterior', '$colonia', '$codigoPostal', '$municipio', '$idUsuario')";
-                        $mysqli->query($insertDireccion);
-
-                        /**Cerrar conexión */
-                        $mysqli->close();
-
-                        header('Location:../login.php?mensajeRegister=1');
-                    }
-                }
-
+            $results = $row['RESULT'];
+            if ($results === "OK") {
+                /**Caso de éxito */
+                header('Location:../login.php?mensajeRegister=1');
             } else {
-                /**No se pudo guardar */
-                $error = $mysqli->error;
-                $mysqli->close();
-                header('Location:../register.php?mensajeRegister=2&valor='.$error);
+               /**Se hizo rollback y no se pudo registrar */
+                header('Location:../register.php?mensajeRegister=2');
             }
-        }
+        }       
     }
     
+} else {
+    header('Location:../register.php');
 }
 
 ?>

@@ -109,7 +109,7 @@ if (isset($_GET['accion'])) {
                     if ($_SESSION['carrito'][$i]['ID'] === $idProducto) {
                         /**Borrar ese producto */
                         array_splice($_SESSION['carrito'], $i, 1);
-                    }  
+                    }
                 }
 
                 /**Si ya no hay elementos, destruir el carrito */

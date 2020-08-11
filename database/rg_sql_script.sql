@@ -198,25 +198,37 @@ CREATE PROCEDURE alta_cliente(IN Email VARCHAR(50), IN Contrasena VARCHAR(50), I
     IN Colonia VARCHAR(40), IN CodigoPostal VARCHAR(10), IN Municipio VARCHAR(20))
 BEGIN
 
-    DECLARE NewIdUsuario INT(10);
+	DECLARE NewIdUsuario INT(10);
     DECLARE newIdDireccion INT(10);
-    DECLARE EmailExistentes INT(10);
-    DECLARE IdMunicipio VARCHAR(6);
-    DECLARE RandomPassword VARCHAR(16);
-
-    SET EmailExistentes = (SELECT COUNT(id) FROM usuario WHERE usuario.email LIKE Email);
-
-    IF EmailExistentes = 0 THEN
+   
+   	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+	   	SELECT 'ERROR' AS RESULT;
+	   	ROLLBACK;
+   	END;
+   
+   	DECLARE EXIT HANDLER FOR SQLWARNING
+   	BEGIN
+		SELECT 'ERROR' AS RESULT;
+	   	ROLLBACK;
+   	END;
 
         SET NewIdUsuario = (SELECT MAX(id) FROM usuario);
         SET newIdDireccion = (SELECT MAX(id) FROM direccion);
-        SET IdMunicipio = (SELECT id FROM municipio WHERE municipio.nombre LIKE Municipio);
 
         IF NewIdUsuario IS NULL THEN
             SET NewIdUsuario = 1;
         ELSE
             SET NewIdUsuario = NewIdUsuario + 1;
         END IF;
+       
+       	IF newIdDireccion IS NULL THEN
+            SET newIdDireccion = 1;
+        ELSE 
+            SET newIdDireccion = newIdDireccion + 1;
+        END IF;
+       
+       	START TRANSACTION;
 
         INSERT INTO usuario (id, email, password, nombre1, nombre2, apellidoPaterno, 
         apellidoMaterno, fechaRegisro, fechaUltimoAcceso) VALUES (
@@ -231,12 +243,6 @@ BEGIN
             NOW()
         );
 
-        IF newIdDireccion IS NULL THEN
-            SET newIdDireccion = 1;
-        ELSE 
-            SET newIdDireccion = newIdDireccion + 1;
-        END IF;
-
         INSERT INTO direccion (id, calle, numeroExterior, numeroInterior, colonia, 
         codigoPostal, idMunicipio, idUsuario) VALUES (
             newIdDireccion,
@@ -245,13 +251,13 @@ BEGIN
             NumeroInterior,
             Colonia,
             CodigoPostal,
-            IdMunicipio,
+            Municipio,
             NewIdUsuario
         );
-
-    ELSE
-        INSERT INTO usuario (id) VALUES (NULL);
-    END IF;
+       
+    SELECT 'OK' AS RESULT;
+  
+   	COMMIT;
 END;
 
 /*Procedimiento almacenado que consulte productos (omitir id, idCategorias) por categoría mostrando la

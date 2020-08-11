@@ -48,9 +48,7 @@ require('scripts/db_connection.php');
                             ?>                           
                         </a>
                     </li>
-                    <?php
-                    if (isset($_SESSION['id'])):
-                    ?>
+                    <?php if (isset($_SESSION['id'])): ?>
                     <li class="drop-down"><a href=""><i class="fas fa-user-circle"></i>
                             <?=$_SESSION['nombre1']." ".$_SESSION['apellidoPaterno']?></a>
                         <ul>

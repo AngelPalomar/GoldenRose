@@ -3,7 +3,6 @@
 session_start();
 
 if (isset($_POST)) {
-    var_dump($_POST);
     require('db_connection.php');
 
     $email= $_POST['email'];
@@ -33,6 +32,17 @@ if (isset($_POST)) {
                 $_SESSION['fechaUltimoAcceso'] = $usuario['fechaUltimoAcceso'];
                 $_SESSION['estado'] = $usuario['estado'];
 
+                /**Fecha actual */
+                $date = date('Y-m-d H:i:s');
+                $idUsuario = $usuario['id'];
+
+                /**Actualización de fecha de acceso */
+                $updateDateLogin = "UPDATE usuario SET fechaUltimoAcceso = '$date' 
+                WHERE usuario.id = '$idUsuario'";
+
+                $query = $mysqli->query($updateDateLogin);
+
+                /**Redirección */
                 switch ($_SESSION['tipoUsuario']) {
                     case 'admin':
                         header('Location:../admin/index.php');

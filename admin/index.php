@@ -6,6 +6,7 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
   header('Location:../login.php');
 }
 
+require('../scripts/db_connection.php');
 
 ?>
 
@@ -53,6 +54,70 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
 
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Inicio</h1>
+
+
+          <h2 class="h3 mb-4 text-gray-800">GANACIAS DE LOS PRDUCTOS</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead class="golden-bg-secondary">
+                <th>PRODUCTO</th>
+                <th>PRECIO</th>
+                <th>COSTO</th>
+                <th>GANANCIA</th>
+                <th>MARCA</th>
+                <th>CATEGORIA</th>
+              </thead>
+              <tbody>
+                <?php 
+                $cmd = 'SELECT NOMBRE_PRODUCTO AS PRODUCTO, PRECIO, COSTO, GANANCIA,
+                MARCA, CATEGORIA FROM ganancias_arriba';
+
+                $query = $mysqli->query($cmd);
+
+                if ($query->num_rows > 0):
+                  while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
+                    <tr>
+                      <td><?=$row['PRODUCTO']?></td>
+                      <td><?=$row['PRECIO']?></td>
+                      <td><?=$row['COSTO']?></td>
+                      <td><?=$row['GANANCIA']?></td>
+                      <td><?=$row['MARCA']?></td>
+                      <td><?=$row['CATEGORIA']?></td>
+                    </tr>
+                  <?php endwhile; ?>
+                <?php endif; ?>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 class="h3 mb-4 text-gray-800">CANTIDAD DE COMPRAS DE LOS CLIENTES</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead class="golden-bg-secondary">
+                <th>EMAIL</th>
+                <th>NOMBRE</th>
+                <th>CANTIDAD DE COMPRAS</th>
+                <th>MONTO</th>
+              </thead>
+              <tbody>
+                <?php 
+                $cmd = 'SELECT email, nombre, cantidadCompras, monto FROM usu_comp';
+
+                $query = $mysqli->query($cmd);
+
+                if ($query->num_rows > 0):
+                  while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
+                    <tr>
+                      <td><?=$row['email']?></td>
+                      <td><?=$row['nombre']?></td>
+                      <td><?=$row['cantidadCompras']?></td>
+                      <td><?=$row['monto']?></td>
+                    </tr>
+                  <?php endwhile; ?>
+                <?php endif; ?>
+              </tbody>
+            </table>
+          </div>
 
         </div>
         <!-- /.container-fluid -->

@@ -130,9 +130,7 @@ require('scripts/db_connection.php');
                                             <td>
                                                 <input type="number" name="cantidad[]"
                                                     value='<?=$carritoActual['CANTIDAD']?>'
-                                                    class="form-control input-quantity-cart"
-                                                    max="99"
-                                                    min="1">
+                                                    class="form-control input-quantity-cart" max="99" min="1">
                                             </td>
                                             <td class="font-weight-bold">
                                                 <?php $subTotalProducto = $carritoActual['PRECIO'] * $carritoActual['CANTIDAD']?>
@@ -151,7 +149,7 @@ require('scripts/db_connection.php');
                     </div>
                 </form>
 
-                <div>
+                <div class="form-group mb-5">
                     <h3>Resumen</h3>
                     <h5 class="g-text-primary">
                         Subtotal: <span class="g-summary">$ <?=number_format($subTotal, 2, '.',',')?></span>
@@ -164,6 +162,49 @@ require('scripts/db_connection.php');
                         Monto total: <span class="g-mount">$ <?=number_format($montoTotal, 2, '.',',')?></span>
                     </h3>
                 </div>
+
+                <?php if (!isset($_SESSION['id'])): ?>
+                <div class="text-center mb-3">
+                    <a href="login.php" class="btn golden-button-primary btn-lg">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Inicia sesión para seguir con la compra
+                    </a>
+                </div>
+                <div class="text-center">
+                    <span>Si no tienes una cuenta, </span> <a href="register.php"><strong>¡Regístrate aquí!</strong></a>
+                </div>
+                <?php else: ?>
+                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" class="row text-center">
+                    <div class="col-sm-12">
+                        <input type="hidden" name="cmd" value="_xclick">
+                        <!-- En esta campo va el correo con el que generaste tu cuenta -->
+                        <input type="hidden" name="business" value="cruzangelp@gmail.com">
+
+                        <!-- Este es el nombre del elemento que se compró -->
+                        <input type="hidden" name="item_name" value='Compra en Golden Rose - Jardinería y más'>
+
+                        <!-- En este campo se agrega el total a pagar en paypal -->
+                        <input type="hidden" name="amount" value="<?=((float) $montoTotal)?>">
+
+                        <input type="hidden" name="no_shipping" value="0">
+                        <input type="hidden" name="no_note" value="1">
+
+                        <!-- Indicamos el pago en pesos mexicanos -->
+                        <input type="hidden" name="currency_code" value="MXN">
+                        <input type="hidden" name="lc" value="MX">
+                        <input type="hidden" name="bn" value="PP-BuyNowBF">
+
+                        <!-- Indicamos a donde debe regresar la petición en caso de finalizar la compra -->
+                        <input type="hidden" name="return"
+                            value="http://localhost/GoldenRose/scripts/pago_terminado.php">
+                        <button type="submit" class="btn btn-lg golden-button-info px-5">
+                            <i class="fab fa-paypal"></i> Finalizar compra
+                            <br />
+                            <small>Pago en PayPal &copy;</small>
+                        </button>
+                    </div>
+                </form>
+                <?php endif; ?>
                 <?php else: ?>
                 <div class="text-center">
                     <h1>¡El carrito está vacío!</h1>

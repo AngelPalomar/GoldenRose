@@ -132,7 +132,8 @@ session_start();
                         producto.pathImagen AS imagen
                         FROM producto
                         LEFT JOIN categoria ON (producto.idCategoria = categoria.id)
-                        WHERE categoria.nombre LIKE 'cactaceas'";
+                        LEFT JOIN marca ON (producto.idMarca = marca.id)
+                        WHERE categoria.nombre LIKE 'cactaceas' AND producto.estado = 'disponible' AND categoria.estado = 'activo' AND marca.estado = 'activo'";
 
                         $query = $mysqli->query($producto);
 
@@ -181,7 +182,8 @@ session_start();
                         producto.pathImagen AS imagen
                         FROM producto
                         LEFT JOIN categoria ON (producto.idCategoria = categoria.id)
-                        WHERE categoria.nombre LIKE 'macetas'";
+                        LEFT JOIN marca ON (producto.idMarca = marca.id)
+                        WHERE categoria.nombre LIKE 'macetas' AND producto.estado = 'disponible' AND categoria.estado = 'activo' AND marca.estado = 'activo'";
 
                         $query = $mysqli->query($producto);
 
@@ -230,7 +232,8 @@ session_start();
                         producto.pathImagen AS imagen
                         FROM producto
                         LEFT JOIN categoria ON (producto.idCategoria = categoria.id)
-                        WHERE categoria.nombre LIKE 'semillas'";
+                        LEFT JOIN marca ON (producto.idMarca = marca.id)
+                        WHERE categoria.nombre LIKE 'semillas' AND producto.estado = 'disponible' AND categoria.estado = 'activo' AND marca.estado = 'activo'";
 
                         $query = $mysqli->query($producto);
 
