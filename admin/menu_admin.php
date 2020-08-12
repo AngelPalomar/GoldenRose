@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav admin-sidebar sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav admin-sidebar sidebar sidebar-dark accordion d-print-none" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center admin-sidebar" href="index.php">
@@ -91,7 +91,7 @@
     <?php endif; ?>
 
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="ventas.php">
             <i class="fas fa-money-check"></i>
             <span>Ventas</span></a>
     </li>

@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
-  header('Location:../login.php');
+    header('Location:../login.php');
 }
 
 require('../scripts/db_connection.php');
@@ -55,11 +55,11 @@ require('../scripts/db_connection.php');
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-box"></i> Productos</h1>
+                    <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-money-check"></i> Ventas</h1>
 
-                    <div class="row pb-3">
+                    <div class="row pb-3 d-print-none">
                         <div class="col-sm-6">
-                            <form action="productos.php" method="get">
+                            <form action="ventas.php" method="get">
                                 <div class="input-group">
                                     <input type="text" name="buscar" class="form-control"
                                         placeholder="Buscar en esta lista">
@@ -73,134 +73,111 @@ require('../scripts/db_connection.php');
                         </div>
 
                         <div class="col-sm-3">
-                            <div class="input-group">
-                                <input type="date" name="date" class="form-control">
-                                <div class="input-group-append">
-                                    <button class="btn golden-button-primary" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                            <form action="ventas.php" method="get">
+                                <div class="input-group">
+
+                                    <input type="date" name="buscarFecha" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn golden-button-primary" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+
                                 </div>
-                            </div>
                             </form>
                         </div>
+
                         <div class="col-sm-3">
-                            <div class="input-group">
-                                <input type="date" name="date" class="form-control">
-                                <div class="input-group-append">
-                                    <button class="btn golden-button-primary" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            </form>
+                            <button class="btn btn-block golden-button-primary" onclick="window.print()">
+                                <i class="fas fa-print"></i>
+                                Generar reporte
+                            </button>
                         </div>
                     </div>
 
                     <span>Listado de ventas</span>
 
-                    <?php if(!isset ($_GET['buscar'])) :?>
-
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <?php
+                                    $cmd = "SELECT id AS ID,
+                                        fecha AS FECHA,
+                                        monto AS MONTO,
+                                        folioFactura AS FOLIOFACTURA,
+                                        fechaFactura AS FECHAFACTURA
+                                        from venta
+                                        ORDER BY id DESC";
+
+                                    if (isset($_GET['buscar'])) {
+                                        $buscar = $_GET['buscar'];
+
+                                        $cmd = "SELECT id AS ID,
+                                        fecha AS FECHA,
+                                        monto AS MONTO,
+                                        folioFactura AS FOLIOFACTURA,
+                                        fechaFactura AS FECHAFACTURA
+                                        from venta
+                                        WHERE id = '$buscar'
+                                        ORDER BY id ASC";
+                                    }
+
+                                    if (isset($_GET['buscarFecha'])) {
+                                        $buscarFecha = $_GET['buscarFecha'];
+
+                                        $cmd = "SELECT id AS ID,
+                                        fecha AS FECHA,
+                                        monto AS MONTO,
+                                        folioFactura AS FOLIOFACTURA,
+                                        fechaFactura AS FECHAFACTURA
+                                        from venta
+                                        WHERE fecha = '$buscarFecha'
+                                        ORDER BY id ASC";
+                                    }
+
+                            $query = $mysqli->query($cmd);
+
+                            if ($query->num_rows > 0): ?>
                             <thead class="golden-bg-secondary">
                                 <th>ID</th>
                                 <th>FECHA</th>
                                 <th>MONTO</th>
                                 <th>FOLIO DE FACTURA</th>
                                 <th>FECHA DE FACTURA</th>
-                                <th>ACCIONES</th>
+                                <th class="d-print-none">ACCIONES</th>
                             </thead>
                             <tbody>
-                                <?php 
-      $cmd = 'SELECT id AS ID,
-      fecha AS FECHA,
-      monto AS MONTO,
-      folioFactura AS FOLIOFACTURA,
-      fechaFactura AS FECHAFACTURA
-      from VENTA
-      ORDER BY id DESC';
-
-      $query = $mysqli->query($cmd);
-
-      if ($query->num_rows > 0):
-        while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
+                                <?php while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
                                 <tr>
-                                    <td><?=$row['ID']?></td>
-                                    <td><?=$row['FECHA']?></td>
-                                    <td><?=$row['MONTO']?> </td>
-                                    <td><?=$row['FOLIOFACTURA']?> </td>
-                                    <td><?=$row['FECHAFACTURA']?> </td>
-                                    <td>
-                                        <div class="col-sm-3">
-                                            <a href="detalle_venta.php"
-                                                class="btn golden-button-primary btn-lg btn-block">
+                                    <td><?= $row['ID'] ?></td>
+                                    <td><?= $row['FECHA'] ?></td>
+                                    <td>$ <?= $row['MONTO'] ?> </td>
+                                    <td><?= $row['FOLIOFACTURA'] !== "" ? $row['FOLIOFACTURA'] : "Sin factura."; ?></td>
+                                    <td><?= empty($row['FECHAFACTURA']) ? "Sin fecha de factura." : $row['FECHAFACTURA']; ?></td>
+                                    <td class="d-print-none">
+                                        <div class="">
+                                            <a href="detalle_venta.php?idVenta=<?= $row['ID'] ?>"
+                                                class="btn golden-button-info btn-block">
                                                 <span class="icon text-white-50">
-                                                    <i class="fas fa-copyright"></i>
+                                                    <i class="fas fa-scroll"></i>
                                                 </span>
-                                                <span class="text">Detalle venta</span>
+                                                <span class="text">Ver detalle de venta</span>
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
                                 <?php endwhile; ?>
+
+                                <?php else: ?>
+                                <div class="text-center mt-5">
+                                    <h2>
+                                        <i class="fas fa-times"></i>
+                                        No se encontraron ventas.
+                                    </h2>
+                                </div>
                                 <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
-                    <?php else:?>
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead class="golden-bg-secondary">
-                                <th>ID</th>
-                                <th>FECHA</th>
-                                <th>MONTO</th>
-                                <th>FOLIO DE FACTURA</th>
-                                <th>FECHA DE FACTURA</th>
-                                <th>ACCIONES</th>
-                            </thead>
-                            <tbody>
-                                <?php
-        $buscar = $_GET['buscar'];
-        $cmd = "SELECT * FROM
-        (SELECT id AS ID,
-        fecha AS FECHA,
-        monto AS MONTO,
-        folioFactura AS FOLIOFACTURA,
-        fechaFactura AS FECHAFACTURA
-        from VENTA
-        ORDER BY id DESC') AS tabla_ventas
-        WHERE ID LIKE '%$buscar%'";
-
-        $query = $mysqli->query($cmd);
-
-        if ($query->num_rows > 0):
-          while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
-                                <tr>
-                                    <td><?=$row['ID']?></td>
-                                    <td><?=$row['FECHA']?></td>
-                                    <td><?=$row['MONTO']?> </td>
-                                    <td><?=$row['FOLIOFACTURA']?> </td>
-                                    <td><?=$row['FECHAFACTURA']?> </td>
-                                    <td>
-                                        <div class="col-sm-3">
-                                            <a href="detalle_venta.php"
-                                                class="btn golden-button-primary btn-lg btn-block">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-copyright"></i>
-                                                </span>
-                                                <span class="text">Detalle venta</span>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <?php endwhile; ?>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <?php endif;?>
-
-
                 </div>
                 <!-- /.container-fluid -->
 

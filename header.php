@@ -52,7 +52,13 @@ require('scripts/db_connection.php');
                     <li class="drop-down"><a href=""><i class="fas fa-user-circle"></i>
                             <?=$_SESSION['nombre1']." ".$_SESSION['apellidoPaterno']?></a>
                         <ul>
+                            <?php if ($_SESSION['tipoUsuario'] == 'admin' || $_SESSION['tipoUsuario'] == 'empleado'): ?>
+                            <li><a href="admin/index.php"><i class="fas fa-tachometer-alt"></i> Panel de control</a></li>
+                            <hr />
+                            <?php endif; ?>
                             <li><a href="perfil.php"><i class="fas fa-user"></i> Mi perfil</a></li>
+                            <li><a href="mis_compras.php"><i class="fas fa-money-check"></i> Mis compras</a></li>
+                            <hr />
                             <li><a href="scripts/logout.php"><i class="fas fa-power-off"></i> Cerrar sesión</a></li>
                         </ul>
                     </li>

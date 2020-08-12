@@ -1,6 +1,13 @@
 <?php
 
 session_start();
+require('scripts/db_connection.php');
+
+if (isset($_GET['cat'])) {
+    $categoria = $_GET['cat'];
+} else {
+    header('Location:index.php');
+}
 
 ?>
 
@@ -12,7 +19,7 @@ session_start();
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Inner Page - Bethany Bootstrap Template</title>
+    <title><?=$categoria?> - Golden Rose</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
@@ -57,11 +64,7 @@ session_start();
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Inner Page</h2>
-                    <ol>
-                        <li><a href="index.html">Home</a></li>
-                        <li>Inner Page</li>
-                    </ol>
+                    <h2><?=$categoria?> - Categorias</h2>
                 </div>
 
             </div>
@@ -69,9 +72,55 @@ session_start();
 
         <section class="inner-page">
             <div class="container">
-                <p>
-                    Example inner page template
-                </p>
+                <div class="row">
+                    <?php
+                    $producto = "SELECT idProducto AS ID, producto.nombre AS nombreProducto, producto.pathImagen AS imagen,
+                        producto.precio AS precio, categoria.nombre AS CATEGORIA, marca.nombre AS MARCA, 
+                        MAX(cantidad) AS EXISTENCIAS
+                        FROM inventario
+                        INNER JOIN producto ON (producto.id = inventario.idProducto)
+                        INNER JOIN categoria ON (producto.idCategoria = categoria.id)
+                        INNER JOIN marca ON (producto.idMarca = marca.id)
+                        WHERE categoria.nombre LIKE '%$categoria%'
+                        AND producto.estado = 'disponible'
+                        AND categoria.estado = 'activo'
+                        AND marca.estado = 'activo'
+                        AND cantidad > 0
+                        GROUP BY idProducto";
+
+             $query = $mysqli->query($producto);    
+             if($query->num_rows > 0):
+                while ($row = $query->fetch_array(MYSQLI_ASSOC)):
+                ?>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <a href="producto.php?id=<?=$row['ID']?>">
+                            <div class="card">
+                                <div class="d-flex justify-content-center">
+                                    <img src="imagenes_productos/<?=$row['imagen']?>" alt="imagen_proc"
+                                        class="rounded img-product">
+                                </div>
+                                <div class="card-body">
+                                    <span class="g-title"><?=$row['nombreProducto']?></span>
+                                    <br />
+                                    <span clasS="g-price">$ <?=$row['precio']?></span>
+                                    <a href="carrito.php?accion=agregar&id=<?=$row['ID']?>&cantidad=1"
+                                        class="mt-3 btn golden-button-info btn-block">
+                                        <i class="fas fa-cart-plus"></i> Añadir al carrito
+                                    </a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <?php endwhile; ?>
+                </div>
+                <?php else: ?>
+                <div class="">
+                    <h2>No hay productos para mostrar</h2>
+                    <h4>
+                        <a href="index.php">Volver a la tienda</a>
+                    </h4>
+                </div>
+                <?php endif; ?>
             </div>
         </section>
 

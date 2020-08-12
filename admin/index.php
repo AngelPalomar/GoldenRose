@@ -55,107 +55,74 @@ require('../scripts/db_connection.php');
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Inicio</h1>
 
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6 form-group">
+              <button onclick="location.href='producto_categoria.php'" class="btn golden-button-primary btn-block " ><i class="fas fa-box" style="font-size: 40px;"></i></br>Producto por categoria</button>
+            </div>
 
-          <h2 class="h3 mb-4 text-gray-800">GANACIAS DE LOS PRDUCTOS</h2>
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead class="golden-bg-secondary">
-                <th>PRODUCTO</th>
-                <th>PRECIO</th>
-                <th>COSTO</th>
-                <th>GANANCIA</th>
-                <th>MARCA</th>
-                <th>CATEGORIA</th>
-              </thead>
-              <tbody>
-                <?php 
-                $cmd = 'SELECT NOMBRE_PRODUCTO AS PRODUCTO, PRECIO, COSTO, GANANCIA,
-                MARCA, CATEGORIA FROM ganancias_arriba';
+            <div class="col-sm-6 col-md-6 col-lg-6 form-group">
+              <button onclick="location.href='usu_qro_notqro.php'" class="btn golden-button-primary btn-block " ><i class="fas fa-user" style="font-size: 40px;"></i></br>Usuarios del estado Querétaro menos del municipio Querétaro</button>
+            </div>
 
-                $query = $mysqli->query($cmd);
-
-                if ($query->num_rows > 0):
-                  while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
-                    <tr>
-                      <td><?=$row['PRODUCTO']?></td>
-                      <td><?=$row['PRECIO']?></td>
-                      <td><?=$row['COSTO']?></td>
-                      <td><?=$row['GANANCIA']?></td>
-                      <td><?=$row['MARCA']?></td>
-                      <td><?=$row['CATEGORIA']?></td>
-                    </tr>
-                  <?php endwhile; ?>
-                <?php endif; ?>
-              </tbody>
-            </table>
           </div>
 
-          <h2 class="h3 mb-4 text-gray-800">CANTIDAD DE COMPRAS DE LOS CLIENTES</h2>
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead class="golden-bg-secondary">
-                <th>EMAIL</th>
-                <th>NOMBRE</th>
-                <th>CANTIDAD DE COMPRAS</th>
-                <th>MONTO</th>
-              </thead>
-              <tbody>
-                <?php 
-                $cmd = 'SELECT email, nombre, cantidadCompras, monto FROM usu_comp';
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6 form-group">
+              <button onclick="location.href='ganancias.php'" class="btn golden-button-primary btn-block " ><i class="fas fa-calculator" style="font-size: 40px;"></i></br>Ganancias</button>
+            </div>
 
-                $query = $mysqli->query($cmd);
+            <div class="col-sm-6 col-md-6 col-lg-6 form-group">
+              <button onclick="location.href='ganancia_menor.php'" class="btn golden-button-primary btn-block " ><i class="fas fa-calculator" style="font-size: 40px;"></i></br>Menores ganancias</button>
+            </div>
 
-                if ($query->num_rows > 0):
-                  while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
-                    <tr>
-                      <td><?=$row['email']?></td>
-                      <td><?=$row['nombre']?></td>
-                      <td><?=$row['cantidadCompras']?></td>
-                      <td><?=$row['monto']?></td>
-                    </tr>
-                  <?php endwhile; ?>
-                <?php endif; ?>
-              </tbody>
-            </table>
           </div>
+
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6 form-group">
+              <button onclick="location.href='compra_clientes.php'" class="btn golden-button-primary btn-block " ><i class="fas fa-star" style="font-size: 40px;"></i></br>Compras de los clientes</button>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-6 form-group">
+              <button onclick="location.href='activos_inactivos.php'" class="btn golden-button-primary btn-block " ><i class="fas fa-user" style="font-size: 40px;"></i></br>Usuarios actiovos e inactivos</button>
+            </div>
+
+          </div>
+          <!-- /.container-fluid -->
 
         </div>
-        <!-- /.container-fluid -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Golden Rose - Jardinería 2020</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
 
       </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Golden Rose - Jardinería 2020</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
+      <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-  </div>
-  <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  </body>
 
-</body>
-
-</html>
+  </html>
