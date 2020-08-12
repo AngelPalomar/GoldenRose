@@ -1,101 +1,75 @@
 <?php
 
 session_start();
-unset($_SESSION['carrito']);
+require('scripts/db_connection.php');
 
-?>
+$idVenta = 0;
+$maxIdVenta = "SELECT MAX(id) AS maxId FROM venta";
 
-<!DOCTYPE html>
-<html lang="en">
+$query = $mysqli->query($maxIdVenta);
 
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+if ($query->num_rows > 0) {
+    while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
+        $idVenta = $row['maxId'] + 1;
+    }
+} else {
+    /**Si no hay registros */
+    $idVenta = 1;
+}
 
-    <title>Inner Page - Bethany Bootstrap Template</title>
-    <meta content="" name="descriptison">
-    <meta content="" name="keywords">
+$fechaVenta = date('Y-m-d H:i:s');
+$nuevaVenta = "INSERT INTO venta VALUES ('$idVenta', '$fechaVenta', '0', '', null)";
 
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+if ($query = $mysqli->query($nuevaVenta)) {
+    $carrito = $_SESSION['carrito'];
 
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    for ($i = 0; $i < sizeof($carrito); $i++) {
+        /**Guardo cada producto en el detalle  */
 
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+        $idDetalle = 0;
+        $maxIdDetalle = "SELECT MAX(id) AS maxId FROM detalle_venta";
 
-    <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        $query = $mysqli->query($maxIdDetalle);
 
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/golden_rose.css">
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
+                $idDetalle = $row['maxId'] + 1;
+            }
+        } else {
+            /**Si no hay registros */
+            $idDetalle = 1;
+        }
 
-    <!-- =======================================================
-  * Template Name: Bethany - v2.1.0
-  * Template URL: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
+        /**Buscar un inventario */
+        $idProc = $carrito[$i]['ID'];
+        $inventario = "SELECT id, idProducto FROM inventario WHERE idProducto = '$idProc'";
 
-<body>
-    <?php require('header.php') ?>
-    <main id="main">
+        $idInventario = 0;
+        /**Agarra el ultimo inventario */
+        $query = $mysqli->query($inventario);
+        while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
+            $idInventario = $row['id'];
+        }
 
-        <!-- ======= Breadcrumbs ======= -->
-        <section class="breadcrumbs">
-            <div class="container">
+        $idUsuario = $_SESSION['id'];
+        $cantidad = $carrito[$i]['CANTIDAD'];
 
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2>Inner Page</h2>
-                    <ol>
-                        <li><a href="index.html">Home</a></li>
-                        <li>Inner Page</li>
-                    </ol>
-                </div>
+        $detalle = "INSERT INTO detalle_venta VALUES ('$idDetalle', '$idVenta', '$idInventario', '$idUsuario', '0', '$cantidad', '0')";
 
-            </div>
-        </section><!-- End Breadcrumbs -->
+        if ($query = $mysqli->query($detalle)) {
+            echo "Insertado";
+        } else {
+            $error = $mysqli->error;
+            echo $error;
+        }
+    }
 
-        <section class="inner-page">
-            <div class="container">
-                <p>
-                    Example inner page template
-                </p>
-            </div>
-        </section>
+    /**Aplicar iva */
+    $aplicarIVA = "UPDATE venta SET monto = monto * 1.16 WHERE id = '$idVenta'";
+    $query = $mysqli->query($aplicarIVA);
+    header('Location:resumen_compra.php?idVenta='.$idVenta);
 
-    </main><!-- End #main -->
-
-    <?php require('footer.php') ?>
-
-    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-    <script src="assets/vendor/counterup/counterup.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/venobox/venobox.min.js"></script>
-    <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
-
-</body>
-
-</html>
+} else {
+    $error = $mysqli->error;
+    header('Location:index.php?errorVenta=1'.$error);
+}

@@ -8,7 +8,7 @@ if (isset($_POST)) {
 
     $categoria = $_POST['categoria'];
 
-    $idMarca = "SELECT max(id) AS ID FROM categoria";
+    $idCategoria = "SELECT max(id) AS ID FROM categoria";
     $query = $mysqli->query($idCategoria);
 
 
@@ -23,6 +23,10 @@ if (isset($_POST)) {
 
                 $mysqli->close();
                 header('Location:../admin/categoria.php?mensajeAgregar=1');
+            } else {
+                $error = $mysqli->error;
+                $mysqli->close();
+                header('Location:../admin/categoria.php?mensajeAgregar=2'.$error);
             }
 
         }

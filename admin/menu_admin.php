@@ -42,8 +42,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Tipo de reportes</h6>
-                <a class="collapse-item" href="buttons.html">Ganancias de productos</a>
-                <a class="collapse-item" href="cards.html">Compras</a>
+                <a class="collapse-item" href="ganancias.php">Ganancias de productos</a>
+                <a class="collapse-item" href="compra_clientes.php">Compras por clientes</a>
             </div>
         </div>
     </li>

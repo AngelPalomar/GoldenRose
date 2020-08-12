@@ -128,13 +128,19 @@ session_start();
                     <div class="row">
                         <?php
                         
-                        $producto = "SELECT producto.id AS ID, producto.nombre AS nombreProducto, producto.precio,
-                        producto.pathImagen AS imagen
-                        FROM producto
-                        LEFT JOIN categoria ON (producto.idCategoria = categoria.id)
-                        LEFT JOIN marca ON (producto.idMarca = marca.id)
-                        WHERE categoria.nombre LIKE 'cactaceas' AND producto.estado = 'disponible' AND categoria.estado = 'activo' AND marca.estado = 'activo'";
-
+                        $producto = "SELECT idProducto AS ID, producto.nombre AS nombreProducto, producto.pathImagen AS imagen,
+                        producto.precio AS precio, categoria.nombre AS CATEGORIA, marca.nombre AS MARCA, 
+                        MAX(cantidad) AS EXISTENCIAS
+                        FROM inventario
+                        INNER JOIN producto ON (producto.id = inventario.idProducto)
+                        INNER JOIN categoria ON (producto.idCategoria = categoria.id)
+                        INNER JOIN marca ON (producto.idMarca = marca.id)
+                        WHERE categoria.nombre LIKE '%cactaceas%'
+                        AND producto.estado = 'disponible'
+                        AND categoria.estado = 'activo'
+                        AND marca.estado = 'activo'
+                        AND cantidad > 0
+                        GROUP BY idProducto";
                         $query = $mysqli->query($producto);
 
                         if($query->num_rows > 0):
@@ -178,12 +184,19 @@ session_start();
                     <div class="row">
                         <?php
                         
-                        $producto = "SELECT producto.id AS ID, producto.nombre AS nombreProducto, producto.precio,
-                        producto.pathImagen AS imagen
-                        FROM producto
-                        LEFT JOIN categoria ON (producto.idCategoria = categoria.id)
-                        LEFT JOIN marca ON (producto.idMarca = marca.id)
-                        WHERE categoria.nombre LIKE 'macetas' AND producto.estado = 'disponible' AND categoria.estado = 'activo' AND marca.estado = 'activo'";
+                        $producto = "SELECT idProducto AS ID, producto.nombre AS nombreProducto, producto.pathImagen AS imagen,
+                        producto.precio AS precio, categoria.nombre AS CATEGORIA, marca.nombre AS MARCA, 
+                        MAX(cantidad) AS EXISTENCIAS
+                        FROM inventario
+                        INNER JOIN producto ON (producto.id = inventario.idProducto)
+                        INNER JOIN categoria ON (producto.idCategoria = categoria.id)
+                        INNER JOIN marca ON (producto.idMarca = marca.id)
+                        WHERE categoria.nombre LIKE '%macetas%'
+                        AND producto.estado = 'disponible'
+                        AND categoria.estado = 'activo'
+                        AND marca.estado = 'activo'
+                        AND cantidad > 0
+                        GROUP BY idProducto";
 
                         $query = $mysqli->query($producto);
 
@@ -228,12 +241,19 @@ session_start();
                     <div class="row">
                         <?php
                         
-                        $producto = "SELECT producto.id AS ID, producto.nombre AS nombreProducto, producto.precio,
-                        producto.pathImagen AS imagen
-                        FROM producto
-                        LEFT JOIN categoria ON (producto.idCategoria = categoria.id)
-                        LEFT JOIN marca ON (producto.idMarca = marca.id)
-                        WHERE categoria.nombre LIKE 'semillas' AND producto.estado = 'disponible' AND categoria.estado = 'activo' AND marca.estado = 'activo'";
+                        $producto = "SELECT idProducto AS ID, producto.nombre AS nombreProducto, producto.pathImagen AS imagen,
+                        producto.precio AS precio, categoria.nombre AS CATEGORIA, marca.nombre AS MARCA, 
+                        MAX(cantidad) AS EXISTENCIAS
+                        FROM inventario
+                        INNER JOIN producto ON (producto.id = inventario.idProducto)
+                        INNER JOIN categoria ON (producto.idCategoria = categoria.id)
+                        INNER JOIN marca ON (producto.idMarca = marca.id)
+                        WHERE categoria.nombre LIKE '%semillas%'
+                        AND producto.estado = 'disponible'
+                        AND categoria.estado = 'activo'
+                        AND marca.estado = 'activo'
+                        AND cantidad > 0
+                        GROUP BY idProducto";
 
                         $query = $mysqli->query($producto);
 

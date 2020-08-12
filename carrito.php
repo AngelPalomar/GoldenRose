@@ -77,16 +77,38 @@ if (isset($_GET['accion'])) {
 
         /**Actualizar cantidades */
         case 'actualizar': {
-            if (isset($_GET['cantidad'])) {
+            if (isset($_GET['cantidad']) && isset($_GET['idProducto'])) {
                 $cantidad = $_GET['cantidad'];
+                $idProducto = $_GET['idProducto'];
 
-                if (is_array($cantidad)) {
+                if (is_array($cantidad) && is_array($idProducto)) {
+
                     /**Recorremos el carrito actualizando las cantidades */
-                    foreach ($cantidad as $index => $valor) {
-                        /**Posición cantidad = nuevo valor */
-                        $_SESSION['carrito'][$index]['CANTIDAD'] = $valor;
-                        header('Location:ver_carrito.php?mensajeCarrito=2');
+                    for ($i=0; $i < sizeof($cantidad); $i++) { 
+
+                        /**BUSCAMOS EL PRODUCTO EN INVENTARIO SI HAY SUFICIENTES EXISTENCIAS */
+                        $buscarExistencias = "SELECT MAX(cantidad) AS EXISTENCIAS 
+                        FROM inventario
+                        WHERE idProducto = '$idProducto[$i]' AND cantidad > 0
+                        GROUP BY idProducto";
+
+                        $query = $mysqli->query($buscarExistencias);
+
+                        /**Buscamos las existencias actuales de ese producto */
+                        while ($row = $query->fetch_array(MYSQLI_ASSOC)) {
+                            $existencias = $row['EXISTENCIAS'];
+                        }
+
+                        /**SI LA CANTIDAD ESCRITA ES MENOR O IGUAL A LA DE INVENTARIO MAYOR */
+                        if ($cantidad[$i] <= $existencias) {
+                            /**Posición cantidad = nuevo valor */
+                            $_SESSION['carrito'][$i]['CANTIDAD'] = $cantidad[$i];
+                            header('Location:ver_carrito.php?mensajeCarrito=2');
+                        } else {
+                            header('Location:ver_carrito.php?mensajeCarrito=3&nombreProducto='.$_SESSION['carrito'][$i]['NOMBRE_PROC']);
+                        }
                     }
+                    
                 } else {
                     /**Si no es arreglo */
                     header('Location:ver_carrito.php');

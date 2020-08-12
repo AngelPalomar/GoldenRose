@@ -9,8 +9,8 @@ $producto = $_POST['producto'];
 $sucursal = $_POST['sucursal'];
 $cantidad = $_POST['cantidad'];
 
-$updateInventario = "UPDATE inventario SET producto = '$producto',
-sucursal = '$sucursal', cantidad = '$cantidad' WHERE id = '$idInventario'";
+$updateInventario = "UPDATE inventario SET idProducto = '$producto',
+idSucursal = '$sucursal', cantidad = '$cantidad' WHERE inventario.id = '$idInventario'";
 
 if ($query = $mysqli->query($updateInventario)) {
     header('Location:../admin/inventario.php?&mensajeModificarInventario=1');

@@ -20,7 +20,7 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Consultar usuarios - Golden Rose</title>
+  <title>Consultar inventario - Golden Rose</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -58,7 +58,7 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
           <div class="row mb-4">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
-              <label for="id">Ingrese el ID del producto a buscar.</label>
+              <label for="id">Ingrese el nombre del producto a buscar</label>
               <div class="row text-center">
                 <div class="col-sm-10">
                   <input type="text" name="id" id="id" class="form-control" placeholder="ID">
@@ -118,20 +118,20 @@ if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
 
 <script type="text/javascript">
   $(document).ready(function () {
-    buscarProducto();
+    buscarInventario();
   });
 
   $('#buscar').click(function () {
-    buscarProducto();
+    buscarInventario();
   });
 </script>
 
 <script type="text/javascript">
-  function buscarProducto() {
+  function buscarInventario() {
     $.ajax({
       type: "POST",
-      url: "../scripts/consultar_producto.php",
-      data: "producto=" + $('#id').val(),
+      url: "../scripts/consultar_inventario.php",
+      data: "inventario=" + $('#id').val(),
       success: function (response) {
         $('#resultados').html(response);
       }

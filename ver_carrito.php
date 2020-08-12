@@ -72,6 +72,14 @@ require('scripts/db_connection.php');
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <?php break;?>
+                <?php case 3: ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i> No hay suficientes existencias de <strong><?=$_GET['nombreProducto']?></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <?php break; endswitch; ?>
                 <?php endif; ?>
 
@@ -128,9 +136,10 @@ require('scripts/db_connection.php');
                                             </td>
                                             <td>$ <?=number_format($carritoActual['PRECIO'], 2, '.',',')?></td>
                                             <td>
+                                                <input type="hidden" name="idProducto[]" value="<?=$carritoActual['ID']?>">
                                                 <input type="number" name="cantidad[]"
-                                                    value='<?=$carritoActual['CANTIDAD']?>'
-                                                    class="form-control input-quantity-cart" max="99" min="1">
+                                                    value="<?=$carritoActual['CANTIDAD']?>"
+                                                    class="form-control input-quantity-cart" max="99" min="1" required>
                                             </td>
                                             <td class="font-weight-bold">
                                                 <?php $subTotalProducto = $carritoActual['PRECIO'] * $carritoActual['CANTIDAD']?>
@@ -149,7 +158,7 @@ require('scripts/db_connection.php');
                     </div>
                 </form>
 
-                <div class="form-group mb-5">
+                <div class="text-right form-group mb-5">
                     <h3>Resumen</h3>
                     <h5 class="g-text-primary">
                         Subtotal: <span class="g-summary">$ <?=number_format($subTotal, 2, '.',',')?></span>
@@ -196,7 +205,7 @@ require('scripts/db_connection.php');
 
                         <!-- Indicamos a donde debe regresar la petición en caso de finalizar la compra -->
                         <input type="hidden" name="return"
-                            value="http://localhost/GoldenRose/scripts/pago_terminado.php">
+                            value="http://localhost/GoldenRose/pago_terminado.php">
                         <button type="submit" class="btn btn-lg golden-button-info px-5">
                             <i class="fab fa-paypal"></i> Finalizar compra
                             <br />

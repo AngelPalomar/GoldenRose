@@ -159,7 +159,8 @@ require('../scripts/db_connection.php');
                                   LEFT JOIN municipio ON (direccion.idMunicipio=municipio.id)
                                   LEFT JOIN estado ON (municipio.idEstado=estado.id)
                                   ORDER BY usuario.id DESC) AS usuarios
-                                  WHERE NOMBRE LIKE '%$buscar%' OR EMAIL LIKE '%$buscar%' OR ID LIKE '%$buscar%'";
+                                  WHERE NOMBRE LIKE '%$buscar%' OR EMAIL LIKE '%$buscar%' OR ID LIKE '%$buscar%'
+                                  OR DIRECCION LIKE '%$buscar%'";
 
                                 } else {
                                   /**Si no hay GET para buscar */
