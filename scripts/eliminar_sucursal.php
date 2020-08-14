@@ -9,8 +9,11 @@ if (!isset($_POST['id'])) {
   $idSucursal = $_POST['id'];
   
   $cmd = "UPDATE sucursal SET estado = 'inactivo' WHERE sucursal.id LIKE '$idSucursal'";
+  $bajaExistencias = "UPDATE inventario SET cantidad = 0 WHERE idSucursal = '$idSucursal'";
   
   if ($query = $mysqli->query($cmd)) {
+    /**Baja existencias */
+    $query = $mysqli->query($bajaExistencias);
     header('Location:../admin/sucursal.php?mensajeEliminar=1');
   } else {
     /**No se pudo */

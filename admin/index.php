@@ -83,7 +83,7 @@ require('../scripts/db_connection.php');
             </div>
 
             <div class="col-sm-6 col-md-6 col-lg-6 form-group">
-              <button onclick="location.href='activos_inactivos.php'" class="btn golden-button-primary btn-block " ><i class="fas fa-user" style="font-size: 40px;"></i></br>Usuarios actiovos e inactivos</button>
+              <button onclick="location.href='activos_inactivos.php'" class="btn golden-button-primary btn-block " ><i class="fas fa-user" style="font-size: 40px;"></i></br>Usuarios activos e inactivos</button>
             </div>
 
           </div>

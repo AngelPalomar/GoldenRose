@@ -165,6 +165,8 @@ require('../scripts/db_connection.php');
                                 FROM producto
                                 INNER JOIN categoria ON (categoria.id = producto.idCategoria) 
                                 INNER JOIN marca ON (marca.id = producto.idMarca)
+                                WHERE categoria.estado = 'activo'
+                                AND marca.estado = 'activo'
                                 ORDER BY producto.id DESC";
                             }
 

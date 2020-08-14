@@ -119,14 +119,15 @@ require('../scripts/db_connection.php');
                     <thead class="golden-bg-secondary">
                       <th>ID</th>
                       <th>NOMBRE</th>
+                      <th>ESTADO ACTUAL</th>
                       <th>ACCIONES</th>
                     </thead>
                     <tbody>
                       <?php 
                       $cmd = 'SELECT id AS ID,
-                      nombre AS NOMBRE
+                      nombre AS NOMBRE,
+                      estado AS ESTADO
                       from categoria
-                      WHERE estado LIKE "activo"
                       ORDER BY id DESC';
 
                       $query = $mysqli->query($cmd);
@@ -136,6 +137,7 @@ require('../scripts/db_connection.php');
                           <tr>
                             <td><?=$row['ID']?></td>
                             <td><?=$row['NOMBRE']?></td>
+                            <td><?=$row['ESTADO']?></td>
                             <td>
                               <div class="d-flex flex-row">
                                 <div class="col-sm-6"> 

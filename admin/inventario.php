@@ -148,8 +148,12 @@ require('../scripts/db_connection.php');
                                 FROM inventario
                                 INNER JOIN producto ON (producto.id = inventario.idProducto) 
                                 INNER JOIN sucursal ON (sucursal.id = inventario.idSucursal)
-                                WHERE inventario.id LIKE '%$buscar%' OR producto.nombre LIKE '%$buscar%'
-                                OR sucursal.nombre LIKE '%$buscar%'
+                                INNER JOIN categoria ON (producto.idCategoria = categoria.id)
+                                INNER JOIN marca ON (producto.idMarca = marca.id)
+                                WHERE (inventario.id LIKE '%$buscar%' OR producto.nombre LIKE '%$buscar%'
+                                OR sucursal.nombre LIKE '%$buscar%') AND producto.estado = 'disponible'
+                                AND categoria.estado = 'activo'
+                                AND marca.estado = 'activo'
                                 ORDER BY producto.nombre";
 
                             } else {
@@ -158,6 +162,10 @@ require('../scripts/db_connection.php');
                                 FROM inventario
                                 INNER JOIN producto ON (producto.id = inventario.idProducto) 
                                 INNER JOIN sucursal ON (sucursal.id = inventario.idSucursal)
+                                INNER JOIN categoria ON (producto.idCategoria = categoria.id)
+                                INNER JOIN marca ON (producto.idMarca = marca.id)
+                                WHERE producto.estado = 'disponible' AND categoria.estado = 'activo'
+                                AND marca.estado = 'activo'
                                 ORDER BY producto.nombre";
                             }
 

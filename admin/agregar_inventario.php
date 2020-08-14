@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
-  header('Location:../login.php');
+    header('Location:../login.php');
 }
 
 require('../scripts/db_connection.php');
@@ -57,8 +57,9 @@ require('../scripts/db_connection.php');
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-box"></i> Agregar inventario</h1>
 
-                    <?php if(isset( $_GET['mensajeAgregarInventario'])) : ?>
-                    <?php switch ( $_GET['mensajeAgregarInventario'] ) : case 2: ?>
+                    <?php if (isset($_GET['mensajeAgregarInventario'])) : ?>
+                    <?php switch ($_GET['mensajeAgregarInventario']):
+                            case 2: ?>
                     <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
                         <strong><i class="fas fa-times-circle"></i> El inventario no pudo ser agregado.</strong> <br />
                         <span>Verifique los datos.</span>
@@ -66,8 +67,9 @@ require('../scripts/db_connection.php');
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <?php break;?>
-                    <?php case 3: ?>
+                    <?php break; ?>
+                    <?php
+                            case 3: ?>
                     <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
                         <strong><i class="fas fa-times-circle"></i> El inventario no pudo ser agregado.</strong> <br />
                         <span>Ocurrió un error, contacte al administrador.</span>
@@ -75,7 +77,8 @@ require('../scripts/db_connection.php');
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <?php break; endswitch; ?>
+                    <?php break;
+                        endswitch; ?>
                     <?php endif; ?>
 
                     <div>
@@ -89,36 +92,42 @@ require('../scripts/db_connection.php');
                                         <label for="Producto">*Producto</label>
                                         <select name="producto" id="producto" class="form-control" required>
                                             <option hidden selected value="">Seleccione una producto</option>
-                                            <?php 
-                      $cmd = "SELECT * FROM producto";
-                      $query = $mysqli->query($cmd);
-                      
-                      if ($query->num_rows > 0):
-                        while($row = $query->fetch_array(MYSQLI_ASSOC)) :
-                    ?>
-                                            <option value="<?=$row['id']?>"><?=$row['nombre']?></option>
-                                            <?php 
-                      endwhile;
-                      endif; 
-                    ?>
+                                            <?php
+                                            $cmd = "SELECT producto.id AS IDP, producto.nombre AS PROC FROM producto
+                                            INNER JOIN categoria ON (producto.idCategoria=categoria.id)
+                                            INNER JOIN marca ON (producto.idMarca=marca.id)
+                                            WHERE producto.estado = 'disponible'
+                                            AND categoria.estado = 'activo'
+                                            AND marca.estado = 'activo'";
+
+                                            $query = $mysqli->query($cmd);
+
+                                            if ($query->num_rows > 0) :
+                                                while ($row = $query->fetch_array(MYSQLI_ASSOC)) :
+                                            ?>
+                                            <option value="<?= $row['IDP'] ?>"><?= $row['PROC'] ?></option>
+                                            <?php
+                                                endwhile;
+                                            endif;
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-sm-4 form-group">
                                         <label for="Sucursal">*Sucursal</label>
                                         <select name="sucursal" id="sucursal" class="form-control" required>
                                             <option hidden selected value="">Seleccione una sucursal</option>
-                                            <?php 
-                      $cmd = "SELECT * FROM sucursal";
-                      $query = $mysqli->query($cmd);
-                      
-                      if ($query->num_rows > 0):
-                        while($row = $query->fetch_array(MYSQLI_ASSOC)) :
-                    ?>
-                                            <option value="<?=$row['id']?>"><?=$row['nombre']?></option>
-                                            <?php 
-                      endwhile;
-                      endif; 
-                    ?>
+                                            <?php
+                                            $cmd = "SELECT * FROM sucursal WHERE estado = 'activo'";
+                                            $query = $mysqli->query($cmd);
+
+                                            if ($query->num_rows > 0) :
+                                                while ($row = $query->fetch_array(MYSQLI_ASSOC)) :
+                                            ?>
+                                            <option value="<?= $row['id'] ?>"><?= $row['nombre'] ?></option>
+                                            <?php
+                                                endwhile;
+                                            endif;
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-sm-4 form-group">

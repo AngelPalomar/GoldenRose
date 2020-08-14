@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
-  header('Location:../login.php');
+    header('Location:../login.php');
 }
 
 require('../scripts/db_connection.php');
@@ -57,8 +57,9 @@ require('../scripts/db_connection.php');
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-box"></i> Agregar Producto</h1>
 
-                    <?php if(isset( $_GET['mensajeAgregarProducto'])) : ?>
-                    <?php switch ( $_GET['mensajeAgregarProducto'] ) : case 2: ?>
+                    <?php if (isset($_GET['mensajeAgregarProducto'])) : ?>
+                    <?php switch ($_GET['mensajeAgregarProducto']):
+                            case 2: ?>
                     <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
                         <strong><i class="fas fa-times-circle"></i> El producto no pudo ser agregado.</strong> <br />
                         <span>Verifique los datos.</span>
@@ -66,8 +67,9 @@ require('../scripts/db_connection.php');
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <?php break;?>
-                    <?php case 3: ?>
+                    <?php break; ?>
+                    <?php
+                            case 3: ?>
                     <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
                         <strong><i class="fas fa-times-circle"></i> El producto no pudo ser agregado.</strong> <br />
                         <span>Ocurrió un error, contacte al administrador.</span>
@@ -75,7 +77,8 @@ require('../scripts/db_connection.php');
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <?php break; endswitch; ?>
+                    <?php break;
+                        endswitch; ?>
                     <?php endif; ?>
 
                     <div>
@@ -129,48 +132,49 @@ require('../scripts/db_connection.php');
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="imagen">*Imagen del producto</label>
-                                        <input type="file" name="imagen" id="imagen" class="form-control" required onchange="return validarFormato();">
+                                        <input type="file" name="imagen" id="imagen" class="form-control" required
+                                            onchange="return validarFormato();">
                                     </div>
                                     <div class="col-sm-1">
-                                      <div id="imagePreview"></div>
+                                        <div id="imagePreview"></div>
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="categoria">*Categoría</label>
                                         <select name="categoria" id="categoria" class="form-control" required>
                                             <option hidden selected value="">Seleccione una categoría</option>
-                                            <?php 
-                      $cmd = "SELECT * FROM categoria";
-                      $query = $mysqli->query($cmd);
-                      
-                      if ($query->num_rows > 0):
-                        while($row = $query->fetch_array(MYSQLI_ASSOC)) :
-                    ?>
-                                            <option value="<?=$row['id']?>"><?=$row['nombre']?></option>
-                                            <?php 
-                      endwhile;
-                      endif; 
-                    ?>
+                                            <?php
+                                            $cmd = "SELECT * FROM categoria";
+                                            $query = $mysqli->query($cmd);
+
+                                            if ($query->num_rows > 0) :
+                                                while ($row = $query->fetch_array(MYSQLI_ASSOC)) :
+                                            ?>
+                                            <option value="<?= $row['id'] ?>"><?= $row['nombre'] ?></option>
+                                            <?php
+                                                endwhile;
+                                            endif;
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="marca">*Marca</label>
                                         <select name="marca" id="marca" class="form-control" required>
                                             <option hidden selected value="">Seleccione una marca</option>
-                                            <?php 
-                      $cmd = "SELECT * FROM marca";
-                      $query = $mysqli->query($cmd);
-                      
-                      if ($query->num_rows > 0):
-                        while($row = $query->fetch_array(MYSQLI_ASSOC)) :
-                    ?>
-                                            <option value="<?=$row['id']?>"><?=$row['nombre']?></option>
-                                            <?php 
-                      endwhile;
-                      endif; 
-                    ?>
+                                            <?php
+                                            $cmd = "SELECT * FROM marca";
+                                            $query = $mysqli->query($cmd);
+
+                                            if ($query->num_rows > 0) :
+                                                while ($row = $query->fetch_array(MYSQLI_ASSOC)) :
+                                            ?>
+                                            <option value="<?= $row['id'] ?>"><?= $row['nombre'] ?></option>
+                                            <?php
+                                                endwhile;
+                                            endif;
+                                            ?>
                                         </select>
                                     </div>
-                                </div>    
+                                </div>
 
                                 <div class="form-group text-center">
                                     <button type="submit" class="btn golden-button-primary btn-lg">
@@ -248,7 +252,8 @@ function validarFormato() {
         if (fileInput.files && fileInput.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById('imagePreview').innerHTML = '<img class="img-thumbnail" width="100%" height="100%" src="' + e.target.result + '"/>';
+                document.getElementById('imagePreview').innerHTML =
+                    '<img class="img-thumbnail" width="100%" height="100%" src="' + e.target.result + '"/>';
             };
             reader.readAsDataURL(fileInput.files[0]);
         }

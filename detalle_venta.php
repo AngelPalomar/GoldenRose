@@ -81,13 +81,9 @@ require('scripts/db_connection.php');
                 <div class="table-responsive mt-4" style="text-align:center">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead class="golden-bg-secondary">
-                            <th>ID</th>
-                            <th>ID VENTA</th>
-                            <th>ID INVENTARIO</th>
-                            <th>ID USUARIO</th>
                             <th>PRODUCTO</th>
                             <th>PRECIO UNITARIO</th>
-                            <th>PRODUCTOS</th>
+                            <th>CANTIDAD</th>
                             <th>SUBTOTAL</th>
                         </thead>
                         <tbody>
@@ -112,11 +108,7 @@ require('scripts/db_connection.php');
                             if ($query->num_rows > 0) :
                                 while ($row = $query->fetch_array(MYSQLI_ASSOC)) : ?>
                                     <tr>
-                                        <td><?= $row['ID'] ?></td>
-                                        <td><?= $row['VENTA'] ?></td>
-                                        <td><?= $row['INVENTARIO'] ?> </td>
                                         <td><?= $row['PRODUCTO'] ?> </td>
-                                        <td><?= $row['USUARIO'] ?> </td>
                                         <td><?= $row['PRECIO'] ?> </td>
                                         <td><?= $row['CANTIDAD'] ?> </td>
                                         <td><?= $row['SUBTOTAL'] ?> </td>

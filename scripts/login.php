@@ -42,18 +42,20 @@ if (isset($_POST)) {
 
                 $query = $mysqli->query($updateDateLogin);
 
-                /**Redirección */
-                switch ($_SESSION['tipoUsuario']) {
-                    case 'admin':
-                        header('Location:../admin/index.php');
-                        break;
-                    case 'empleado':
-                        header('Location:../admin/index.php');
-                        break;
-                    case 'cliente':
-                        header('Location:../index.php');
-                        break;
+                $tipoUser = $_SESSION['tipoUsuario'];
+                $acceso = "SELECT url FROM accesos WHERE tipoUsuario = '$tipoUser'";
+
+                $query = $mysqli->query($acceso);
+
+                if ($query->num_rows === 1) {
+                    $row = $query->fetch_array(MYSQLI_ASSOC);
+                    $view = $row['url'];
                 }
+
+                $url = 'Location:http://localhost/GoldenRose/'.$view;
+
+                /**Redirección */
+                header($url);
 
             } else {
                 /**Usuario inactivo/deshabilitado */

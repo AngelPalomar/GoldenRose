@@ -24,7 +24,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['tipoUsuario'])) {
 			break;
 	}
 } else {
-	$user = 'clientegr';
+	$user = 'admingr';
 }
 
 

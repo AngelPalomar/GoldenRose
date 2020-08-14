@@ -73,7 +73,7 @@ require('../scripts/db_connection.php');
                 <th>EMAIL</th>
                 <th>NOMBRE</th>
                 <th>CANTIDAD DE COMPRAS</th>
-                <th>MONTO</th>
+                <th>MONTO ACUMULADO</th>
               </thead>
               <tbody>
                 <?php 
@@ -86,8 +86,8 @@ require('../scripts/db_connection.php');
                     <tr>
                       <td><?=$row['email']?></td>
                       <td><?=$row['nombre']?></td>
-                      <td><?=$row['cantidadCompras']?></td>
-                      <td><?=$row['monto']?></td>
+                      <td><?=$row['cantidadCompras']?> Compras(s)</td>
+                      <td>$ <?=$row['monto']?></td>
                     </tr>
                   <?php endwhile; ?>
                 <?php endif; ?>

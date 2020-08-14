@@ -75,7 +75,7 @@ if (!isset($_GET['id'])) {
           <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-times"></i> Eliminar sucursal</h1>
 
           <form action="../scripts/eliminar_sucursal.php" method="post">
-            <div class="alert alert-warning" role="alert">
+            <div class="alert alert-danger" role="alert">
               <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> ¿Deseas cambiar el estado de la sucursal a <span class="text-danger">inactivo</span> ?</h4>
               <p>
                 la sucursal <strong><?=$sucursal_datos['nombre']?></strong>
@@ -91,7 +91,10 @@ if (!isset($_GET['id'])) {
                 </div>
               </div>
               <hr>
-              <p class="mb-0">Presiona el botón "Aceptar" para dar de baja a este usuario o presiona "Cancelar" para volver al menú de usuarios.</p>
+              <h5 class="text-center">
+                <span class="font-weight-bold"> PRECAUCIÓN:</span>
+                Al eliminar esta sucursal, colocará las existencias de sus productos, esto no se puede deshacer
+              </p>
             </div>
 
             <div class="form-group">

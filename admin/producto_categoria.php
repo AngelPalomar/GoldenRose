@@ -67,8 +67,7 @@ require('../scripts/db_connection.php');
             <div class="col-sm-9 d-print-none">
               <form action="producto_categoria.php" method="get">
                 <div class="input-group">
-                  <input type="text" name="cat" class="form-control"
-                  placeholder="Buscar en esta lista">
+                  <input type="text" name="cat" class="form-control" placeholder="Buscar en esta lista">
                   <div class="input-group-append">
                     <button class="btn golden-button-primary" type="submit">
                       <i class="fa fa-search"></i>
@@ -81,90 +80,93 @@ require('../scripts/db_connection.php');
 
 
 
-          <?php if(!isset ($_GET['cat'])) :?>
+          <?php if (!isset($_GET['cat'])) : ?>
             <div class='alert alert-info mt-4 d-print-none'>
               <h4><i class='fas fa-info-circle'></i> Buscar productos</h4>
               <hr />
-              <p>Por favor, ingrese una categoria en el campo para buscar los productos relacionados a la categoria consultada.</p>
+              <p>Por favor, ingrese una categoria en el campo para buscar los productos relacionados a la
+                categoria consultada.</p>
             </div>";
-            <?php else : ?>
+          <?php else : ?>
 
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead class="golden-bg-secondary">
-                    <th>IMAGEN</th>
-                    <th>PRODUCTO</th>
-                    <th>CATEGORIA</th>
-                    <th>MARCA</th>
-                    <th>PRECIO</th>
-                    <th>EXISTENCIAS</th>
-                    <th>SUCURSAL</th>
-                  </thead>
-                  <tbody>
-                    <?php 
-                    $cat = $_GET['cat'];
-                    $cmd = "CALL consulta_existencias_producto('$cat')";
-                    $query = $mysqli->query($cmd);
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="golden-bg-secondary">
+                  <th>IMAGEN</th>
+                  <th>PRODUCTO</th>
+                  <th>CATEGORIA</th>
+                  <th>MARCA</th>
+                  <th>PRECIO</th>
+                  <th>EXISTENCIAS</th>
+                  <th>SUCURSAL</th>
+                </thead>
+                <tbody>
+                  <?php
+                  $cat = $_GET['cat'];
+                  $cmd = "CALL consulta_existencias_producto('$cat')";
+                  $query = $mysqli->query($cmd);
 
-                    if ($query->num_rows > 0):
-                      while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
-                        <tr>
-                          <td><?=$row['Imagen']?></td>
-                          <td><?=$row['Nombre_del_producto']?></td>
-                          <td><?=$row['Categoria']?></td>
-                          <td><?=$row['Marca']?></td>
-                          <td><?=$row['Precio']?></td>
-                          <td><?=$row['Existencias']?></td>
-                          <td><?=$row['Sucursal']?></td>
-                        </tr>
-                      <?php endwhile; ?>
-                    <?php endif; ?>
-                  </tbody>
-                </table>
-              </div>
-
-
-
-            <?php endif; ?>
+                  if ($query->num_rows > 0) :
+                    while ($row = $query->fetch_array(MYSQLI_ASSOC)) : ?>
+                      <tr>
+                        <td>
+                          <img src="../imagenes_productos/<?= $row['Imagen'] ?>" alt="producto" width="40px">
+                        </td>
+                        <td><?= $row['Nombre_del_producto'] ?></td>
+                        <td><?= $row['Categoria'] ?></td>
+                        <td><?= $row['Marca'] ?></td>
+                        <td><?= $row['Precio'] ?></td>
+                        <td><?= $row['Existencias'] ?></td>
+                        <td><?= $row['Sucursal'] ?></td>
+                      </tr>
+                    <?php endwhile; ?>
+                  <?php endif; ?>
+                </tbody>
+              </table>
+            </div>
 
 
-          </div>
-          <!-- /.container-fluid -->
+
+          <?php endif; ?>
+
 
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright &copy; Golden Rose - Jardinería 2020</span>
-            </div>
-          </div>
-        </footer>
-        <!-- End of Footer -->
+        <!-- /.container-fluid -->
 
       </div>
-      <!-- End of Content Wrapper -->
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Golden Rose - Jardinería 2020</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
+  </div>
+  <!-- End of Page Wrapper -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  </body>
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
 
-  </html>
+</body>
+
+</html>
