@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
+if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente' || $_SESSION['tipoUsuario'] === 'empleado') {
   header('Location:../login.php');
 }
 
@@ -21,7 +21,7 @@ require('../scripts/db_connection.php');
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Blank</title>
+  <title>Marcas</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -57,7 +57,7 @@ require('../scripts/db_connection.php');
 
           <div class="row pb-3">
             <div class="col-sm-3">
-              <a href="agregar_marca.php" class="btn golden-button-primary btn-lg btn-block">
+              <a href="agregar_marca.php" class="btn golden-button-primary btn-block">
                 <span class="icon text-white-50">
                   <i class="fas fa-copyright"></i>
                 </span>

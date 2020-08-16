@@ -99,7 +99,13 @@ if (isset($_GET['id'])) {
                         <div class="col-sm-6">
                             <div class="p-3">
                                 <h2><?=$datosProducto['nombreProducto']?></h2>
-                                <h3 class="g-text-primary mb-4">$ <?=$datosProducto['precio']?></h3>
+                                <h3 class="g-text-primary">$ <?=$datosProducto['precio']?></h3>
+                                <a href="carrito.php?accion=agregar&id=<?=$datosProducto['ID']?>&cantidad=1"
+                                    class="my-4 p-2 btn golden-button-info btn-block">
+                                    <span class="h5">
+                                        <i class="fas fa-cart-plus"></i> Añadir al carrito
+                                    </span>
+                                </a>
                                 <h5>Descripción</h5>
                                 <p>
                                     <?=$datosProducto['descripcion']?>
@@ -108,9 +114,14 @@ if (isset($_GET['id'])) {
                                 <p>
                                     <?=$datosProducto['desc_amp']?>
                                 </p>
-                                <a href="carrito.php?accion=agregar&id=<?=$datosProducto['ID']?>&cantidad=1" class="mt-5 btn golden-button-info btn-block">
-                                    <i class="fas fa-cart-plus"></i> Añadir al carrito
-                                </a>
+                                <h5>Categoría</h5>
+                                <p>
+                                    <?=$datosProducto['categoria']?>
+                                </p>
+                                <h5>Marca</h5>
+                                <p>
+                                    <?=$datosProducto['marca']?>
+                                </p>              
                             </div>
                         </div>
                     </div>

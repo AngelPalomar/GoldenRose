@@ -21,6 +21,12 @@ require('scripts/db_connection.php');
                             Inicio
                         </a>
                     </li>
+                    <li>
+                        <a href="catalogo.php">
+                            <i class="fas fa-book"></i>
+                            Catálogo
+                        </a>
+                    </li>
                     <li class="drop-down"><a href="#"><i class="fas fa-tag"></i> Categorías</a>
                         <ul>
                             <?php

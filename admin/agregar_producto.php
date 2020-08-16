@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
+if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente' || $_SESSION['tipoUsuario'] === 'empleado') {
     header('Location:../login.php');
 }
 

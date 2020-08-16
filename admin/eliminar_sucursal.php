@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente') {
+if (!isset($_SESSION['id']) || $_SESSION['tipoUsuario'] === 'cliente' || $_SESSION['tipoUsuario'] === 'empleado') {
   header('Location:../login.php');
 }
 
@@ -93,7 +93,7 @@ if (!isset($_GET['id'])) {
               <hr>
               <h5 class="text-center">
                 <span class="font-weight-bold"> PRECAUCIÓN:</span>
-                Al eliminar esta sucursal, colocará las existencias de sus productos, esto no se puede deshacer
+                Al eliminar esta sucursal, colocará las existencias de sus productos en 0, esto no se puede deshacer.
               </p>
             </div>
 

@@ -146,7 +146,7 @@ session_start();
                         if($query->num_rows > 0):
                         while ($row = $query->fetch_array(MYSQLI_ASSOC)):
                         ?>
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4">
                             <a href="producto.php?id=<?=$row['ID']?>">
                                 <div class="card">
                                     <div class="d-flex justify-content-center">
@@ -203,7 +203,7 @@ session_start();
                         if($query->num_rows > 0):
                         while ($row = $query->fetch_array(MYSQLI_ASSOC)):
                         ?>
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4">
                             <a href="producto.php?id=<?=$row['ID']?>">
                                 <div class="card">
                                     <div class="d-flex justify-content-center">
@@ -260,7 +260,7 @@ session_start();
                         if($query->num_rows > 0):
                         while ($row = $query->fetch_array(MYSQLI_ASSOC)):
                         ?>
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4">
                             <a href="producto.php?id=<?=$row['ID']?>">
                                 <div class="card">
                                     <div class="d-flex justify-content-center">

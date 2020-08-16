@@ -339,7 +339,7 @@ require('../scripts/db_connection.php');
         type: 'column'
       },
       title: {
-        text: 'Data extracted from a HTML table in the page'
+        text: 'Cantidad de usuarios activos inactivos'
       },
       yAxis: {
         allowDecimals: false,

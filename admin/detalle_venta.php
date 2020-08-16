@@ -73,8 +73,8 @@ require('../scripts/db_connection.php');
                                 <th>ID</th>
                                 <th>ID VENTA</th>
                                 <th>ID INVENTARIO</th>
-                                <th>ID USUARIO</th>
                                 <th>PRODUCTO</th>
+                                <th>ID USUARIO</th>                               
                                 <th>PRECIO UNITARIO</th>
                                 <th>PRODUCTOS</th>
                                 <th>SUBTOTAL</th>
