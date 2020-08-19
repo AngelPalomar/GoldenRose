@@ -116,7 +116,7 @@ session_start();
                                 <div class="text-center mt-5">
                                     <h2>
                                         <i class="fas fa-times"></i>
-                                        No se encontraron ventas.
+                                        No se encontraron compras.
                                     </h2>
                                 </div>
                             <?php endif; ?>

@@ -6,6 +6,13 @@
                     <h3>Golden Rose</h3>
                     <p>El mejor lugar para tu jardín.</p>
                 </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Más información</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="sucursales.php">Sucursales</a></li>
+                    </ul>
+                </div>
             </div>
 
             <div class="d-md-flex py-4">
