@@ -36,12 +36,12 @@ require('../scripts/db_connection.php');
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
   <style type="text/css">
-
     #container {
       height: 400px;
     }
 
-    .highcharts-figure, .highcharts-data-table table {
+    .highcharts-figure,
+    .highcharts-data-table table {
       min-width: 310px;
       max-width: 800px;
       margin: 1em auto;
@@ -56,27 +56,33 @@ require('../scripts/db_connection.php');
       width: 100%;
       max-width: 500px;
     }
+
     #datatable caption {
       padding: 1em 0;
       font-size: 1.2em;
       color: #555;
     }
+
     #datatable th {
       font-weight: 600;
       padding: 0.5em;
     }
-    #datatable td, #datatable th, #datatable caption {
+
+    #datatable td,
+    #datatable th,
+    #datatable caption {
       padding: 0.5em;
     }
-    #datatable thead tr, #datatable tr:nth-child(even) {
+
+    #datatable thead tr,
+    #datatable tr:nth-child(even) {
       background: #f8f8f8;
     }
+
     #datatable tr:hover {
       background: #f1f7ff;
     }
-
-
-  </style> 
+  </style>
 
 </head>
 
@@ -100,23 +106,11 @@ require('../scripts/db_connection.php');
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h2 class="h3 mb-4 text-gray-800">USUARIOS ACTIVOS E INACTIVOS</h2>
-
-          <div class="row pb-3 d-print-none">
-            <div class="col-sm-3">
-              <button onclick="window.print()" class="btn golden-button-primary btn-lg btn-block">
-                <span class="icon text-white-50">
-                  <i class="fas fa-print"></i>
-                </span>
-                <span class="text">Generar PDF</span>
-              </button>
-            </div>
-            
-          </div>
+          <h2 class="h3 mb-4 text-gray-800 text-center">USUARIOS ACTIVOS E INACTIVOS</h2>
 
           <h1 class="h3 mb-4 text-gray-800">USUARIOS ACTIVOS</h1>
 
-          <div class="table-responsive">
+          <div class="table-responsive d-print-none">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead class="golden-bg-secondary">
                 <th>EMAIL</th>
@@ -124,7 +118,7 @@ require('../scripts/db_connection.php');
                 <th>ESTATUS</th>
               </thead>
               <tbody>
-                <?php 
+                <?php
                 $cmd = 'SELECT email,
                 CONCAT(nombre1, " ", nombre2, " ", apellidopaterno, " ", apellidoMaterno) AS nombre,
                 estado 
@@ -133,12 +127,12 @@ require('../scripts/db_connection.php');
 
                 $query = $mysqli->query($cmd);
 
-                if ($query->num_rows > 0):
-                  while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
+                if ($query->num_rows > 0) :
+                  while ($row = $query->fetch_array(MYSQLI_ASSOC)) : ?>
                     <tr>
-                      <td><?=$row['email']?></td>
-                      <td><?=$row['nombre']?></td>
-                      <td><?=$row['estado']?></td>
+                      <td><?= $row['email'] ?></td>
+                      <td><?= $row['nombre'] ?></td>
+                      <td><?= $row['estado'] ?></td>
                     </tr>
                   <?php endwhile; ?>
                 <?php endif; ?>
@@ -152,7 +146,7 @@ require('../scripts/db_connection.php');
                 <th class="text-center">TOTAL</th>
               </thead>
               <tbody>
-                <?php 
+                <?php
                 $activos = 'SELECT count(*) as activos
                 from (select estado 
                 from usuario 
@@ -160,10 +154,10 @@ require('../scripts/db_connection.php');
 
                 $query2 = $mysqli->query($activos);
 
-                if ($query2->num_rows > 0):
-                  while($row1 = $query2->fetch_array(MYSQLI_ASSOC)):?>
+                if ($query2->num_rows > 0) :
+                  while ($row1 = $query2->fetch_array(MYSQLI_ASSOC)) : ?>
                     <tr>
-                      <td class="text-center"><?=$row1['activos']?></td>
+                      <td class="text-center"><?= $row1['activos'] ?></td>
                     </tr>
                   <?php endwhile; ?>
                 <?php endif; ?>
@@ -174,7 +168,7 @@ require('../scripts/db_connection.php');
 
           <h1 class="h3 mb-4 text-gray-800">USUARIOS INACTIVOS</h1>
 
-          <div class="table-responsive">
+          <div class="table-responsive d-print-none">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead class="golden-bg-secondary">
                 <th>EMAIL</th>
@@ -182,7 +176,7 @@ require('../scripts/db_connection.php');
                 <th>ESTATUS</th>
               </thead>
               <tbody>
-                <?php 
+                <?php
                 $cmd2 = 'SELECT email,
                 CONCAT(nombre1, " ", nombre2, " ", apellidopaterno, " ", apellidoMaterno) AS nombre,
                 estado 
@@ -191,12 +185,12 @@ require('../scripts/db_connection.php');
 
                 $query3 = $mysqli->query($cmd2);
 
-                if ($query3->num_rows > 0):
-                  while($row = $query3->fetch_array(MYSQLI_ASSOC)):?>
+                if ($query3->num_rows > 0) :
+                  while ($row = $query3->fetch_array(MYSQLI_ASSOC)) : ?>
                     <tr>
-                      <td><?=$row['email']?></td>
-                      <td><?=$row['nombre']?></td>
-                      <td><?=$row['estado']?></td>
+                      <td><?= $row['email'] ?></td>
+                      <td><?= $row['nombre'] ?></td>
+                      <td><?= $row['estado'] ?></td>
                     </tr>
                   <?php endwhile; ?>
                 <?php endif; ?>
@@ -210,7 +204,7 @@ require('../scripts/db_connection.php');
                 <th class="text-center">TOTAL</th>
               </thead>
               <tbody>
-                <?php 
+                <?php
                 $inactivos = 'SELECT count(*) as inactivos
                 from (select estado 
                 from usuario 
@@ -218,10 +212,10 @@ require('../scripts/db_connection.php');
 
                 $query2 = $mysqli->query($inactivos);
 
-                if ($query2->num_rows > 0):
-                  while($row2 = $query2->fetch_array(MYSQLI_ASSOC)):?>
+                if ($query2->num_rows > 0) :
+                  while ($row2 = $query2->fetch_array(MYSQLI_ASSOC)) : ?>
                     <tr>
-                      <td class="text-center"><?=$row2['inactivos']?></td>
+                      <td class="text-center"><?= $row2['inactivos'] ?></td>
                     </tr>
                   <?php endwhile; ?>
                 <?php endif; ?>
@@ -229,7 +223,7 @@ require('../scripts/db_connection.php');
             </table>
           </div>
 
-          
+
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
@@ -253,7 +247,7 @@ require('../scripts/db_connection.php');
                     <tbody>
                       <tr>
                         <th>USUARIOS</th>
-                        <?php 
+                        <?php
                         $activos = 'SELECT count(*) as activos
                         from (select estado 
                         from usuario 
@@ -261,10 +255,10 @@ require('../scripts/db_connection.php');
 
                         $query2 = $mysqli->query($activos);
 
-                        if ($query2->num_rows > 0):
-                          while($row1 = $query2->fetch_array(MYSQLI_ASSOC)):?>
+                        if ($query2->num_rows > 0) :
+                          while ($row1 = $query2->fetch_array(MYSQLI_ASSOC)) : ?>
 
-                            <td><?=$row1['activos']?></td>
+                            <td><?= $row1['activos'] ?></td>
                           <?php endwhile; ?>
                         <?php endif; ?>
 
@@ -273,10 +267,10 @@ require('../scripts/db_connection.php');
                         from usuario 
                         where estado like "inactivo")as inactivos;';
                         $query2 = $mysqli->query($inactivos);
-                        if ($query2->num_rows > 0):
-                          while($row2 = $query2->fetch_array(MYSQLI_ASSOC)):?>
+                        if ($query2->num_rows > 0) :
+                          while ($row2 = $query2->fetch_array(MYSQLI_ASSOC)) : ?>
                             <td>
-                              <?=$row2['inactivos']?>
+                              <?= $row2['inactivos'] ?>
                             </td>
                           <?php endwhile; ?>
                         <?php endif; ?>
@@ -286,7 +280,16 @@ require('../scripts/db_connection.php');
                 </figure>
               </div>
             </div>
-          </div> 
+          </div>
+
+          <div class="my-5 text-center d-print-none">
+            <button onclick="window.print()" class="btn golden-button-primary">
+              <span class="icon text-white-50">
+                <i class="fas fa-print"></i>
+              </span>
+              <span class="text">Generar PDF</span>
+            </button>
+          </div>
 
 
 
@@ -330,7 +333,6 @@ require('../scripts/db_connection.php');
 
 
   <script>
-
     Highcharts.chart('container', {
       data: {
         table: 'datatable'
@@ -348,13 +350,12 @@ require('../scripts/db_connection.php');
         }
       },
       tooltip: {
-        formatter: function () {
+        formatter: function() {
           return '<b>' + this.series.name + '</b><br/>' +
-          this.point.y + ' ' + this.point.name.toLowerCase();
+            this.point.y + ' ' + this.point.name.toLowerCase();
         }
       }
     });
-
   </script>
 
 </body>

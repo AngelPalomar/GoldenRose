@@ -57,7 +57,7 @@ require('../scripts/db_connection.php');
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800 text-center"><i class="fas fa-box"></i> Inventarios</h1>
 
-                    <div class="row pb-3">
+                    <div class="row pb-3 d-print-none">
                         <div class="col-sm-3">
                             <a href="agregar_inventario.php" class="btn golden-button-primary btn-block">
                                 <span class="icon text-white-50">
@@ -66,7 +66,16 @@ require('../scripts/db_connection.php');
                                 <span class="text">Agregar inventario</span>
                             </a>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-3">
+                            <button onclick="window.print()" class="btn btn-block golden-button-primary">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-print"></i>
+                                </span>
+                                <span class="text">Generar PDF</span>
+                            </button>
+
+                        </div>
+                        <div class="col-sm-6">
                             <form action="inventario.php" method="get">
                                 <div class="input-group">
                                     <input type="text" name="buscar" class="form-control"
@@ -90,7 +99,8 @@ require('../scripts/db_connection.php');
                         <?php if(isset($_GET['accion'])): ?>
                         <?php if($_GET['accion'] === "sumar"): ?>
                         <br /><br />
-                        <span class="font-weight-bold"><i class="fas fa-exclamation-triangle"></i> La cantidad ingresada se ha sumado al inventario
+                        <span class="font-weight-bold"><i class="fas fa-exclamation-triangle"></i> La cantidad ingresada
+                            se ha sumado al inventario
                             correspondiente porque este ya existía.</span>
                         <?php endif;?>
                         <?php endif;?>
@@ -178,7 +188,7 @@ require('../scripts/db_connection.php');
                                 <th>IMAGEN</th>
                                 <th>SUCURSAL</th>
                                 <th>CANTIDAD</th>
-                                <th>ACCIONES</th>
+                                <th class="d-print-none">ACCIONES</th>
                             </thead>
                             <tbody>
                                 <?php while($row = $query->fetch_array(MYSQLI_ASSOC)):?>
@@ -191,7 +201,7 @@ require('../scripts/db_connection.php');
                                     </td>
                                     <td><?=$row['SUCURSAL']?></td>
                                     <td class="font-weight-bold"><?=$row['CANTIDAD']?></td>
-                                    <td>
+                                    <td class="d-print-none">
                                         <div class="d-flex flex-row">
                                             <div class="col-sm-6">
                                                 <a href="modificar_inventario.php?id=<?=$row['ID']?>"
